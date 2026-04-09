@@ -382,9 +382,160 @@ body{
 .proj-expand-row .chev{transition:transform .22s;font-style:normal}
 .proj-card.expanded .proj-expand-row .chev{transform:rotate(180deg);display:inline-block}
 
+
+/* ══ IMAGE GALLERY MODAL ══════════════════════════════════ */
+.gal-backdrop {
+  position:fixed;inset:0;z-index:600;
+  background:rgba(0,0,0,.9);
+  display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.gal-backdrop.open { opacity:1;pointer-events:all; }
+.gal-sheet {
+  background:#fff;width:100%;max-width:520px;
+  border-radius:20px 20px 0 0;
+  max-height:90vh;display:flex;flex-direction:column;
+  transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+.gal-backdrop.open .gal-sheet { transform:translateY(0); }
+/* Header */
+.gal-head {
+  display:flex;align-items:center;gap:10px;
+  padding:14px 16px 10px;border-bottom:1px solid var(--border);flex-shrink:0;
+}
+.gal-handle {
+  width:36px;height:4px;background:var(--border);
+  border-radius:2px;margin:0 auto 10px;
+}
+.gal-title { font-size:.9rem;font-weight:700;color:var(--text);flex:1 }
+.gal-name  { font-size:.72rem;color:var(--muted) }
+.gal-close {
+  width:32px;height:32px;border-radius:50%;border:none;
+  background:var(--bg);cursor:pointer;font-size:.9rem;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+/* Tab bar inside modal */
+.gal-tabs {
+  display:flex;gap:0;padding:10px 16px 0;flex-shrink:0;
+}
+.gal-tab {
+  flex:1;padding:9px 10px;border-radius:10px 10px 0 0;
+  border:none;font-family:'Sarabun',sans-serif;
+  font-size:.78rem;font-weight:700;cursor:pointer;
+  color:var(--muted);background:var(--bg);
+  border:1.5px solid var(--border);border-bottom:none;
+  transition:all .15s;
+}
+.gal-tab.active { background:#fff;color:var(--c3);border-color:var(--c3); }
+/* Counter badge */
+.gal-count {
+  font-size:.65rem;font-weight:700;padding:1px 7px;
+  border-radius:20px;margin-left:5px;
+}
+/* Grid */
+.gal-grid-wrap {
+  overflow-y:auto;padding:12px 14px 16px;flex:1;
+}
+.gal-grid {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
+}
+.gal-thumb {
+  aspect-ratio:1;border-radius:10px;overflow:hidden;
+  cursor:pointer;position:relative;background:var(--bg);
+  transition:transform .15s,box-shadow .15s;
+}
+.gal-thumb:active { transform:scale(.95); }
+.gal-thumb img {
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:opacity .3s;
+}
+.gal-thumb .gal-num {
+  position:absolute;bottom:4px;right:5px;
+  background:rgba(0,0,0,.55);color:#fff;
+  font-size:.55rem;font-weight:700;padding:1px 5px;border-radius:6px;
+}
+.gal-thumb.loading img { opacity:0; }
+.gal-thumb.loaded  img { opacity:1; }
+/* Empty state */
+.gal-empty {
+  text-align:center;padding:2rem 1rem;color:var(--muted);
+}
+.gal-empty .gal-empty-icon { font-size:2rem;margin-bottom:8px }
+.gal-empty p { font-size:.78rem }
+
+/* ── LIGHTBOX ──────────────────────────────────────── */
+.gal-lightbox {
+  position:fixed;inset:0;z-index:700;
+  background:rgba(0,0,0,.95);
+  display:none;flex-direction:column;
+  align-items:center;justify-content:center;
+}
+.gal-lightbox.open { display:flex; }
+.gal-lb-img-wrap {
+  flex:1;width:100%;display:flex;align-items:center;
+  justify-content:center;overflow:hidden;padding:10px;
+}
+.gal-lb-img-wrap img {
+  max-width:100%;max-height:100%;object-fit:contain;
+  border-radius:10px;
+}
+.gal-lb-bar {
+  width:100%;display:flex;align-items:center;
+  justify-content:space-between;padding:10px 16px;
+  padding-bottom:max(10px,env(safe-area-inset-bottom));
+  background:rgba(0,0,0,.6);flex-shrink:0;
+}
+.gal-lb-nav {
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.15);border:none;
+  color:#fff;font-size:1.4rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.gal-lb-nav:active { background:rgba(255,255,255,.3); }
+.gal-lb-counter { font-size:.82rem;color:rgba(255,255,255,.8);font-weight:600; }
+.gal-lb-back {
+  padding:8px 18px;border-radius:20px;border:1px solid rgba(255,255,255,.3);
+  background:none;color:#fff;font-family:'Sarabun',sans-serif;
+  font-size:.76rem;font-weight:700;cursor:pointer;
+}
+
 </style>
 </head>
 <body>
+
+<!-- ══ IMAGE GALLERY MODAL ══════════════════════════════════ -->
+<div id="galBackdrop" class="gal-backdrop" onclick="handleGalBackdrop(event)">
+  <div class="gal-sheet" id="galSheet">
+    <div class="gal-handle"></div>
+    <div class="gal-head">
+      <div>
+        <div class="gal-title" id="galTitle"></div>
+        <div class="gal-name"  id="galSubname"></div>
+      </div>
+      <button class="gal-close" onclick="closeGallery()">✕</button>
+    </div>
+    <div class="gal-tabs" id="galTabs"></div>
+    <div class="gal-grid-wrap">
+      <div class="gal-grid" id="galGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LIGHTBOX ══════════════════════════════════════════════ -->
+<div id="galLightbox" class="gal-lightbox">
+  <div class="gal-lb-img-wrap">
+    <img id="galLbImg" src="" alt="">
+  </div>
+  <div class="gal-lb-bar">
+    <button class="gal-lb-nav" onclick="galLbNav(-1)">‹</button>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+      <span class="gal-lb-counter" id="galLbCounter"></span>
+      <button class="gal-lb-back" onclick="closeLightbox()">← กลับอัลบั้ม</button>
+    </div>
+    <button class="gal-lb-nav" onclick="galLbNav(1)">›</button>
+  </div>
+</div>
 
 <!-- HEADER -->
 <header class="app-header" id="appHeader">
@@ -1143,7 +1294,7 @@ const P3 = {
   },
   types:[{l:'ผู้สูงอายุ',v:120},{l:'คนพิการ',v:88},{l:'ผู้สูงอายุ/คนพิการ',v:58},{l:'ข้อจำกัดการเคลื่อนไหว',v:37},{l:'อื่นๆ',v:9}],
   albums:[
-    {name:'นางมณี แจ้งจิต',age:78,agency:'ทต.เมืองแกลง',url:'https://github.com/iamsilky/gongtoon.db/tree/main/images/Manee',imgNow:'images/Manee/now.jpg',imgThen:'images/Manee/then.jpg'},
+    {name:'นางมณี แจ้งจิต',age:78,agency:'ทต.เมืองแกลง',url:'https://github.com/iamsilky/gongtoon.db/tree/main/images/Manee',imgNow:null,imgThen:null,galNow:["https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20then/Aphanthree%20then%20(1).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20then/Aphanthree%20then%20(2).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20then/Aphanthree%20then%20(6).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20then/Aphanthree%20then%20(9).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20then/Aphanthree%20then%20(10).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20then/Aphanthree%20then%20(12).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20then/Aphanthree%20then%20(13).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20then/Aphanthree%20then%20(16).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20then/Aphanthree%20then%20(17).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20then/Aphanthree%20then%20(18).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20then/Aphanthree%20then%20(23).jpg"],galThen:["https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20now/Aphanthree%20now%20(1).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20now/Aphanthree%20now%20(3).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20now/Aphanthree%20now%20(5).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20now/Aphanthree%20now%20(6).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20now/Aphanthree%20now%20(7).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20now/Aphanthree%20now%20(8).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20now/Aphanthree%20now%20(10).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20now/Aphanthree%20now%20(11).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20now/Aphanthree%20now%20(12).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20now/Aphanthree%20now%20(14).jpg", "https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/images/Aphanthree%20now/Aphanthree%20now%20(15).jpg"]},
     {name:'นางบุญปลูก จำเริญ',age:86,agency:'ทต.เมืองแกลง',url:'https://github.com/iamsilky/gongtoon.db/tree/main/images/Boonplook',imgNow:'images/Boonplook/now.jpg',imgThen:'images/Boonplook/then.jpg'},
     {name:'นางสาวสีนวล ไกรเพชร',age:84,agency:'ทต.เมืองแกลง',url:'https://github.com/iamsilky/gongtoon.db/tree/main/images/Seenuan',imgNow:'images/Seenuan/now.jpg',imgThen:'images/Seenuan/then.jpg'},
     {name:'นางสำรอง เปรมปรี',age:67,agency:'ทต.เมืองแกลง',url:'https://github.com/iamsilky/gongtoon.db/tree/main/images/Sumrong',imgNow:'images/Sumrong/now.jpg',imgThen:'images/Sumrong/then.jpg'},
@@ -1473,8 +1624,74 @@ function ensureCharts(page){
         const color = AVATAR_COLORS[P3.albums.indexOf(a) % AVATAR_COLORS.length];
         const ag_label = ageGroup(a.age);
         const idx = P3.albums.indexOf(a);
+        const hasGal = !!(a.galNow || a.galThen);
+        const hasNow  = hasGal ? !!(a.galNow  && a.galNow.length)  : !!a.imgNow;
+        const hasThen = hasGal ? !!(a.galThen && a.galThen.length) : !!a.imgThen;
+
+        // Build before/after section based on mode
+        let mediaSection = '';
+        if(hasGal){
+          // Gallery mode — show buttons that open modal gallery
+          const nowCount  = (a.galNow  || []).length;
+          const thenCount = (a.galThen || []).length;
+          mediaSection = `
+          <div style="padding:8px 12px 4px;display:flex;gap:6px">
+            ${hasNow ? `<button onclick="openGallery(${idx},'now')"
+              style="flex:1;padding:9px 6px;border-radius:10px;border:1.5px solid var(--c3);
+                     background:var(--c3l);font-family:'Sarabun',sans-serif;font-size:.74rem;
+                     font-weight:700;color:var(--c3);cursor:pointer;display:flex;
+                     align-items:center;justify-content:center;gap:5px">
+              📷 ก่อนดำเนินการ
+              <span style="background:var(--c3);color:#fff;font-size:.6rem;padding:1px 6px;
+                    border-radius:20px">${nowCount}</span>
+            </button>` : ''}
+            ${hasThen ? `<button onclick="openGallery(${idx},'then')"
+              style="flex:1;padding:9px 6px;border-radius:10px;border:1.5px solid #059669;
+                     background:#D1FAE5;font-family:'Sarabun',sans-serif;font-size:.74rem;
+                     font-weight:700;color:#059669;cursor:pointer;display:flex;
+                     align-items:center;justify-content:center;gap:5px">
+              ✅ ดำเนินการแล้ว
+              <span style="background:#059669;color:#fff;font-size:.6rem;padding:1px 6px;
+                    border-radius:20px">${thenCount}</span>
+            </button>` : ''}
+          </div>`;
+        } else {
+          // Single-image mode — show inline toggle (existing behavior)
+          mediaSection = `
+          <div style="padding:8px 13px 4px">
+            <div style="display:flex;gap:4px;margin-bottom:7px">
+              <button class="img-tab active" id="tab-now-${idx}"
+                onclick="showImg(${idx},'now')"
+                style="flex:1;padding:5px;border-radius:8px;border:none;
+                       font-family:'Sarabun',sans-serif;font-size:.72rem;font-weight:700;
+                       cursor:pointer;background:var(--c3l);color:var(--c3)">
+                📷 ก่อนดำเนินการ
+              </button>
+              <button class="img-tab" id="tab-then-${idx}"
+                onclick="showImg(${idx},'then')"
+                style="flex:1;padding:5px;border-radius:8px;border:none;
+                       font-family:'Sarabun',sans-serif;font-size:.72rem;font-weight:700;
+                       cursor:pointer;background:var(--bg);color:var(--muted)">
+                ✅ ดำเนินการแล้ว
+              </button>
+            </div>
+            <div id="img-wrap-${idx}" style="border-radius:10px;overflow:hidden;height:160px;background:var(--bg);position:relative">
+              <img id="img-now-${idx}" src="${a.imgNow||''}"
+                style="width:100%;height:100%;object-fit:cover;display:block"
+                onerror="this.style.display='none';document.getElementById('img-err-${idx}').style.display='flex'"
+                loading="lazy">
+              <img id="img-then-${idx}" src="${a.imgThen||''}"
+                style="width:100%;height:100%;object-fit:cover;display:none" loading="lazy">
+              <div id="img-err-${idx}" style="display:none;position:absolute;inset:0;
+                align-items:center;justify-content:center;flex-direction:column;gap:4px;background:var(--bg)">
+                <span style="font-size:1.5rem">🖼️</span>
+                <span style="font-size:.65rem;color:var(--muted)">ไม่พบรูปภาพ</span>
+              </div>
+            </div>
+          </div>`;
+        }
+
         ag.innerHTML+=`<div class="album-person" data-agency="${a.agency}">
-          <!-- Header row -->
           <div style="display:flex;align-items:center;gap:10px;padding:11px 13px 8px;border-bottom:1px solid var(--border)">
             <div class="album-avatar" style="background:${color}">
               ${initials}
@@ -1485,39 +1702,11 @@ function ensureCharts(page){
               <div class="album-person-agency">🏢 ${a.agency}</div>
               <div class="album-person-tags">
                 <span class="apt" style="background:${ag_label.bg};color:${ag_label.color}">${ag_label.label} ${a.age} ปี</span>
+                ${hasGal ? '<span class="apt" style="background:#EDE9FE;color:#6D28D9">🖼️ หลายรูป</span>' : '<span class="apt" style="background:#F0FDF4;color:#15803D">📸 มีรูป</span>'}
               </div>
             </div>
           </div>
-          <!-- Before/After toggle -->
-          <div style="padding:8px 13px 4px">
-            <div style="display:flex;gap:4px;margin-bottom:7px">
-              <button class="img-tab active" id="tab-now-${idx}"
-                onclick="showImg(${idx},'now')"
-                style="flex:1;padding:5px;border-radius:8px;border:none;font-family:'Sarabun',sans-serif;font-size:.72rem;font-weight:700;cursor:pointer;background:var(--c3l);color:var(--c3)">
-                📷 ก่อนดำเนินการ
-              </button>
-              <button class="img-tab" id="tab-then-${idx}"
-                onclick="showImg(${idx},'then')"
-                style="flex:1;padding:5px;border-radius:8px;border:none;font-family:'Sarabun',sans-serif;font-size:.72rem;font-weight:700;cursor:pointer;background:var(--bg);color:var(--muted)">
-                ✅ ดำเนินการแล้ว
-              </button>
-            </div>
-            <div id="img-wrap-${idx}" style="border-radius:10px;overflow:hidden;height:160px;background:var(--bg);position:relative">
-              <img id="img-now-${idx}" src="${a.imgNow}"
-                style="width:100%;height:100%;object-fit:cover;display:block"
-                onerror="this.style.display='none';document.getElementById('img-err-${idx}').style.display='flex'"
-                loading="lazy">
-              <img id="img-then-${idx}" src="${a.imgThen}"
-                style="width:100%;height:100%;object-fit:cover;display:none"
-                onerror="this.style.display='none'"
-                loading="lazy">
-              <div id="img-err-${idx}" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;gap:4px;background:var(--bg)">
-                <span style="font-size:1.5rem">🖼️</span>
-                <span style="font-size:.65rem;color:var(--muted)">ไม่พบรูปภาพ</span>
-              </div>
-            </div>
-          </div>
-          <!-- Footer -->
+          ${mediaSection}
           <div style="padding:8px 13px 10px;display:flex;justify-content:space-between;align-items:center">
             <span style="font-size:.65rem;color:var(--muted)">🔒 ปกป้องตาม PDPA</span>
             <a href="${a.url}" target="_blank"
@@ -1530,25 +1719,127 @@ function ensureCharts(page){
       });
     }
 
-    window.showImg = function(idx, type){
-      const now  = document.getElementById('img-now-'+idx);
-      const then = document.getElementById('img-then-'+idx);
-      const tabN = document.getElementById('tab-now-'+idx);
-      const tabT = document.getElementById('tab-then-'+idx);
-      if(type==='now'){
-        if(now)  { now.style.display='block'; }
-        if(then) { then.style.display='none'; }
-        if(tabN) { tabN.style.background='var(--c3l)'; tabN.style.color='var(--c3)'; }
-        if(tabT) { tabT.style.background='var(--bg)';  tabT.style.color='var(--muted)'; }
-      } else {
-        if(now)  { now.style.display='none'; }
-        if(then) { then.style.display='block'; }
-        if(tabN) { tabN.style.background='var(--bg)';  tabN.style.color='var(--muted)'; }
-        if(tabT) { tabT.style.background='var(--c3l)'; tabT.style.color='var(--c3)'; }
-      }
+    // ── GALLERY OPEN/CLOSE ─────────────────────────────────────────────
+    let _galImages = [];
+    let _galIdx    = 0;
+    let _galName   = '';
+    let _galActive = 'now';
+    let _galPersonIdx = 0;
+
+    window.openGallery = function(personIdx, type){
+      const a = P3.albums[personIdx];
+      _galPersonIdx = personIdx;
+      _galActive    = type;
+      _galName      = a.name;
+
+      const hasBoth = !!(a.galNow && a.galThen);
+
+      // Build tabs HTML if both exist
+      const tabsEl = document.getElementById('galTabs');
+      tabsEl.innerHTML = hasBoth
+        ? `<button class="gal-tab ${type==='now'?'active':''}" id="galTabNow"
+             onclick="switchGalTab('now')">
+             📷 ก่อนดำเนินการ
+             <span class="gal-count" style="background:${type==='now'?'var(--c3)':'var(--bg)'};color:${type==='now'?'#fff':'var(--muted)'}">${(a.galNow||[]).length}</span>
+           </button>
+           <button class="gal-tab ${type==='then'?'active':''}" id="galTabThen"
+             onclick="switchGalTab('then')">
+             ✅ ดำเนินการแล้ว
+             <span class="gal-count" style="background:${type==='then'?'#059669':'var(--bg)'};color:${type==='then'?'#fff':'var(--muted)'}">${(a.galThen||[]).length}</span>
+           </button>`
+        : '';
+
+      renderGalGrid(type);
+
+      document.getElementById('galSubname').textContent = a.name + ' · ' + a.agency;
+      document.getElementById('galBackdrop').classList.add('open');
+      document.body.style.overflow = 'hidden';
     };
 
-    window.filterAlbum = function(agency, btn){
+    window.switchGalTab = function(type){
+      _galActive = type;
+      const a = P3.albums[_galPersonIdx];
+      // Update tab styles
+      const tabN = document.getElementById('galTabNow');
+      const tabT = document.getElementById('galTabThen');
+      if(tabN){ tabN.classList.toggle('active', type==='now'); }
+      if(tabT){ tabT.classList.toggle('active', type==='then'); }
+      const cn  = (a.galNow||[]).length;
+      const ct  = (a.galThen||[]).length;
+      if(tabN) tabN.querySelector('.gal-count').style.background = type==='now' ? 'var(--c3)' : 'var(--bg)';
+      if(tabN) tabN.querySelector('.gal-count').style.color      = type==='now' ? '#fff' : 'var(--muted)';
+      if(tabT) tabT.querySelector('.gal-count').style.background = type==='then' ? '#059669' : 'var(--bg)';
+      if(tabT) tabT.querySelector('.gal-count').style.color      = type==='then' ? '#fff' : 'var(--muted)';
+      renderGalGrid(type);
+    };
+
+    function renderGalGrid(type){
+      const a = P3.albums[_galPersonIdx];
+      const images = type === 'now' ? (a.galNow||[]) : (a.galThen||[]);
+      _galImages = images;
+
+      const title = type === 'now' ? '📷 ก่อนดำเนินการ' : '✅ ดำเนินการแล้ว';
+      document.getElementById('galTitle').textContent = title;
+
+      const grid = document.getElementById('galGrid');
+      if(!images.length){
+        grid.innerHTML = '<div class="gal-empty"><div class="gal-empty-icon">🖼️</div><p>ยังไม่มีรูปภาพ</p></div>';
+        return;
+      }
+      grid.innerHTML = images.map((url, i) =>
+        `<div class="gal-thumb loading" onclick="openLightbox(${i})" id="gthumb-${i}">
+          <img src="${url}" alt="รูปที่ ${i+1}" loading="lazy"
+            onload="document.getElementById('gthumb-${i}').classList.replace('loading','loaded')"
+            onerror="this.parentElement.style.background='#f5f5f5';this.style.display='none'">
+          <span class="gal-num">${i+1}</span>
+        </div>`
+      ).join('');
+    }
+
+    window.handleGalBackdrop = function(e){
+      if(e.target.id === 'galBackdrop') closeGallery();
+    };
+    window.closeGallery = function(){
+      document.getElementById('galBackdrop').classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    // ── LIGHTBOX ───────────────────────────────────────────────────────
+    window.openLightbox = function(imgIdx){
+      _galIdx = imgIdx;
+      document.getElementById('galLbImg').src = _galImages[imgIdx];
+      document.getElementById('galLbCounter').textContent = (imgIdx+1) + ' / ' + _galImages.length;
+      document.getElementById('galLightbox').classList.add('open');
+    };
+    window.closeLightbox = function(){
+      document.getElementById('galLightbox').classList.remove('open');
+    };
+    window.galLbNav = function(dir){
+      _galIdx = (_galIdx + dir + _galImages.length) % _galImages.length;
+      document.getElementById('galLbImg').src = _galImages[_galIdx];
+      document.getElementById('galLbCounter').textContent = (_galIdx+1) + ' / ' + _galImages.length;
+    };
+    // swipe support for lightbox
+    (function(){
+      let tx=0;
+      const lb = document.getElementById('galLightbox');
+      lb.addEventListener('touchstart', e=>{ tx=e.touches[0].clientX; }, {passive:true});
+      lb.addEventListener('touchend', e=>{
+        const dx = e.changedTouches[0].clientX - tx;
+        if(Math.abs(dx)>50) galLbNav(dx<0?1:-1);
+      }, {passive:true});
+    })();
+    // Escape key
+    document.addEventListener('keydown', e=>{
+      if(e.key==='Escape'){
+        if(document.getElementById('galLightbox').classList.contains('open')) closeLightbox();
+        else closeGallery();
+      }
+      if(e.key==='ArrowLeft')  galLbNav(-1);
+      if(e.key==='ArrowRight') galLbNav(1);
+    });
+
+        window.filterAlbum = function(agency, btn){
       document.querySelectorAll('.af-btn').forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
       const list = agency==='all' ? window._allAlbums : window._allAlbums.filter(a=>a.agency===agency);
