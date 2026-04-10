@@ -663,6 +663,147 @@ body{
 @media(max-width:479px){.p1sc-kpis{grid-template-columns:1fr 1fr}
   .p1sc-dist-grid{grid-template-columns:1fr 1fr}}
 
+
+/* ── BUDGET CARD ─────────────────────────────────── */
+.p1-bud-card,.p1-loc-card-outer{background:var(--white);border-radius:16px;
+  box-shadow:0 1px 3px rgba(0,0,0,.08);border:1px solid var(--border);
+  overflow:hidden;margin-bottom:14px}
+.p1-bud-hero,.p1-loc-hero{padding:14px 16px 10px;border-bottom:1px solid var(--border)}
+.p1-bud-title,.p1-loc-title{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:2px}
+.p1-bud-sub,.p1-loc-sub{font-size:.72rem;color:var(--muted)}
+.p1-bud-kpi-row{display:flex;gap:0;border-bottom:1px solid var(--border)}
+.p1-bud-kpi{flex:1;padding:10px 8px;text-align:center;border-right:1px solid var(--border)}
+.p1-bud-kpi:last-child{border-right:none}
+.p1-bud-kv{font-size:1.1rem;font-weight:700;color:#0369A1;line-height:1}
+.p1-bud-kl{font-size:.62rem;color:var(--muted);font-weight:600;text-transform:uppercase;margin-top:2px}
+.p1-bud-preview{padding:10px 14px}
+.p1-bud-bar-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border)}
+.p1-bud-bar-row:last-child{border-bottom:none}
+.p1-bud-br-name{font-size:.76rem;font-weight:600;color:var(--text2);min-width:90px;max-width:110px}
+.p1-bud-br-bar{flex:1;height:7px;background:var(--bg);border-radius:4px;overflow:hidden}
+.p1-bud-br-fill{height:100%;border-radius:4px}
+.p1-bud-br-val{font-size:.72rem;font-weight:700;color:#0369A1;min-width:70px;text-align:right}
+.p1-bud-cta{padding:10px 14px;display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:8px;border-top:1px solid var(--border)}
+.p1-bud-open-btn{display:flex;align-items:center;gap:6px;padding:9px 18px;
+  border-radius:24px;border:none;background:#0369A1;color:#fff;
+  font-family:'Sarabun',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer}
+.p1-bud-open-btn:hover{background:#0c4a6e}
+
+/* ── LOCATION CARD ───────────────────────────────── */
+.p1-loc-dist-chips{display:flex;gap:5px;overflow-x:auto;padding:8px 14px;
+  border-bottom:1px solid var(--border)}
+.p1-loc-dist-chips::-webkit-scrollbar{display:none}
+.p1-loc-chip{padding:4px 12px;border-radius:20px;border:1.5px solid var(--border);
+  background:var(--white);font-family:'Sarabun',sans-serif;font-size:.7rem;
+  font-weight:700;color:var(--muted);cursor:pointer;white-space:nowrap;flex-shrink:0}
+.p1-loc-chip.active{color:#fff}
+.p1-loc-agency-list{padding:8px 14px}
+.p1-loc-ag-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;
+  border-bottom:1px solid var(--border)}
+.p1-loc-ag-item:last-child{border-bottom:none}
+.p1-loc-ag-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.p1-loc-ag-info{flex:1;min-width:0}
+.p1-loc-ag-name{font-size:.8rem;font-weight:700;color:var(--text)}
+.p1-loc-ag-tambon{font-size:.66rem;color:var(--muted);margin-top:1px}
+.p1-loc-ag-coords{font-size:.63rem;color:var(--muted);margin-top:2px;
+  font-family:monospace}
+.p1-loc-ag-actions{display:flex;gap:5px;margin-top:4px;flex-wrap:wrap}
+.p1-loc-map-link{font-size:.68rem;font-weight:700;color:#0369A1;
+  background:#E0F2FE;padding:3px 9px;border-radius:20px;text-decoration:none}
+.p1-loc-phone-link{font-size:.68rem;font-weight:700;color:#059669;
+  background:#D1FAE5;padding:3px 9px;border-radius:20px;text-decoration:none}
+
+/* ── BUDGET MODAL ────────────────────────────────── */
+#budModal{position:fixed;inset:0;z-index:810;display:none;
+  background:rgba(0,0,0,.65);backdrop-filter:blur(4px);
+  align-items:flex-end;justify-content:center}
+#budModal.open{display:flex}
+#budSheet{background:#fff;width:100%;max-width:860px;border-radius:20px 20px 0 0;
+  max-height:94vh;display:flex;flex-direction:column;
+  transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+#budModal.open #budSheet{transform:translateY(0)}
+
+/* ── LOCATION MODAL ──────────────────────────────── */
+#locModal{position:fixed;inset:0;z-index:810;display:none;
+  background:rgba(0,0,0,.65);backdrop-filter:blur(4px);
+  align-items:flex-end;justify-content:center}
+#locModal.open{display:flex}
+#locSheet{background:#fff;width:100%;max-width:860px;border-radius:20px 20px 0 0;
+  max-height:94vh;display:flex;flex-direction:column;
+  transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+#locModal.open #locSheet{transform:translateY(0)}
+
+/* Shared modal chrome */
+.p1modal-handle{width:40px;height:4px;background:var(--border);
+  border-radius:2px;margin:12px auto 0;flex-shrink:0}
+.p1modal-head{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px 8px;border-bottom:1px solid var(--border);flex-shrink:0}
+.p1modal-title{font-size:.92rem;font-weight:700;color:var(--text)}
+.p1modal-meta{font-size:.7rem;color:var(--muted);margin-top:1px}
+.p1modal-close{width:32px;height:32px;border-radius:50%;border:none;
+  background:var(--bg);cursor:pointer;font-size:.9rem;display:flex;
+  align-items:center;justify-content:center}
+.p1modal-nav{display:flex;gap:4px;padding:8px 12px;overflow-x:auto;
+  border-bottom:1px solid var(--border);flex-shrink:0}
+.p1modal-nav::-webkit-scrollbar{display:none}
+.p1modal-nav-btn{padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);
+  background:#fff;font-family:'Sarabun',sans-serif;font-size:.7rem;font-weight:700;
+  color:var(--muted);cursor:pointer;white-space:nowrap;flex-shrink:0}
+.p1modal-body{overflow-y:auto;flex:1;padding:0 12px 16px}
+
+/* Budget modal internals */
+.bud-dist{padding-top:12px}
+.bud-dist-hd{padding:12px 14px;border-radius:12px;display:flex;
+  align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.bud-dlabel{font-size:.6rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.07em}
+.bud-dname{font-size:1rem;font-weight:700;color:#fff;margin:2px 0}
+.bud-dmeta{font-size:.68rem;color:rgba(255,255,255,.7)}
+.bud-dsum{text-align:right}
+.bud-dv{font-size:1rem;font-weight:700;color:#fff}
+.bud-dp{font-size:.66rem;color:rgba(255,255,255,.7)}
+.bud-ag-row{display:flex;align-items:center;gap:8px;padding:6px 4px;
+  border-bottom:1px dashed var(--border)}
+.bud-ag-left{flex:1;min-width:0}
+.bud-ag-name{font-size:.8rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.bud-ag-bar-wrap{height:5px;background:var(--bg);border-radius:3px;overflow:hidden;width:100%}
+.bud-ag-bar{height:100%;border-radius:3px;transition:width .4s ease}
+.bud-ag-right{font-size:.8rem;font-weight:700;color:#0369A1;flex-shrink:0;min-width:80px;text-align:right}
+.bud-ag-tbl-wrap{overflow-x:auto;margin:0 0 10px;border-radius:8px;border:1px solid var(--border)}
+.bud-tbl{width:100%;border-collapse:collapse;font-size:.71rem;min-width:440px}
+.bud-tbl thead tr{background:#F1F5F9}
+.bud-tbl th{padding:7px 10px;text-align:center;font-size:.62rem;font-weight:700;
+  color:var(--muted);border-bottom:2px solid var(--border2);white-space:nowrap;
+  text-transform:uppercase;letter-spacing:.04em}
+.bud-tbl td{padding:7px 10px;text-align:center;border-bottom:1px solid var(--border)}
+.bt-has{color:#0369A1;font-weight:700}
+.bt-zero{color:#CBD5E1}
+.bud-tot{font-weight:700;color:#0369A1}
+
+/* Location modal internals */
+.loc-dist{padding-top:12px}
+.loc-dist-hd{padding:10px 14px;border-radius:10px;display:flex;
+  align-items:center;justify-content:space-between;margin-bottom:8px}
+.loc-dlabel{font-size:.6rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.07em}
+.loc-dname{font-size:.95rem;font-weight:700;color:#fff;margin:2px 0}
+.loc-dmeta{font-size:.67rem;color:rgba(255,255,255,.7)}
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-bottom:12px}
+@media(max-width:520px){.loc-grid{grid-template-columns:1fr}}
+.loc-card{background:var(--bg);border-radius:10px;border:1px solid var(--border);overflow:hidden}
+.loc-card-top{padding:8px 10px;border-top:3px solid;background:var(--white)}
+.loc-name{font-size:.78rem;font-weight:700;color:var(--text);margin-bottom:1px}
+.loc-tambon{font-size:.65rem;color:var(--muted)}
+.loc-card-body{padding:6px 10px 8px}
+.loc-coords{font-size:.62rem;color:var(--muted);font-family:monospace;margin-bottom:5px;
+  background:var(--white);border-radius:5px;padding:3px 6px}
+.loc-actions{display:flex;gap:5px;flex-wrap:wrap}
+.loc-map-btn{font-size:.68rem;font-weight:700;color:#0369A1;
+  background:#E0F2FE;padding:3px 10px;border-radius:20px;text-decoration:none;border:1px solid #BAE6FD}
+.loc-map-btn:hover{background:#BAE6FD}
+.loc-phone{font-size:.68rem;font-weight:700;color:#059669;
+  background:#D1FAE5;padding:3px 10px;border-radius:20px;text-decoration:none;border:1px solid #A7F3D0}
+.loc-map-na{font-size:.65rem;color:var(--muted)}
+
 </style>
 </head>
 <body>
@@ -2096,6 +2237,65 @@ window.goPage=function(id){
 window.showSub=showSub;
 window.goHome=goHome;
 
+/* ── BUDGET & LOCATION MODALS ─────────────────────── */
+const _bcolors = ['#0369A1', '#0891B2', '#059669', '#D97706', '#DC2626', '#7C3AED', '#DB2777', '#65A30D'];
+
+function openBudModal(){
+  document.getElementById('budModal').classList.add('open');
+  document.body.style.overflow='hidden';
+  const b=document.querySelector('.p1modal-nav-btn[id^="budn-"]');
+  if(b){ b.style.background=_bcolors[0]; b.style.borderColor=_bcolors[0]; b.style.color='#fff'; }
+}
+function closeBudModal(){
+  document.getElementById('budModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function handleBudBackdrop(e){ if(e.target.id==='budModal') closeBudModal(); }
+function budJumpTo(di){
+  openBudModal();
+  document.querySelectorAll('[id^="budn-"]').forEach((b,i)=>{
+    b.style.background=i===di?_bcolors[di]:''; b.style.borderColor=i===di?_bcolors[di]:'';
+    b.style.color=i===di?'#fff':'';
+  });
+  const el=document.getElementById('budd-'+di);
+  if(el) setTimeout(()=>{ document.getElementById('budBody').scrollTop=el.offsetTop-10; },60);
+}
+
+function openLocModal(){
+  document.getElementById('locModal').classList.add('open');
+  document.body.style.overflow='hidden';
+  const b=document.querySelector('.p1modal-nav-btn[id^="locn-"]');
+  if(b){ b.style.background='#059669'; b.style.borderColor='#059669'; b.style.color='#fff'; }
+}
+function closeLocModal(){
+  document.getElementById('locModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function handleLocBackdrop(e){ if(e.target.id==='locModal') closeLocModal(); }
+function locJumpTo(di){
+  openLocModal();
+  document.querySelectorAll('[id^="locn-"]').forEach((b,i)=>{
+    b.style.background=i===di?_bcolors[di]:''; b.style.borderColor=i===di?_bcolors[di]:'';
+    b.style.color=i===di?'#fff':'';
+  });
+  const el=document.getElementById('locd-'+di);
+  if(el) setTimeout(()=>{ document.getElementById('locBody').scrollTop=el.offsetTop-10; },60);
+}
+
+/* Filter location list in card */
+function p1LocFilter(btn, d){
+  document.querySelectorAll('.p1-loc-chip').forEach(b=>{
+    b.classList.remove('active'); b.style.background=''; b.style.borderColor=''; b.style.color='';
+  });
+  btn.classList.add('active');
+  const col = d==='all' ? '#0369A1' : _bcolors[parseInt(d)];
+  btn.style.background=col; btn.style.borderColor=col; btn.style.color='#fff';
+  document.querySelectorAll('.p1-loc-ag-item').forEach(item=>{
+    item.style.display=(d==='all'||item.dataset.dist===d)?'':'none';
+  });
+}
+
+
 /* ── P1 DETAIL SECTION ─────────────────────────────── */
 function openP1Detail(){
   // Hide app pages, show p1-detail
@@ -2256,6 +2456,645 @@ function toggleCard(card, pid){
       <div class="p1sc-dn">ปลวกแดง</div>
       <div class="p1sc-dm">9 หน่วย · ใช้ 41%</div>
     </a></div>
+</div>
+<div class="p1-bud-card">
+  <div class="p1-bud-hero">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <div>
+        <div class="p1-bud-title">💰 งบประมาณโดยละเอียด</div>
+        <div class="p1-bud-sub">8 อำเภอ · 81 หน่วยงาน · ปีงบประมาณ 2564–2568</div>
+      </div>
+      <div style="font-size:.72rem;color:var(--muted)">รวมทั้งหมด <strong style="color:#0369A1;font-size:.9rem">฿28,219,810</strong></div>
+    </div>
+  </div>
+  <div class="p1-bud-kpi-row">
+    <div class="p1-bud-kpi"><div class="p1-bud-kv">฿4,913,750</div><div class="p1-bud-kl">ปี 2564</div></div><div class="p1-bud-kpi"><div class="p1-bud-kv">฿1,440,730</div><div class="p1-bud-kl">ปี 2565</div></div><div class="p1-bud-kpi"><div class="p1-bud-kv">฿4,981,130</div><div class="p1-bud-kl">ปี 2566</div></div><div class="p1-bud-kpi"><div class="p1-bud-kv">฿9,841,240</div><div class="p1-bud-kl">ปี 2567</div></div><div class="p1-bud-kpi"><div class="p1-bud-kv">฿7,042,960</div><div class="p1-bud-kl">ปี 2568</div></div>
+  </div>
+  <div class="p1-bud-preview">
+    <div style="font-size:.67rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">🏆 TOP 5 หน่วยงาน (งบสูงสุด)</div>
+    <div class="p1-bud-bar-row">
+    <div class="p1-bud-br-name">รพ.บ้านฉาง (ครั้งที่ 1 )</div>
+    <div class="p1-bud-br-bar"><div class="p1-bud-br-fill" style="width:100%;background:#059669"></div></div>
+    <div class="p1-bud-br-val">฿3,301,150</div>
+  </div><div class="p1-bud-bar-row">
+    <div class="p1-bud-br-name">รพ.แกลง</div>
+    <div class="p1-bud-br-bar"><div class="p1-bud-br-fill" style="width:81%;background:#DC2626"></div></div>
+    <div class="p1-bud-br-val">฿2,668,300</div>
+  </div><div class="p1-bud-bar-row">
+    <div class="p1-bud-br-name">รพ.ระยอง</div>
+    <div class="p1-bud-br-bar"><div class="p1-bud-br-fill" style="width:66%;background:#0369A1"></div></div>
+    <div class="p1-bud-br-val">฿2,162,400</div>
+  </div><div class="p1-bud-bar-row">
+    <div class="p1-bud-br-name">รพ.นิคมพัฒนา</div>
+    <div class="p1-bud-br-bar"><div class="p1-bud-br-fill" style="width:50%;background:#0891B2"></div></div>
+    <div class="p1-bud-br-val">฿1,661,950</div>
+  </div><div class="p1-bud-bar-row">
+    <div class="p1-bud-br-name">สสอ.บ้านฉาง (ครั้งที่ 1 )</div>
+    <div class="p1-bud-br-bar"><div class="p1-bud-br-fill" style="width:45%;background:#059669"></div></div>
+    <div class="p1-bud-br-val">฿1,481,300</div>
+  </div>
+  </div>
+  <div class="p1-bud-cta">
+    <div style="font-size:.72rem;color:var(--muted)">แสดงข้อมูลงบประมาณทุกปีแยกรายหน่วยงาน</div>
+    <button class="p1-bud-open-btn" onclick="openBudModal()">📊 ดูรายละเอียด</button>
+  </div>
+</div>
+<div class="p1-loc-card-outer">
+  <div class="p1-loc-hero">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <div>
+        <div class="p1-loc-title">🗺️ แผนที่และข้อมูลติดต่อ</div>
+        <div class="p1-loc-sub">73 หน่วยงาน · 8 อำเภอ พร้อมพิกัดและเบอร์โทร</div>
+      </div>
+      <button class="p1-bud-open-btn" onclick="openLocModal()" style="background:#059669">📍 ดูแผนที่ทั้งหมด</button>
+    </div>
+  </div>
+  <div class="p1-loc-dist-chips"><button class="p1-loc-chip active" data-ld="all" onclick="p1LocFilter(this,'all')" style="background:#0369A1;border-color:#0369A1;color:#fff">ทั้งหมด (73)</button><button class="p1-loc-chip" data-ld="0" onclick="p1LocFilter(this,'0')">เมืองระยอง (11)</button><button class="p1-loc-chip" data-ld="1" onclick="p1LocFilter(this,'1')">นิคมพัฒนา (3)</button><button class="p1-loc-chip" data-ld="2" onclick="p1LocFilter(this,'2')">บ้านฉาง (8)</button><button class="p1-loc-chip" data-ld="3" onclick="p1LocFilter(this,'3')">เขาชะเมา (6)</button><button class="p1-loc-chip" data-ld="4" onclick="p1LocFilter(this,'4')">แกลง (25)</button><button class="p1-loc-chip" data-ld="5" onclick="p1LocFilter(this,'5')">วังจันทร์ (6)</button><button class="p1-loc-chip" data-ld="6" onclick="p1LocFilter(this,'6')">บ้านค่าย (5)</button><button class="p1-loc-chip" data-ld="7" onclick="p1LocFilter(this,'7')">ปลวกแดง (9)</button></div>
+  <div class="p1-loc-agency-list" id="p1LocList"><div class="p1-loc-ag-item" data-dist="0">
+      <div class="p1-loc-ag-dot" style="background:#0369A1"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.ระยอง</div>
+        <div class="p1-loc-ag-tambon">ต.ท่าประดู่ · อ.เมืองระยอง</div>
+        <div class="p1-loc-ag-coords">12.68234, 101.27647</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/x7ypYXDBCfHKyqUm8" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38611104">📞 38611104</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="0">
+      <div class="p1-loc-ag-dot" style="background:#0369A1"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.เฉลิมพระเกียรติฯ</div>
+        <div class="p1-loc-ag-tambon">ต.ห้วยโป่ง · อ.เมืองระยอง</div>
+        <div class="p1-loc-ag-coords">12.73078, 101.13640</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/FwZBL9JLZx3am5es8" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38684444">📞 38684444</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="0">
+      <div class="p1-loc-ag-dot" style="background:#0369A1"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">สสอ.เมืองระยอง</div>
+        <div class="p1-loc-ag-tambon">ต.เนินพระ · อ.เมืองระยอง</div>
+        <div class="p1-loc-ag-coords">12.68319, 101.23727</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/PtQ8f3tvGSG9rJjYA" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38614435">📞 38614435</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="0">
+      <div class="p1-loc-ag-dot" style="background:#0369A1"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.กะเฉด</div>
+        <div class="p1-loc-ag-tambon">ต.มาบข่า · อ.เมืองระยอง</div>
+        <div class="p1-loc-ag-coords">12.72817, 101.48862</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/scSrzCWTTkBhvGpV9" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38634222">📞 38634222</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="0">
+      <div class="p1-loc-ag-dot" style="background:#0369A1"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.แกลง</div>
+        <div class="p1-loc-ag-tambon">ต.แกลง · อ.เมืองระยอง</div>
+        <div class="p1-loc-ag-coords">12.64240, 101.50611</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/verN7HsCeySiZ3faA" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38648588">📞 38648588</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="0">
+      <div class="p1-loc-ag-dot" style="background:#0369A1"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.คลองบางไผ่</div>
+        <div class="p1-loc-ag-tambon">ต.สำนักท้อน · อ.เมืองระยอง</div>
+        <div class="p1-loc-ag-coords">12.70531, 100.99661</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/H7iiJYeoTkRXnH2m6" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="0">
+      <div class="p1-loc-ag-dot" style="background:#0369A1"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.ก้นหนอง</div>
+        <div class="p1-loc-ag-tambon">ต.บ้านแลง · อ.เมืองระยอง</div>
+        <div class="p1-loc-ag-coords">12.68576, 101.34161</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/7nVEntNKHYvVV9vp8" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38626275">📞 38626275</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="0">
+      <div class="p1-loc-ag-dot" style="background:#0369A1"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านยายจั่น</div>
+        <div class="p1-loc-ag-tambon">ต.สำนักทอง · อ.เมืองระยอง</div>
+        <div class="p1-loc-ag-coords">12.70676, 101.47026</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/SQMfH9MwNhP9Qm4z7" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="0">
+      <div class="p1-loc-ag-dot" style="background:#0369A1"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.เพ</div>
+        <div class="p1-loc-ag-tambon">ต.เพ · อ.เมืองระยอง</div>
+        <div class="p1-loc-ag-coords">12.62149, 101.42802</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/z3iCVyfTLEJD7f1t8" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38652613">📞 38652613</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="0">
+      <div class="p1-loc-ag-dot" style="background:#0369A1"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านเกาะเสม็ด</div>
+        <div class="p1-loc-ag-tambon">ต.เพ · อ.เมืองระยอง</div>
+        <div class="p1-loc-ag-coords">12.57063, 101.46451</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/RKzc8of4Nk99vjEv7" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38644123">📞 38644123</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="0">
+      <div class="p1-loc-ag-dot" style="background:#0369A1"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">ศูนย์บริการสาธารณสุข ทน.ระยอง</div>
+        <div class="p1-loc-ag-tambon">ต.ท่าประดู่ · อ.เมืองระยอง</div>
+        <div class="p1-loc-ag-coords">12.67513, 101.27865</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/EQr4U3K9r1Qe6TH39" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38610124">📞 38610124</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="1">
+      <div class="p1-loc-ag-dot" style="background:#0891B2"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.นิคมพัฒนา</div>
+        <div class="p1-loc-ag-tambon">ต.มะขามคู่ · อ.นิคมพัฒนา</div>
+        <div class="p1-loc-ag-coords">12.87021, 101.14226</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/ERYrvujia4nK2wgD8" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38038050">📞 38038050</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="1">
+      <div class="p1-loc-ag-dot" style="background:#0891B2"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">สสอ.นิคมพัฒนา</div>
+        <div class="p1-loc-ag-tambon">ต.นิคมพัฒนา · อ.นิคมพัฒนา</div>
+        <div class="p1-loc-ag-coords">12.82993, 101.20511</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/5NKEDpWrN89q66Ca8" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38636827">📞 38636827</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="1">
+      <div class="p1-loc-ag-dot" style="background:#0891B2"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านกระเฉท</div>
+        <div class="p1-loc-ag-tambon">ต.มาบข่า · อ.นิคมพัฒนา</div>
+        <div class="p1-loc-ag-coords">12.76607, 101.21294</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/A2MjCJzWPmWBJT8FA" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38637917">📞 38637917</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="2">
+      <div class="p1-loc-ag-dot" style="background:#059669"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.บ้านฉาง</div>
+        <div class="p1-loc-ag-tambon">ต.พลา · อ.บ้านฉาง</div>
+        <div class="p1-loc-ag-coords">12.72615, 101.04331</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/iWzbo3darsCvDLTu6" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38603838">📞 38603838</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="2">
+      <div class="p1-loc-ag-dot" style="background:#059669"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">สสอ.บ้านฉาง</div>
+        <div class="p1-loc-ag-tambon">ต.พลา · อ.บ้านฉาง</div>
+        <div class="p1-loc-ag-coords">12.71934, 101.04305</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/VXphNcYcm546hPsH6" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38601142">📞 38601142</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="2">
+      <div class="p1-loc-ag-dot" style="background:#059669"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">ศูนย์บริการสาธารณสุข อบต.สำนักท้อน</div>
+        <div class="p1-loc-ag-tambon">ต.สำนักท้อน · อ.บ้านฉาง</div>
+        <div class="p1-loc-ag-coords">—, —</div>
+        <div class="p1-loc-ag-actions"></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="2">
+      <div class="p1-loc-ag-dot" style="background:#059669"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านสระแก้ว</div>
+        <div class="p1-loc-ag-tambon">ต.สำนักท้อน · อ.บ้านฉาง</div>
+        <div class="p1-loc-ag-coords">12.72024, 101.00681</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/KbM7pXct14uTN1CXA" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38030484">📞 38030484</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="2">
+      <div class="p1-loc-ag-dot" style="background:#059669"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.สำนักท้อน</div>
+        <div class="p1-loc-ag-tambon">ต.สำนักท้อน · อ.บ้านฉาง</div>
+        <div class="p1-loc-ag-coords">12.77016, 101.01938</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/9KbRYLw4q2EBT1as7" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="2">
+      <div class="p1-loc-ag-dot" style="background:#059669"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านยายร้า</div>
+        <div class="p1-loc-ag-tambon">ต.บ้านฉาง · อ.บ้านฉาง</div>
+        <div class="p1-loc-ag-coords">12.75326, 101.03974</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/74mRZT5duNgwf9DKA" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38696088">📞 38696088</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="2">
+      <div class="p1-loc-ag-dot" style="background:#059669"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านเขาครอก</div>
+        <div class="p1-loc-ag-tambon">ต.สำนักท้อน · อ.บ้านฉาง</div>
+        <div class="p1-loc-ag-coords">12.74317, 101.01353</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/TxRkjmTQFCj28BEm7" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="2">
+      <div class="p1-loc-ag-dot" style="background:#059669"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านหนองน้ำเย็น</div>
+        <div class="p1-loc-ag-tambon">ต.สำนักท้อน · อ.บ้านฉาง</div>
+        <div class="p1-loc-ag-coords">12.80343, 101.05244</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/AwmWyPd54Mnw5LXV9" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38030625">📞 38030625</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="3">
+      <div class="p1-loc-ag-dot" style="background:#D97706"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.เขาชะเมาฯ</div>
+        <div class="p1-loc-ag-tambon">ต.ห้วยทับมอญ · อ.เขาชะเมา</div>
+        <div class="p1-loc-ag-coords">12.98822, 101.67332</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/wyGPZvBQ5kK9vvwu8" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38996022">📞 38996022</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="3">
+      <div class="p1-loc-ag-dot" style="background:#D97706"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านชำฆ้อ</div>
+        <div class="p1-loc-ag-tambon">ต.ชำฆ้อ · อ.เขาชะเมา</div>
+        <div class="p1-loc-ag-coords">12.94096, 101.67278</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/DsnxC75VDZH8eZ8a8" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="3">
+      <div class="p1-loc-ag-dot" style="background:#D97706"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.แสงส่องหล้า 2</div>
+        <div class="p1-loc-ag-tambon">ต.ห้วยทับมอญ · อ.เขาชะเมา</div>
+        <div class="p1-loc-ag-coords">13.00796, 101.71610</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/hR64pRUnMbYV85an8" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="3">
+      <div class="p1-loc-ag-dot" style="background:#D97706"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านเขาน้อย</div>
+        <div class="p1-loc-ag-tambon">ต.เขาน้อย · อ.เขาชะเมา</div>
+        <div class="p1-loc-ag-coords">13.10184, 101.60000</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/DByjxN3xe9dWXLN69" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="3">
+      <div class="p1-loc-ag-dot" style="background:#D97706"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านสามแยกน้ำเป็น</div>
+        <div class="p1-loc-ag-tambon">ต.น้ำเป็น · อ.เขาชะเมา</div>
+        <div class="p1-loc-ag-coords">12.86274, 101.73753</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/RGo3A37vmM5jWP4e8" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="3">
+      <div class="p1-loc-ag-dot" style="background:#D97706"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">สถานีอนามัยเฉลิมพระเกียรติ 60 พรรษา นวมินทราชินี บ้านน้ำใส</div>
+        <div class="p1-loc-ag-tambon">ต.น้ำเป็น · อ.เขาชะเมา</div>
+        <div class="p1-loc-ag-coords">12.94777, 101.79475</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/GoAzRpfHDdAAHxoQ7" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.แกลง</div>
+        <div class="p1-loc-ag-tambon">ต.ทางเกวียน · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.78578, 101.67069</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/fRVTxr61x6wnokCz9" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38677534">📞 38677534</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.กองดิน</div>
+        <div class="p1-loc-ag-tambon">ต.กองดิน · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.78345, 101.80870</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/WWR19UJGUcXz584Z6" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38806363">📞 38806363</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านนา</div>
+        <div class="p1-loc-ag-tambon">ต.บ้้านนา · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.83081, 101.66939</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/6QCjy1vssFvYbbrv9" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:870565795">📞 870565795</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.กร่ำ</div>
+        <div class="p1-loc-ag-tambon">ต.กร่ำ · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.65841, 101.63827</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/sfa7dzMcubg4wXps5" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านสองพี่น้อง</div>
+        <div class="p1-loc-ag-tambon">ต.ห้วยยาง · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.86794, 99.68025</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/2jF8pYyoGBwU86PUA" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:32787446">📞 32787446</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านวัดบุนนาค</div>
+        <div class="p1-loc-ag-tambon">ต.ชากโดน · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.69948, 101.60560</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/ZRNRW7pXZc9YR7i86" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านเนินหย่อง</div>
+        <div class="p1-loc-ag-tambon">ต.วังหว้า · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.78097, 101.56683</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/UgZs1chtazyZCCMT9" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38944550">📞 38944550</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านโพธิฐาน</div>
+        <div class="p1-loc-ag-tambon">ต.ทุ่งควายกิน · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.80415, 101.74058</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/KYxUmQqJyJc8YEe3A" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38669432">📞 38669432</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านเขาดิน</div>
+        <div class="p1-loc-ag-tambon">ต.ทุ่งควายกิน · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.78060, 101.71293</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/vFzU5ofCdGgwA4ki9" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านชำสมอ</div>
+        <div class="p1-loc-ag-tambon">ต.กองดิน · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.81502, 101.76967</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/PH7xZoP3v7Lcw5v88" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38668936">📞 38668936</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.วังหว้า</div>
+        <div class="p1-loc-ag-tambon">ต.วังหว้า · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.75090, 101.62005</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/XUJb6xHok19exwR97" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38671911">📞 38671911</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านคลองคา</div>
+        <div class="p1-loc-ag-tambon">ต.ห้วยยาง · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.73613, 101.59323</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/GLnznSBepT6K5nkE8" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านถนนกะเพรา</div>
+        <div class="p1-loc-ag-tambon">ต.เนิินฆ้อ · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.69313, 101.66904</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/eUxs8GfpXqkQFYdG8" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.ชากพง</div>
+        <div class="p1-loc-ag-tambon">ต.ชากพง · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.65114, 101.56501</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/d11RmAUEqJf3GN276" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38638459">📞 38638459</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านจำรุง</div>
+        <div class="p1-loc-ag-tambon">ต.เนินฆ้อ · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.71126, 101.61905</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/qm5u7vNLW8S1hsjL7" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.กระแสบน</div>
+        <div class="p1-loc-ag-tambon">ต.กระแสบน · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.84399, 101.62659</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/gqDWu8YQWZdWtna77" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38992120">📞 38992120</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.หนองแพงพวย</div>
+        <div class="p1-loc-ag-tambon">ต.เนินฆ้อ · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.72582, 101.63534</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/XNkZuq4b4LgMaM4s8" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.พังราด</div>
+        <div class="p1-loc-ag-tambon">ต.พังราด · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.72922, 101.75186</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/6iYaqhiugweBzwPx6" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านเขาหินแท่น</div>
+        <div class="p1-loc-ag-tambon">ต.ทางเกวียน · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.83003, 101.52242</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/UUsfW2fNbrdFvAgg9" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:892404288">📞 892404288</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.เต้าปูนหาย</div>
+        <div class="p1-loc-ag-tambon">ต.ห้วยยาง · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.79874, 101.53583</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/VfAnSNSXo8tHoCZk8" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.สองสลึง</div>
+        <div class="p1-loc-ag-tambon">ต.สองสลึง · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.71368, 101.56164</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/GS2ME57McUhYzcGH7" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.คลองป่าไม้</div>
+        <div class="p1-loc-ag-tambon">ต.กระแสบน · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.94137, 101.60619</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/wFQQdcgVvCoZRz5t5" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38017506">📞 38017506</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.คลองปูน</div>
+        <div class="p1-loc-ag-tambon">ต.คลองปูน · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.75016, 101.73076</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/vxmQJ1nwTtoyzKf27" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.ปากน้ำกระแส</div>
+        <div class="p1-loc-ag-tambon">ต.ปากน้ำกระแส · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.71406, 101.70783</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/DpjZ4a6udtxKSJBK9" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="4">
+      <div class="p1-loc-ag-dot" style="background:#DC2626"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">ศูนย์บริการสาธารณสุข ทต.เมืองแกลง</div>
+        <div class="p1-loc-ag-tambon">ต.ทางเกวียน · อ.แกลง</div>
+        <div class="p1-loc-ag-coords">12.77938, 101.65155</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/pk16aW7TiFAtfKyG7" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38672654">📞 38672654</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="5">
+      <div class="p1-loc-ag-dot" style="background:#7C3AED"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.วังจันทร์</div>
+        <div class="p1-loc-ag-tambon">ต.ชุมแสง · อ.วังจันทร์</div>
+        <div class="p1-loc-ag-coords">12.94034, 101.52925</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/UAQuNZ5AXbKFnuGk7" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38666174">📞 38666174</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="5">
+      <div class="p1-loc-ag-dot" style="background:#7C3AED"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">สสอ.วังจันทร์</div>
+        <div class="p1-loc-ag-tambon">ต.ชุมแสง · อ.วังจันทร์</div>
+        <div class="p1-loc-ag-coords">12.93569, 101.51939</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/2FxFmZaafnvhVotj7" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="5">
+      <div class="p1-loc-ag-dot" style="background:#7C3AED"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านคลองเขต</div>
+        <div class="p1-loc-ag-tambon">ต.ป่ายุบใน · อ.วังจันทร์</div>
+        <div class="p1-loc-ag-coords">13.03694, 101.43515</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/rZSC3fBnKPeNe39T6" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38015158">📞 38015158</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="5">
+      <div class="p1-loc-ag-dot" style="background:#7C3AED"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านวังจันทร์</div>
+        <div class="p1-loc-ag-tambon">ต.ป่ายุบใน · อ.วังจันทร์</div>
+        <div class="p1-loc-ag-coords">12.88258, 101.55737</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/CmRnWV9Wsr41vQMr9" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38626053">📞 38626053</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="5">
+      <div class="p1-loc-ag-dot" style="background:#7C3AED"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านเขาตาอิ๋น</div>
+        <div class="p1-loc-ag-tambon">ต.คลองกิ่ว · อ.วังจันทร์</div>
+        <div class="p1-loc-ag-coords">12.91850, 101.49653</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/sVhe4wA7wsyJENsaA" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38666642">📞 38666642</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="5">
+      <div class="p1-loc-ag-dot" style="background:#7C3AED"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านเขาสิงห์โต</div>
+        <div class="p1-loc-ag-tambon">ต.ป่ายุบใน · อ.วังจันทร์</div>
+        <div class="p1-loc-ag-coords">13.04626, 101.53138</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/Wmi4q8HSt1EGuigK6" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="6">
+      <div class="p1-loc-ag-dot" style="background:#DB2777"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.บ้านค่าย</div>
+        <div class="p1-loc-ag-tambon">ต.หนองละลอก · อ.บ้านค่าย</div>
+        <div class="p1-loc-ag-coords">12.77881, 101.29283</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/YkT5XqFz59adb8EaA" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38641005">📞 38641005</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="6">
+      <div class="p1-loc-ag-dot" style="background:#DB2777"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">สสอ.บ้านค่าย</div>
+        <div class="p1-loc-ag-tambon">ต.บ้านค่าย · อ.บ้านค่าย</div>
+        <div class="p1-loc-ag-coords">12.77738, 101.29383</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/xvyd77gaoNtP1shr9" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="6">
+      <div class="p1-loc-ag-dot" style="background:#DB2777"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.หนองสะพาน</div>
+        <div class="p1-loc-ag-tambon">ต.หนองตะพาน · อ.บ้านค่าย</div>
+        <div class="p1-loc-ag-coords">12.74908, 101.26336</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/fCpmQMsHtSBVXwPw5" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38025232">📞 38025232</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="6">
+      <div class="p1-loc-ag-dot" style="background:#DB2777"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.เนินสว่าง</div>
+        <div class="p1-loc-ag-tambon">ต.เนินสว่าง · อ.บ้านค่าย</div>
+        <div class="p1-loc-ag-coords">12.95763, 101.44170</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/i2sRkGnjadua8Q8K9" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38018010">📞 38018010</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="6">
+      <div class="p1-loc-ag-dot" style="background:#DB2777"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านหนองพะวา</div>
+        <div class="p1-loc-ag-tambon">ต.บางบุตร · อ.บ้านค่าย</div>
+        <div class="p1-loc-ag-coords">12.83263, 101.34390</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/u3XuBGruCd7vEsQA7" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="7">
+      <div class="p1-loc-ag-dot" style="background:#65A30D"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.ปลวกแดง</div>
+        <div class="p1-loc-ag-tambon">ต.ปลวกแดง · อ.ปลวกแดง</div>
+        <div class="p1-loc-ag-coords">12.97077, 101.21910</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/o9SKoSzyD1MKh7rv9" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:33650413">📞 33650413</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="7">
+      <div class="p1-loc-ag-dot" style="background:#65A30D"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">สสอ.ปลวกแดง</div>
+        <div class="p1-loc-ag-tambon">ต.ปลวกแดง · อ.ปลวกแดง</div>
+        <div class="p1-loc-ag-coords">12.97437, 101.21322</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/edjh9mBkvHYV5QDHA" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38659069">📞 38659069</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="7">
+      <div class="p1-loc-ag-dot" style="background:#65A30D"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านหนองค้างคาว</div>
+        <div class="p1-loc-ag-tambon">ต.ตาสิทธิ์ · อ.ปลวกแดง</div>
+        <div class="p1-loc-ag-coords">13.05510, 101.20100</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/jrRuXP7ZAyJL5wit5" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:838586253">📞 838586253</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="7">
+      <div class="p1-loc-ag-dot" style="background:#65A30D"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านมาบยางพร</div>
+        <div class="p1-loc-ag-tambon">ต.มาบยางพร · อ.ปลวกแดง</div>
+        <div class="p1-loc-ag-coords">12.99113, 101.13303</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/cgS1iAtkCgucaQTv8" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38891599">📞 38891599</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="7">
+      <div class="p1-loc-ag-dot" style="background:#65A30D"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านหนองไร่</div>
+        <div class="p1-loc-ag-tambon">ต.หนองไร่ · อ.ปลวกแดง</div>
+        <div class="p1-loc-ag-coords">13.00865, 101.35961</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/jM3Xx7aZGXf8jqud9" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:892493434">📞 892493434</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="7">
+      <div class="p1-loc-ag-dot" style="background:#65A30D"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.คลองน้ำแดง</div>
+        <div class="p1-loc-ag-tambon">ต.หนองไร่่ · อ.ปลวกแดง</div>
+        <div class="p1-loc-ag-coords">12.97474, 101.37918</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/bQZVgBqjvCRpn9566" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:871496499">📞 871496499</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="7">
+      <div class="p1-loc-ag-dot" style="background:#65A30D"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านปากแพรก</div>
+        <div class="p1-loc-ag-tambon">ต.ละหาร · อ.ปลวกแดง</div>
+        <div class="p1-loc-ag-coords">12.94580, 101.31222</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/728bjT99fKdAiPtQ6" target="_blank">📍 แผนที่</a><a class="p1-loc-phone-link" href="tel:38961237">📞 38961237</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="7">
+      <div class="p1-loc-ag-dot" style="background:#65A30D"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บึงตาต้า</div>
+        <div class="p1-loc-ag-tambon">ต.หนองไร่ · อ.ปลวกแดง</div>
+        <div class="p1-loc-ag-coords">13.04138, 101.30973</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/si9GUkXkAf3ijUC99" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div><div class="p1-loc-ag-item" data-dist="7">
+      <div class="p1-loc-ag-dot" style="background:#65A30D"></div>
+      <div class="p1-loc-ag-info">
+        <div class="p1-loc-ag-name">รพ.สต.บ้านห้วยปราบ</div>
+        <div class="p1-loc-ag-tambon">ต.มาบยางพร · อ.ปลวกแดง</div>
+        <div class="p1-loc-ag-coords">13.02115, 101.11445</div>
+        <div class="p1-loc-ag-actions"><a class="p1-loc-map-link" href="https://maps.app.goo.gl/ckWcoTHTihqX4yeTA" target="_blank">📍 แผนที่</a></div>
+      </div>
+    </div></div>
 </div>
   <div class="p1-dive-card">
   <div class="p1-dive-top">
@@ -4632,6 +5471,2579 @@ function toggleCard(card, pid){
 <tr><td class="tc-item">เครื่องดูดเสมหะ (SUCTION)</td><td class="tc-yr n">—</td><td class="tc-yr n">—</td><td class="tc-yr n">—</td><td class="tc-yr n">—</td><td class="tc-yr n">1</td><td class="tc-tot n">1</td><td class="tc-st n iu">0</td><td class="tc-st n z">—</td><td class="tc-st n rv">1</td></tr>
 </tbody></table></div></div>
 </div></div>
+  </div>
+</div>
+<div id="budModal" onclick="handleBudBackdrop(event)">
+  <div id="budSheet">
+    <div class="p1modal-handle"></div>
+    <div class="p1modal-head">
+      <div><div class="p1modal-title">💰 งบประมาณโดยละเอียด</div>
+        <div class="p1modal-meta">รวม ฿28,219,810 · 81 หน่วยงาน · ปี 2564–2568</div></div>
+      <button class="p1modal-close" onclick="closeBudModal()">✕</button>
+    </div>
+    <div class="p1modal-nav"><button class="p1modal-nav-btn" id="budn-0" onclick="budJumpTo(0)">เมืองระยอง</button><button class="p1modal-nav-btn" id="budn-1" onclick="budJumpTo(1)">นิคมพัฒนา</button><button class="p1modal-nav-btn" id="budn-2" onclick="budJumpTo(2)">บ้านฉาง</button><button class="p1modal-nav-btn" id="budn-3" onclick="budJumpTo(3)">เขาชะเมา</button><button class="p1modal-nav-btn" id="budn-4" onclick="budJumpTo(4)">แกลง</button><button class="p1modal-nav-btn" id="budn-5" onclick="budJumpTo(5)">วังจันทร์</button><button class="p1modal-nav-btn" id="budn-6" onclick="budJumpTo(6)">บ้านค่าย</button><button class="p1modal-nav-btn" id="budn-7" onclick="budJumpTo(7)">ปลวกแดง</button></div>
+    <div class="p1modal-body" id="budBody"><div class="bud-dist" id="budd-0">
+  <div class="bud-dist-hd" style="background:#0369A1">
+    <div>
+      <div class="bud-dlabel">อำเภอ</div>
+      <div class="bud-dname">เมืองระยอง</div>
+      <div class="bud-dmeta">12 หน่วยงาน</div>
+    </div>
+    <div class="bud-dsum">
+      <div class="bud-dv">฿4,625,950</div>
+      <div class="bud-dp">16% ของทั้งหมด</div>
+    </div>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.ระยอง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:8%;background:#0369A1"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿2,162,400</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-has">฿1,263,800</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿398,600</td><td class="bt-yr bt-has">฿500,000</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿2,162,400</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.เฉลิมพระเกียรติฯ</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:2%;background:#0369A1"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿573,180</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-has">฿73,500</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿499,680</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿573,180</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">สสอ.เมืองระยอง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:2%;background:#0369A1"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿482,400</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿482,400</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿482,400</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.กะเฉด (1)</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#0369A1"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿241,100</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿50,000</td><td class="bt-yr bt-has">฿99,500</td><td class="bt-yr bt-has">฿91,600</td>
+        <td class="bud-tot">฿241,100</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.กะเฉด (2)</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#0369A1"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿76,970</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿76,970</td>
+        <td class="bud-tot">฿76,970</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.แกลง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#0369A1"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿194,300</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿94,900</td><td class="bt-yr bt-has">฿99,400</td>
+        <td class="bud-tot">฿194,300</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.คลองบางไผ่</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#0369A1"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿50,800</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿50,800</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿50,800</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.ก้นหนอง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#0369A1"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿98,900</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿98,900</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿98,900</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.เพ</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#0369A1"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿100,000</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿100,000</td>
+        <td class="bud-tot">฿100,000</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านยายจั่น</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#0369A1"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿92,300</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿92,300</td>
+        <td class="bud-tot">฿92,300</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้้านเกาะเสม็ด</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#0369A1"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿92,300</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿92,300</td>
+        <td class="bud-tot">฿92,300</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">ศูนย์บริการสาธารณสุข ทน.ระยอง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:2%;background:#0369A1"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿461,300</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿461,300</td>
+        <td class="bud-tot">฿461,300</td>
+      </tr></tbody>
+    </table>
+  </div>
+</div>
+<div class="bud-dist" id="budd-1">
+  <div class="bud-dist-hd" style="background:#0891B2">
+    <div>
+      <div class="bud-dlabel">อำเภอ</div>
+      <div class="bud-dname">นิคมพัฒนา</div>
+      <div class="bud-dmeta">4 หน่วยงาน</div>
+    </div>
+    <div class="bud-dsum">
+      <div class="bud-dv">฿2,802,850</div>
+      <div class="bud-dp">10% ของทั้งหมด</div>
+    </div>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.นิคมพัฒนา</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:6%;background:#0891B2"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿1,661,950</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-has">฿165,750</td><td class="bt-yr bt-has">฿498,500</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿499,100</td><td class="bt-yr bt-has">฿498,600</td>
+        <td class="bud-tot">฿1,661,950</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">สสอ.นิคมพัฒนา (ครั้งที่ 1 )</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:2%;background:#0891B2"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿494,900</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿494,900</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿494,900</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">สสอ.นิคมพัฒนา (ครั้ั้งที่ 2 )</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:2%;background:#0891B2"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿450,700</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿450,700</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿450,700</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านกระเฉท</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#0891B2"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿195,300</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿96,000</td><td class="bt-yr bt-has">฿99,300</td>
+        <td class="bud-tot">฿195,300</td>
+      </tr></tbody>
+    </table>
+  </div>
+</div>
+<div class="bud-dist" id="budd-2">
+  <div class="bud-dist-hd" style="background:#059669">
+    <div>
+      <div class="bud-dlabel">อำเภอ</div>
+      <div class="bud-dname">บ้านฉาง</div>
+      <div class="bud-dmeta">10 หน่วยงาน</div>
+    </div>
+    <div class="bud-dsum">
+      <div class="bud-dv">฿6,589,290</div>
+      <div class="bud-dp">23% ของทั้งหมด</div>
+    </div>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.บ้านฉาง (ครั้งที่ 1 )</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:12%;background:#059669"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿3,301,150</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-has">฿1,453,000</td><td class="bt-yr bt-has">฿348,850</td><td class="bt-yr bt-has">฿499,700</td><td class="bt-yr bt-has">฿499,600</td><td class="bt-yr bt-has">฿500,000</td>
+        <td class="bud-tot">฿3,301,150</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.บ้านฉาง (ครั้ั้งที่ 2 )</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:2%;background:#059669"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿499,600</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿499,600</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿499,600</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">สสอ.บ้านฉาง (ครั้งที่ 1 )</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:5%;background:#059669"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿1,481,300</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿499,400</td><td class="bt-yr bt-has">฿491,400</td><td class="bt-yr bt-has">฿490,500</td>
+        <td class="bud-tot">฿1,481,300</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">สสอ.บ้านฉาง (ครั้ั้งที่ 2 )</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:2%;background:#059669"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿479,400</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿479,400</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿479,400</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">ศูนย์บริการสาธารณสุข อบต.สำนักท้อน</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#059669"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿390,840</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿390,840</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿390,840</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านสระแก้ว</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#059669"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿83,300</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿83,300</td>
+        <td class="bud-tot">฿83,300</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.สำนักท้อน</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#059669"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿97,600</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿97,600</td>
+        <td class="bud-tot">฿97,600</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านยายร้า</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#059669"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿99,200</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿99,200</td>
+        <td class="bud-tot">฿99,200</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านเขาครอก</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#059669"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿58,100</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿58,100</td>
+        <td class="bud-tot">฿58,100</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านหนองน้ำเย็น</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#059669"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿98,800</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿98,800</td>
+        <td class="bud-tot">฿98,800</td>
+      </tr></tbody>
+    </table>
+  </div>
+</div>
+<div class="bud-dist" id="budd-3">
+  <div class="bud-dist-hd" style="background:#D97706">
+    <div>
+      <div class="bud-dlabel">อำเภอ</div>
+      <div class="bud-dname">เขาชะเมา</div>
+      <div class="bud-dmeta">6 หน่วยงาน</div>
+    </div>
+    <div class="bud-dsum">
+      <div class="bud-dv">฿1,419,050</div>
+      <div class="bud-dp">5% ของทั้งหมด</div>
+    </div>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.เขาชะเมาฯ</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:3%;background:#D97706"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿935,400</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-has">฿467,700</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿467,700</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿935,400</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านชำฆ้อ</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#D97706"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿93,100</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿93,100</td>
+        <td class="bud-tot">฿93,100</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.แสงส่องหล้า 2</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#D97706"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿99,800</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿99,800</td>
+        <td class="bud-tot">฿99,800</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านเขาน้อย</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#D97706"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿92,750</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿92,750</td>
+        <td class="bud-tot">฿92,750</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านสามแยกน้ำเป็น</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#D97706"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿99,400</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿99,400</td>
+        <td class="bud-tot">฿99,400</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">สถานีอนามัยเฉลิมพระเกียรติ 60 พรรษา บ้านน้ำใส</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#D97706"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿98,600</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿98,600</td>
+        <td class="bud-tot">฿98,600</td>
+      </tr></tbody>
+    </table>
+  </div>
+</div>
+<div class="bud-dist" id="budd-4">
+  <div class="bud-dist-hd" style="background:#DC2626">
+    <div>
+      <div class="bud-dlabel">อำเภอ</div>
+      <div class="bud-dname">แกลง</div>
+      <div class="bud-dmeta">28 หน่วยงาน</div>
+    </div>
+    <div class="bud-dsum">
+      <div class="bud-dv">฿6,721,600</div>
+      <div class="bud-dp">24% ของทั้งหมด</div>
+    </div>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.แกลง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:9%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿2,668,300</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-has">฿1,168,900</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿499,600</td><td class="bt-yr bt-has">฿500,000</td><td class="bt-yr bt-has">฿499,800</td>
+        <td class="bud-tot">฿2,668,300</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.กองดิน (ครั้งที่ 1 )</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿246,200</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿50,000</td><td class="bt-yr bt-has">฿99,200</td><td class="bt-yr bt-has">฿97,000</td>
+        <td class="bud-tot">฿246,200</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.กองดิน (ครั้งที่ 2 )</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿191,600</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿95,600</td><td class="bt-yr bt-has">฿96,000</td>
+        <td class="bud-tot">฿191,600</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.คลองป่าไม้ (ครั้งที่ 1 )</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿139,400</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿44,800</td><td class="bt-yr bt-has">฿94,600</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿139,400</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.คลองป่าไม้ (ครั้งที่ 2 )</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿84,600</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿84,600</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿84,600</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านนา</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿229,200</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿50,000</td><td class="bt-yr bt-has">฿80,000</td><td class="bt-yr bt-has">฿99,200</td>
+        <td class="bud-tot">฿229,200</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.กร่ำ</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿215,600</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿51,400</td><td class="bt-yr bt-has">฿82,400</td><td class="bt-yr bt-has">฿81,800</td>
+        <td class="bud-tot">฿215,600</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านสองพี่น้อง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿52,300</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿32,200</td><td class="bt-yr bt-has">฿20,100</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿52,300</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านวัดบุนนาค</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿70,400</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿70,400</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿70,400</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านเนินหย่อง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿144,300</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿74,300</td><td class="bt-yr bt-has">฿70,000</td>
+        <td class="bud-tot">฿144,300</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านโพธิฐาน</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿190,600</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿96,300</td><td class="bt-yr bt-has">฿94,300</td>
+        <td class="bud-tot">฿190,600</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านเขาดิน</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿185,700</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿86,700</td><td class="bt-yr bt-has">฿99,000</td>
+        <td class="bud-tot">฿185,700</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านชำสมอ</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿188,000</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿89,100</td><td class="bt-yr bt-has">฿98,900</td>
+        <td class="bud-tot">฿188,000</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.วังหว้า</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿144,300</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿74,300</td><td class="bt-yr bt-has">฿70,000</td>
+        <td class="bud-tot">฿144,300</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านคลองคา</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿137,500</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿92,300</td><td class="bt-yr bt-has">฿45,200</td>
+        <td class="bud-tot">฿137,500</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านถนนกะเพรา</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿114,100</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿69,100</td><td class="bt-yr bt-has">฿45,000</td>
+        <td class="bud-tot">฿114,100</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.ชากพง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿152,000</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿84,200</td><td class="bt-yr bt-has">฿67,800</td>
+        <td class="bud-tot">฿152,000</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านจำรุง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿164,500</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿97,700</td><td class="bt-yr bt-has">฿66,800</td>
+        <td class="bud-tot">฿164,500</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.กระแสบน</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿142,500</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿98,700</td><td class="bt-yr bt-has">฿43,800</td>
+        <td class="bud-tot">฿142,500</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.หนองแพงพวย</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿177,000</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿95,500</td><td class="bt-yr bt-has">฿81,500</td>
+        <td class="bud-tot">฿177,000</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.พังราด</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿167,100</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿82,300</td><td class="bt-yr bt-has">฿84,800</td>
+        <td class="bud-tot">฿167,100</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านเขาหินแท่น</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿95,600</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿95,600</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿95,600</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.เต้าปูนหาย</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿122,000</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿50,800</td><td class="bt-yr bt-has">฿71,200</td>
+        <td class="bud-tot">฿122,000</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.สองสลึง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿185,300</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿98,900</td><td class="bt-yr bt-has">฿86,400</td>
+        <td class="bud-tot">฿185,300</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.คลองป่าไม้ (ครั้งที่ 1 )</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿139,400</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿44,800</td><td class="bt-yr bt-has">฿94,600</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿139,400</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.คลองป่าไม้ (ครั้งที่ 2 )</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿85,600</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿85,600</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿85,600</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.คลองปูน</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿192,100</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿96,400</td><td class="bt-yr bt-has">฿95,700</td>
+        <td class="bud-tot">฿192,100</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.ปากน้ำกระแส</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#DC2626"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿96,400</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿96,400</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿96,400</td>
+      </tr></tbody>
+    </table>
+  </div>
+</div>
+<div class="bud-dist" id="budd-5">
+  <div class="bud-dist-hd" style="background:#7C3AED">
+    <div>
+      <div class="bud-dlabel">อำเภอ</div>
+      <div class="bud-dname">วังจันทร์</div>
+      <div class="bud-dmeta">7 หน่วยงาน</div>
+    </div>
+    <div class="bud-dsum">
+      <div class="bud-dv">฿2,500,510</div>
+      <div class="bud-dp">9% ของทั้งหมด</div>
+    </div>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.วังจันทร์</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:5%;background:#7C3AED"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿1,440,800</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-has">฿321,100</td><td class="bt-yr bt-has">฿385,100</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿434,600</td><td class="bt-yr bt-has">฿300,000</td>
+        <td class="bud-tot">฿1,440,800</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">สสอ.บ้านวังจันทร์</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#7C3AED"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿96,400</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿96,400</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿96,400</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านคลองเขต</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#7C3AED"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿181,850</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿98,550</td><td class="bt-yr bt-has">฿83,300</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿181,850</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านวังจันทร์</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#7C3AED"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿295,400</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿98,000</td><td class="bt-yr bt-has">฿99,400</td><td class="bt-yr bt-has">฿98,000</td>
+        <td class="bud-tot">฿295,400</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านเขาตาอิ๋น (1)</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#7C3AED"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿198,300</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿98,700</td><td class="bt-yr bt-has">฿99,600</td>
+        <td class="bud-tot">฿198,300</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านเขาตาอิ๋น (2)</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#7C3AED"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿95,800</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿95,800</td>
+        <td class="bud-tot">฿95,800</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านเขาสิงห์โต</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#7C3AED"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿191,960</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿92,700</td><td class="bt-yr bt-has">฿99,260</td>
+        <td class="bud-tot">฿191,960</td>
+      </tr></tbody>
+    </table>
+  </div>
+</div>
+<div class="bud-dist" id="budd-6">
+  <div class="bud-dist-hd" style="background:#DB2777">
+    <div>
+      <div class="bud-dlabel">อำเภอ</div>
+      <div class="bud-dname">บ้านค่าย</div>
+      <div class="bud-dmeta">5 หน่วยงาน</div>
+    </div>
+    <div class="bud-dsum">
+      <div class="bud-dv">฿1,573,620</div>
+      <div class="bud-dp">6% ของทั้งหมด</div>
+    </div>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.บ้านค่าย</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:3%;background:#DB2777"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿708,280</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿208,280</td><td class="bt-yr bt-has">฿500,000</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿708,280</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">สสอ.บ้านค่าย</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:2%;background:#DB2777"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿487,700</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿487,700</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿487,700</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.หนองสะพาน</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#DB2777"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿197,140</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿97,700</td><td class="bt-yr bt-has">฿99,440</td>
+        <td class="bud-tot">฿197,140</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.เนินสว่าง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#DB2777"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿96,000</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿96,000</td>
+        <td class="bud-tot">฿96,000</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านหนองพะวา</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#DB2777"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿84,500</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿84,500</td>
+        <td class="bud-tot">฿84,500</td>
+      </tr></tbody>
+    </table>
+  </div>
+</div>
+<div class="bud-dist" id="budd-7">
+  <div class="bud-dist-hd" style="background:#65A30D">
+    <div>
+      <div class="bud-dlabel">อำเภอ</div>
+      <div class="bud-dname">ปลวกแดง</div>
+      <div class="bud-dmeta">9 หน่วยงาน</div>
+    </div>
+    <div class="bud-dsum">
+      <div class="bud-dv">฿1,986,940</div>
+      <div class="bud-dp">7% ของทั้งหมด</div>
+    </div>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.ปลวกแดง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:2%;background:#65A30D"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿532,600</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿279,600</td><td class="bt-yr bt-has">฿253,000</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿532,600</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">สสอ.ปลวกแดง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:2%;background:#65A30D"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿494,900</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿494,900</td><td class="bt-yr bt-zero">—</td>
+        <td class="bud-tot">฿494,900</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านหนองค้างคาว</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#65A30D"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿171,800</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿47,500</td><td class="bt-yr bt-has">฿69,300</td><td class="bt-yr bt-has">฿55,000</td>
+        <td class="bud-tot">฿171,800</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านมาบยางพร</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#65A30D"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿109,600</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿49,800</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿59,800</td>
+        <td class="bud-tot">฿109,600</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านหนองไร่</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#65A30D"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿192,400</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿96,400</td><td class="bt-yr bt-has">฿96,000</td>
+        <td class="bud-tot">฿192,400</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.คลองน้ำแดง</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#65A30D"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿73,300</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿73,300</td>
+        <td class="bud-tot">฿73,300</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.ปากแพรก</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#65A30D"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿99,250</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿99,250</td>
+        <td class="bud-tot">฿99,250</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บึงตาต้า</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:0%;background:#65A30D"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿72,190</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿72,190</td>
+        <td class="bud-tot">฿72,190</td>
+      </tr></tbody>
+    </table>
+  </div>
+  <div class="bud-ag-row">
+    <div class="bud-ag-left">
+      <div class="bud-ag-name">รพ.สต.บ้านห้วยปราบ</div>
+      <div class="bud-ag-bar-wrap">
+        <div class="bud-ag-bar" style="width:1%;background:#65A30D"></div>
+      </div>
+    </div>
+    <div class="bud-ag-right">฿240,900</div>
+  </div>
+  <div class="bud-ag-tbl-wrap">
+    <table class="bud-tbl">
+      <thead><tr>
+        <th>ปี 2564</th><th>ปี 2565</th><th>ปี 2566</th><th>ปี 2567</th><th>ปี 2568</th>
+        <th class="bud-tot">รวม</th>
+      </tr></thead>
+      <tbody><tr>
+        <td class="bt-yr bt-zero">—</td><td class="bt-yr bt-zero">—</td><td class="bt-yr bt-has">฿50,000</td><td class="bt-yr bt-has">฿93,200</td><td class="bt-yr bt-has">฿97,700</td>
+        <td class="bud-tot">฿240,900</td>
+      </tr></tbody>
+    </table>
+  </div>
+</div></div>
+  </div>
+</div>
+<div id="locModal" onclick="handleLocBackdrop(event)">
+  <div id="locSheet">
+    <div class="p1modal-handle"></div>
+    <div class="p1modal-head">
+      <div><div class="p1modal-title">🗺️ แผนที่และข้อมูลติดต่อ</div>
+        <div class="p1modal-meta">73 หน่วยงาน · 8 อำเภอ จ.ระยอง</div></div>
+      <button class="p1modal-close" onclick="closeLocModal()">✕</button>
+    </div>
+    <div class="p1modal-nav"><button class="p1modal-nav-btn" id="locn-0" onclick="locJumpTo(0)">เมืองระยอง</button><button class="p1modal-nav-btn" id="locn-1" onclick="locJumpTo(1)">นิคมพัฒนา</button><button class="p1modal-nav-btn" id="locn-2" onclick="locJumpTo(2)">บ้านฉาง</button><button class="p1modal-nav-btn" id="locn-3" onclick="locJumpTo(3)">เขาชะเมา</button><button class="p1modal-nav-btn" id="locn-4" onclick="locJumpTo(4)">แกลง</button><button class="p1modal-nav-btn" id="locn-5" onclick="locJumpTo(5)">วังจันทร์</button><button class="p1modal-nav-btn" id="locn-6" onclick="locJumpTo(6)">บ้านค่าย</button><button class="p1modal-nav-btn" id="locn-7" onclick="locJumpTo(7)">ปลวกแดง</button></div>
+    <div class="p1modal-body" id="locBody"><div class="loc-dist" id="locd-0"><div class="loc-dist-hd" style="background:#0369A1"><div class="loc-dlabel">อำเภอ</div><div class="loc-dname">เมืองระยอง</div><div class="loc-dmeta">11 หน่วยงาน</div></div><div class="loc-grid">
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#0369A1">
+            <div class="loc-name">รพ.ระยอง</div>
+            <div class="loc-tambon">ต.ท่าประดู่</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.682344, 101.276467</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/x7ypYXDBCfHKyqUm8" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38611104">📞 38611104</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#0369A1">
+            <div class="loc-name">รพ.เฉลิมพระเกียรติฯ</div>
+            <div class="loc-tambon">ต.ห้วยโป่ง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.730779, 101.136403</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/FwZBL9JLZx3am5es8" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38684444">📞 38684444</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#0369A1">
+            <div class="loc-name">สสอ.เมืองระยอง</div>
+            <div class="loc-tambon">ต.เนินพระ</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.683185, 101.237268</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/PtQ8f3tvGSG9rJjYA" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38614435">📞 38614435</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#0369A1">
+            <div class="loc-name">รพ.สต.กะเฉด</div>
+            <div class="loc-tambon">ต.มาบข่า</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.728168, 101.488619</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/scSrzCWTTkBhvGpV9" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38634222">📞 38634222</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#0369A1">
+            <div class="loc-name">รพ.สต.แกลง</div>
+            <div class="loc-tambon">ต.แกลง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.642403, 101.506114</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/verN7HsCeySiZ3faA" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38648588">📞 38648588</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#0369A1">
+            <div class="loc-name">รพ.สต.คลองบางไผ่</div>
+            <div class="loc-tambon">ต.สำนักท้อน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.705311, 100.996607</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/H7iiJYeoTkRXnH2m6" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#0369A1">
+            <div class="loc-name">รพ.สต.ก้นหนอง</div>
+            <div class="loc-tambon">ต.บ้านแลง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.685762, 101.341607</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/7nVEntNKHYvVV9vp8" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38626275">📞 38626275</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#0369A1">
+            <div class="loc-name">รพ.สต.บ้านยายจั่น</div>
+            <div class="loc-tambon">ต.สำนักทอง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.706764, 101.470263</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/SQMfH9MwNhP9Qm4z7" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#0369A1">
+            <div class="loc-name">รพ.สต.เพ</div>
+            <div class="loc-tambon">ต.เพ</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.621489, 101.428020</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/z3iCVyfTLEJD7f1t8" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38652613">📞 38652613</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#0369A1">
+            <div class="loc-name">รพ.สต.บ้านเกาะเสม็ด</div>
+            <div class="loc-tambon">ต.เพ</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.570627, 101.464511</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/RKzc8of4Nk99vjEv7" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38644123">📞 38644123</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#0369A1">
+            <div class="loc-name">ศูนย์บริการสาธารณสุข ทน.ระยอง</div>
+            <div class="loc-tambon">ต.ท่าประดู่</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.675127, 101.278650</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/EQr4U3K9r1Qe6TH39" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38610124">📞 38610124</a></div>
+          </div>
+        </div>
+</div></div>
+<div class="loc-dist" id="locd-1"><div class="loc-dist-hd" style="background:#0891B2"><div class="loc-dlabel">อำเภอ</div><div class="loc-dname">นิคมพัฒนา</div><div class="loc-dmeta">3 หน่วยงาน</div></div><div class="loc-grid">
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#0891B2">
+            <div class="loc-name">รพ.นิคมพัฒนา</div>
+            <div class="loc-tambon">ต.มะขามคู่</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.870213, 101.142261</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/ERYrvujia4nK2wgD8" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38038050">📞 38038050</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#0891B2">
+            <div class="loc-name">สสอ.นิคมพัฒนา</div>
+            <div class="loc-tambon">ต.นิคมพัฒนา</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.829934, 101.205108</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/5NKEDpWrN89q66Ca8" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38636827">📞 38636827</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#0891B2">
+            <div class="loc-name">รพ.สต.บ้านกระเฉท</div>
+            <div class="loc-tambon">ต.มาบข่า</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.766070, 101.212941</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/A2MjCJzWPmWBJT8FA" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38637917">📞 38637917</a></div>
+          </div>
+        </div>
+</div></div>
+<div class="loc-dist" id="locd-2"><div class="loc-dist-hd" style="background:#059669"><div class="loc-dlabel">อำเภอ</div><div class="loc-dname">บ้านฉาง</div><div class="loc-dmeta">8 หน่วยงาน</div></div><div class="loc-grid">
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#059669">
+            <div class="loc-name">รพ.บ้านฉาง</div>
+            <div class="loc-tambon">ต.พลา</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.726149, 101.043315</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/iWzbo3darsCvDLTu6" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38603838">📞 38603838</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#059669">
+            <div class="loc-name">สสอ.บ้านฉาง</div>
+            <div class="loc-tambon">ต.พลา</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.719337, 101.043049</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/VXphNcYcm546hPsH6" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38601142">📞 38601142</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#059669">
+            <div class="loc-name">ศูนย์บริการสาธารณสุข อบต.สำนักท้อน</div>
+            <div class="loc-tambon">ต.สำนักท้อน</div>
+          </div>
+          <div class="loc-card-body">
+            
+            <div class="loc-actions"><span class="loc-map-na">ไม่มีข้อมูล</span><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#059669">
+            <div class="loc-name">รพ.สต.บ้านสระแก้ว</div>
+            <div class="loc-tambon">ต.สำนักท้อน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.720245, 101.006809</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/KbM7pXct14uTN1CXA" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38030484">📞 38030484</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#059669">
+            <div class="loc-name">รพ.สต.สำนักท้อน</div>
+            <div class="loc-tambon">ต.สำนักท้อน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.770164, 101.019376</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/9KbRYLw4q2EBT1as7" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#059669">
+            <div class="loc-name">รพ.สต.บ้านยายร้า</div>
+            <div class="loc-tambon">ต.บ้านฉาง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.753258, 101.039736</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/74mRZT5duNgwf9DKA" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38696088">📞 38696088</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#059669">
+            <div class="loc-name">รพ.สต.บ้านเขาครอก</div>
+            <div class="loc-tambon">ต.สำนักท้อน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.743170, 101.013528</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/TxRkjmTQFCj28BEm7" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#059669">
+            <div class="loc-name">รพ.สต.บ้านหนองน้ำเย็น</div>
+            <div class="loc-tambon">ต.สำนักท้อน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.803430, 101.052445</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/AwmWyPd54Mnw5LXV9" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38030625">📞 38030625</a></div>
+          </div>
+        </div>
+</div></div>
+<div class="loc-dist" id="locd-3"><div class="loc-dist-hd" style="background:#D97706"><div class="loc-dlabel">อำเภอ</div><div class="loc-dname">เขาชะเมา</div><div class="loc-dmeta">6 หน่วยงาน</div></div><div class="loc-grid">
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#D97706">
+            <div class="loc-name">รพ.เขาชะเมาฯ</div>
+            <div class="loc-tambon">ต.ห้วยทับมอญ</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.988216, 101.673321</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/wyGPZvBQ5kK9vvwu8" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38996022">📞 38996022</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#D97706">
+            <div class="loc-name">รพ.สต.บ้านชำฆ้อ</div>
+            <div class="loc-tambon">ต.ชำฆ้อ</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.940960, 101.672782</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/DsnxC75VDZH8eZ8a8" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#D97706">
+            <div class="loc-name">รพ.สต.แสงส่องหล้า 2</div>
+            <div class="loc-tambon">ต.ห้วยทับมอญ</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">13.007958, 101.716101</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/hR64pRUnMbYV85an8" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#D97706">
+            <div class="loc-name">รพ.สต.บ้านเขาน้อย</div>
+            <div class="loc-tambon">ต.เขาน้อย</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">13.101835, 101.600001</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/DByjxN3xe9dWXLN69" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#D97706">
+            <div class="loc-name">รพ.สต.บ้านสามแยกน้ำเป็น</div>
+            <div class="loc-tambon">ต.น้ำเป็น</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.862739, 101.737529</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/RGo3A37vmM5jWP4e8" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#D97706">
+            <div class="loc-name">สถานีอนามัยเฉลิมพระเกียรติ 60 พรรษา นวมินทราชินี บ้านน้ำใส</div>
+            <div class="loc-tambon">ต.น้ำเป็น</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.947768, 101.794748</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/GoAzRpfHDdAAHxoQ7" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+</div></div>
+<div class="loc-dist" id="locd-4"><div class="loc-dist-hd" style="background:#DC2626"><div class="loc-dlabel">อำเภอ</div><div class="loc-dname">แกลง</div><div class="loc-dmeta">25 หน่วยงาน</div></div><div class="loc-grid">
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.แกลง</div>
+            <div class="loc-tambon">ต.ทางเกวียน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.785785, 101.670686</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/fRVTxr61x6wnokCz9" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38677534">📞 38677534</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.กองดิน</div>
+            <div class="loc-tambon">ต.กองดิน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.783445, 101.808703</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/WWR19UJGUcXz584Z6" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38806363">📞 38806363</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.บ้านนา</div>
+            <div class="loc-tambon">ต.บ้้านนา</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.830807, 101.669394</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/6QCjy1vssFvYbbrv9" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:870565795">📞 870565795</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.กร่ำ</div>
+            <div class="loc-tambon">ต.กร่ำ</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.658412, 101.638273</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/sfa7dzMcubg4wXps5" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.บ้านสองพี่น้อง</div>
+            <div class="loc-tambon">ต.ห้วยยาง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.867942, 99.680251</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/2jF8pYyoGBwU86PUA" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:32787446">📞 32787446</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.บ้านวัดบุนนาค</div>
+            <div class="loc-tambon">ต.ชากโดน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.699480, 101.605596</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/ZRNRW7pXZc9YR7i86" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.บ้านเนินหย่อง</div>
+            <div class="loc-tambon">ต.วังหว้า</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.780967, 101.566827</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/UgZs1chtazyZCCMT9" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38944550">📞 38944550</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.บ้านโพธิฐาน</div>
+            <div class="loc-tambon">ต.ทุ่งควายกิน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.804154, 101.740580</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/KYxUmQqJyJc8YEe3A" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38669432">📞 38669432</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.บ้านเขาดิน</div>
+            <div class="loc-tambon">ต.ทุ่งควายกิน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.780603, 101.712930</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/vFzU5ofCdGgwA4ki9" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.บ้านชำสมอ</div>
+            <div class="loc-tambon">ต.กองดิน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.815022, 101.769673</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/PH7xZoP3v7Lcw5v88" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38668936">📞 38668936</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.วังหว้า</div>
+            <div class="loc-tambon">ต.วังหว้า</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.750902, 101.620053</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/XUJb6xHok19exwR97" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38671911">📞 38671911</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.บ้านคลองคา</div>
+            <div class="loc-tambon">ต.ห้วยยาง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.736126, 101.593231</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/GLnznSBepT6K5nkE8" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.บ้านถนนกะเพรา</div>
+            <div class="loc-tambon">ต.เนิินฆ้อ</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.693132, 101.669041</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/eUxs8GfpXqkQFYdG8" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.ชากพง</div>
+            <div class="loc-tambon">ต.ชากพง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.651142, 101.565010</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/d11RmAUEqJf3GN276" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38638459">📞 38638459</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.บ้านจำรุง</div>
+            <div class="loc-tambon">ต.เนินฆ้อ</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.711262, 101.619046</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/qm5u7vNLW8S1hsjL7" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.กระแสบน</div>
+            <div class="loc-tambon">ต.กระแสบน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.843991, 101.626593</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/gqDWu8YQWZdWtna77" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38992120">📞 38992120</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.หนองแพงพวย</div>
+            <div class="loc-tambon">ต.เนินฆ้อ</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.725825, 101.635338</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/XNkZuq4b4LgMaM4s8" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.พังราด</div>
+            <div class="loc-tambon">ต.พังราด</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.729223, 101.751857</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/6iYaqhiugweBzwPx6" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.บ้านเขาหินแท่น</div>
+            <div class="loc-tambon">ต.ทางเกวียน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.830032, 101.522417</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/UUsfW2fNbrdFvAgg9" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:892404288">📞 892404288</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.เต้าปูนหาย</div>
+            <div class="loc-tambon">ต.ห้วยยาง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.798740, 101.535834</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/VfAnSNSXo8tHoCZk8" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.สองสลึง</div>
+            <div class="loc-tambon">ต.สองสลึง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.713685, 101.561636</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/GS2ME57McUhYzcGH7" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.คลองป่าไม้</div>
+            <div class="loc-tambon">ต.กระแสบน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.941367, 101.606188</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/wFQQdcgVvCoZRz5t5" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38017506">📞 38017506</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.คลองปูน</div>
+            <div class="loc-tambon">ต.คลองปูน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.750156, 101.730757</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/vxmQJ1nwTtoyzKf27" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">รพ.สต.ปากน้ำกระแส</div>
+            <div class="loc-tambon">ต.ปากน้ำกระแส</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.714060, 101.707828</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/DpjZ4a6udtxKSJBK9" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DC2626">
+            <div class="loc-name">ศูนย์บริการสาธารณสุข ทต.เมืองแกลง</div>
+            <div class="loc-tambon">ต.ทางเกวียน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.779380, 101.651552</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/pk16aW7TiFAtfKyG7" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38672654">📞 38672654</a></div>
+          </div>
+        </div>
+</div></div>
+<div class="loc-dist" id="locd-5"><div class="loc-dist-hd" style="background:#7C3AED"><div class="loc-dlabel">อำเภอ</div><div class="loc-dname">วังจันทร์</div><div class="loc-dmeta">6 หน่วยงาน</div></div><div class="loc-grid">
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#7C3AED">
+            <div class="loc-name">รพ.วังจันทร์</div>
+            <div class="loc-tambon">ต.ชุมแสง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.940341, 101.529247</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/UAQuNZ5AXbKFnuGk7" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38666174">📞 38666174</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#7C3AED">
+            <div class="loc-name">สสอ.วังจันทร์</div>
+            <div class="loc-tambon">ต.ชุมแสง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.935687, 101.519386</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/2FxFmZaafnvhVotj7" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#7C3AED">
+            <div class="loc-name">รพ.สต.บ้านคลองเขต</div>
+            <div class="loc-tambon">ต.ป่ายุบใน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">13.036936, 101.435150</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/rZSC3fBnKPeNe39T6" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38015158">📞 38015158</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#7C3AED">
+            <div class="loc-name">รพ.สต.บ้านวังจันทร์</div>
+            <div class="loc-tambon">ต.ป่ายุบใน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.882579, 101.557369</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/CmRnWV9Wsr41vQMr9" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38626053">📞 38626053</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#7C3AED">
+            <div class="loc-name">รพ.สต.บ้านเขาตาอิ๋น</div>
+            <div class="loc-tambon">ต.คลองกิ่ว</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.918497, 101.496533</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/sVhe4wA7wsyJENsaA" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38666642">📞 38666642</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#7C3AED">
+            <div class="loc-name">รพ.สต.บ้านเขาสิงห์โต</div>
+            <div class="loc-tambon">ต.ป่ายุบใน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">13.046264, 101.531376</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/Wmi4q8HSt1EGuigK6" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+</div></div>
+<div class="loc-dist" id="locd-6"><div class="loc-dist-hd" style="background:#DB2777"><div class="loc-dlabel">อำเภอ</div><div class="loc-dname">บ้านค่าย</div><div class="loc-dmeta">5 หน่วยงาน</div></div><div class="loc-grid">
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DB2777">
+            <div class="loc-name">รพ.บ้านค่าย</div>
+            <div class="loc-tambon">ต.หนองละลอก</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.778806, 101.292829</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/YkT5XqFz59adb8EaA" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38641005">📞 38641005</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DB2777">
+            <div class="loc-name">สสอ.บ้านค่าย</div>
+            <div class="loc-tambon">ต.บ้านค่าย</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.777383, 101.293835</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/xvyd77gaoNtP1shr9" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DB2777">
+            <div class="loc-name">รพ.สต.หนองสะพาน</div>
+            <div class="loc-tambon">ต.หนองตะพาน</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.749083, 101.263361</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/fCpmQMsHtSBVXwPw5" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38025232">📞 38025232</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DB2777">
+            <div class="loc-name">รพ.สต.เนินสว่าง</div>
+            <div class="loc-tambon">ต.เนินสว่าง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.957625, 101.441703</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/i2sRkGnjadua8Q8K9" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38018010">📞 38018010</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#DB2777">
+            <div class="loc-name">รพ.สต.บ้านหนองพะวา</div>
+            <div class="loc-tambon">ต.บางบุตร</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.832627, 101.343902</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/u3XuBGruCd7vEsQA7" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+</div></div>
+<div class="loc-dist" id="locd-7"><div class="loc-dist-hd" style="background:#65A30D"><div class="loc-dlabel">อำเภอ</div><div class="loc-dname">ปลวกแดง</div><div class="loc-dmeta">9 หน่วยงาน</div></div><div class="loc-grid">
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#65A30D">
+            <div class="loc-name">รพ.ปลวกแดง</div>
+            <div class="loc-tambon">ต.ปลวกแดง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.970771, 101.219104</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/o9SKoSzyD1MKh7rv9" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:33650413">📞 33650413</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#65A30D">
+            <div class="loc-name">สสอ.ปลวกแดง</div>
+            <div class="loc-tambon">ต.ปลวกแดง</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.974370, 101.213219</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/edjh9mBkvHYV5QDHA" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38659069">📞 38659069</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#65A30D">
+            <div class="loc-name">รพ.สต.บ้านหนองค้างคาว</div>
+            <div class="loc-tambon">ต.ตาสิทธิ์</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">13.055104, 101.201001</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/jrRuXP7ZAyJL5wit5" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:838586253">📞 838586253</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#65A30D">
+            <div class="loc-name">รพ.สต.บ้านมาบยางพร</div>
+            <div class="loc-tambon">ต.มาบยางพร</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.991132, 101.133032</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/cgS1iAtkCgucaQTv8" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38891599">📞 38891599</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#65A30D">
+            <div class="loc-name">รพ.สต.บ้านหนองไร่</div>
+            <div class="loc-tambon">ต.หนองไร่</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">13.008653, 101.359606</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/jM3Xx7aZGXf8jqud9" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:892493434">📞 892493434</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#65A30D">
+            <div class="loc-name">รพ.สต.คลองน้ำแดง</div>
+            <div class="loc-tambon">ต.หนองไร่่</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.974738, 101.379183</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/bQZVgBqjvCRpn9566" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:871496499">📞 871496499</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#65A30D">
+            <div class="loc-name">รพ.สต.บ้านปากแพรก</div>
+            <div class="loc-tambon">ต.ละหาร</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">12.945802, 101.312220</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/728bjT99fKdAiPtQ6" target="_blank">📍 แผนที่</a><a class="loc-phone" href="tel:38961237">📞 38961237</a></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#65A30D">
+            <div class="loc-name">รพ.สต.บึงตาต้า</div>
+            <div class="loc-tambon">ต.หนองไร่</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">13.041380, 101.309734</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/si9GUkXkAf3ijUC99" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+<div class="loc-card">
+          <div class="loc-card-top" style="border-top-color:#65A30D">
+            <div class="loc-name">รพ.สต.บ้านห้วยปราบ</div>
+            <div class="loc-tambon">ต.มาบยางพร</div>
+          </div>
+          <div class="loc-card-body">
+            <div class="loc-coords">13.021147, 101.114448</div>
+            <div class="loc-actions"><a class="loc-map-btn" href="https://maps.app.goo.gl/ckWcoTHTihqX4yeTA" target="_blank">📍 แผนที่</a><span style="color:var(--muted);font-size:.68rem">—</span></div>
+          </div>
+        </div>
+</div></div></div>
   </div>
 </div>
 </body>
