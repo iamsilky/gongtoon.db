@@ -835,151 +835,6 @@ body{
   padding:1px 5px;border-radius:20px;margin-left:4px;
   animation:gal-pulse 2s infinite}
 
-
-/* ── PROJECT CARD STRUCTURE ──────────────────────────────── */
-.proj-back-btn{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:8px 16px;border-radius:20px;
-  border:1.5px solid var(--border);background:var(--white);
-  font-family:'Sarabun',sans-serif;font-size:.78rem;font-weight:700;
-  color:var(--text2);cursor:pointer;margin-bottom:14px;
-  transition:all .15s;
-}
-.proj-back-btn:hover{background:var(--bg);border-color:var(--border2)}
-
-/* Executive Card */
-.proj-exec-card{
-  background:var(--white);border-radius:16px;
-  box-shadow:0 2px 12px rgba(0,0,0,.09);border:1px solid var(--border);
-  overflow:hidden;margin-bottom:14px;
-}
-.pec-hero{
-  padding:18px 16px;display:flex;align-items:flex-start;gap:14px;
-}
-.pec-icon{
-  width:50px;height:50px;border-radius:14px;flex-shrink:0;
-  background:rgba(255,255,255,.18);display:flex;align-items:center;
-  justify-content:center;font-size:1.5rem;
-  box-shadow:0 0 20px rgba(255,255,255,.2);
-}
-.pec-proj-label{font-size:.62rem;font-weight:700;color:rgba(255,255,255,.6);
-  text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
-.pec-title{font-size:1rem;font-weight:700;color:#f1f5f9;line-height:1.3;margin-bottom:2px}
-.pec-sub{font-size:.7rem;color:rgba(255,255,255,.65)}
-.pec-kpis{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  border-bottom:1px solid var(--border);
-}
-.pec-kpi{padding:12px 8px;text-align:center;border-right:1px solid var(--border)}
-.pec-kpi:last-child{border-right:none}
-.pec-kv{font-size:1.5rem;font-weight:700;line-height:1;margin-bottom:3px}
-.pec-kl{font-size:.62rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
-.pec-mission{
-  font-size:.75rem;color:var(--text2);line-height:1.6;
-  padding:12px 16px;border-bottom:1px solid var(--border);
-  background:linear-gradient(135deg,rgba(3,105,161,.03),rgba(5,150,105,.03));
-}
-.pec-section{padding:12px 16px}
-.pec-sect-title{font-size:.7rem;font-weight:700;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
-
-/* Operations Card */
-.proj-ops-card{
-  background:var(--white);border-radius:16px;
-  box-shadow:0 2px 12px rgba(0,0,0,.09);border:1px solid var(--border);
-  overflow:hidden;margin-bottom:14px;
-}
-.poc-title{
-  font-size:.78rem;font-weight:700;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.06em;
-  padding:12px 16px 8px;border-bottom:1px solid var(--border);
-}
-.poc-btns{padding:10px 12px;display:flex;flex-direction:column;gap:8px}
-.poc-btn{
-  display:flex;align-items:center;gap:12px;
-  padding:12px 14px;border-radius:12px;border:1.5px solid var(--bc,var(--border));
-  background:var(--bbl,var(--bg));cursor:pointer;
-  font-family:'Sarabun',sans-serif;text-align:left;
-  transition:all .18s;
-}
-.poc-btn:hover{transform:translateX(3px);box-shadow:0 2px 10px rgba(0,0,0,.1)}
-.poc-btn:active{transform:scale(.98)}
-.poc-btn-icon{font-size:1.4rem;flex-shrink:0}
-.poc-btn-title{font-size:.84rem;font-weight:700;color:var(--text);margin-bottom:2px}
-.poc-btn-sub{font-size:.68rem;color:var(--muted)}
-.poc-arrow{margin-left:auto;font-size:1.2rem;color:var(--bc,var(--muted));font-weight:700;flex-shrink:0}
-.poc-quick-row{
-  display:flex;gap:8px;overflow-x:auto;
-  padding:8px 14px 12px;border-top:1px solid var(--border);
-}
-.poc-quick-row::-webkit-scrollbar{display:none}
-.poc-q{flex-shrink:0;text-align:center;min-width:60px}
-.poc-qv{font-size:.95rem;font-weight:700}
-.poc-ql{font-size:.6rem;color:var(--muted);margin-top:2px}
-
-/* ── UNIFIED PROJECT MODAL ───────────────────────────────── */
-#projModal{
-  position:fixed;inset:0;z-index:820;display:none;
-  background:rgba(0,0,0,.65);backdrop-filter:blur(4px);
-  align-items:flex-end;justify-content:center;
-}
-#projModal.open{display:flex}
-#projSheet{
-  background:#fff;width:100%;max-width:900px;
-  border-radius:20px 20px 0 0;max-height:94vh;
-  display:flex;flex-direction:column;
-  transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
-}
-#projModal.open #projSheet{transform:translateY(0)}
-.pm-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0;flex-shrink:0}
-.pm-head{display:flex;align-items:center;justify-content:space-between;
-  padding:10px 16px 8px;border-bottom:1px solid var(--border);flex-shrink:0}
-.pm-title{font-size:.92rem;font-weight:700;color:var(--text)}
-.pm-meta{font-size:.7rem;color:var(--muted);margin-top:1px}
-.pm-close{width:32px;height:32px;border-radius:50%;border:none;
-  background:var(--bg);cursor:pointer;font-size:.9rem;
-  display:flex;align-items:center;justify-content:center}
-.pm-body{overflow-y:auto;flex:1;padding:14px 14px 20px}
-
-/* Modal content styles */
-.pm-section{margin-bottom:18px}
-.pm-sect-hd{font-size:.8rem;font-weight:700;color:var(--text);
-  border-left:4px solid var(--c1);padding-left:10px;margin-bottom:10px}
-.pm-krow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
-@media(min-width:400px){.pm-krow{grid-template-columns:repeat(3,1fr)}}
-.pm-k{background:var(--bg);border-radius:10px;padding:10px;text-align:center;border:1px solid var(--border)}
-.pm-kv{font-size:1.1rem;font-weight:700;line-height:1}
-.pm-kl{font-size:.62rem;color:var(--muted);font-weight:700;margin-top:3px;text-transform:uppercase}
-.pm-table-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--border);margin-bottom:10px}
-.pm-table{width:100%;border-collapse:collapse;font-size:.74rem;min-width:420px}
-.pm-table thead tr{background:#F1F5F9}
-.pm-table th{padding:8px 10px;text-align:center;font-size:.63rem;font-weight:700;
-  color:var(--muted);text-transform:uppercase;letter-spacing:.04em;
-  border-bottom:2px solid var(--border2);white-space:nowrap}
-.pm-table th.l{text-align:left}
-.pm-table td{padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)}
-.pm-table tr:last-child td{border-bottom:none}
-.pm-table tr:hover td{background:#F8FAFC}
-.pm-table .r{text-align:right}.pm-table .c{text-align:center}
-.pm-table .b{font-weight:700}.pm-table .hi{color:#0369A1}
-.pm-table .tot{background:var(--bg);font-weight:700}
-.pm-bar-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dashed var(--border)}
-.pm-bar-row:last-child{border-bottom:none}
-.pm-br-n{font-size:.78rem;font-weight:600;color:var(--text2);min-width:120px;max-width:150px}
-.pm-br-b{flex:1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden}
-.pm-br-f{height:100%;border-radius:3px}
-.pm-br-v{font-size:.72rem;font-weight:700;min-width:80px;text-align:right}
-.pm-item-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
-.pm-item-row:last-child{border-bottom:none}
-.pm-item-num{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;
-  justify-content:center;font-size:.68rem;font-weight:700;color:#fff;flex-shrink:0}
-.pm-item-name{font-size:.8rem;font-weight:600;color:var(--text)}
-.pm-item-meta{font-size:.68rem;color:var(--muted);margin-top:2px}
-.pm-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:.65rem;font-weight:700}
-.pm-badge-done{background:#D1FAE5;color:#065F46}
-.pm-badge-pend{background:#FEF3C7;color:#92400E}
-@media(max-width:479px){.pec-kpis{grid-template-columns:1fr 1fr}}
-
 </style>
 </head>
 <body>
@@ -1463,225 +1318,227 @@ body{
 
 <!-- P2: ศูนย์ซ่อม -->
 <div class="page" id="page-p2">
-  <button class="proj-back-btn" onclick="goHome()">← กลับหน้าหลัก</button>
-
-  <!-- Card A: Executive Summary -->
-  <div class="proj-exec-card" style="--pc:var(--c2);--pcl:var(--c2l)">
-    <div class="pec-hero" style="background:linear-gradient(135deg,#78350F,#D97706)">
-      <div class="pec-icon">🔧</div>
-      <div>
-        <div class="pec-proj-label">โครงการที่ 2</div>
-        <div class="pec-title">ศูนย์ซ่อมอุปกรณ์ทางการแพทย์</div>
-        <div class="pec-sub">ปีงบประมาณ 2566–2568 · จ.ระยอง</div>
-      </div>
-    </div>
-    <div class="pec-kpis">
-      <div class="pec-kpi"><div class="pec-kv" style="color:var(--c2)">10</div><div class="pec-kl">ศูนย์ซ่อม</div></div>
-      <div class="pec-kpi"><div class="pec-kv" style="color:#059669">11,437</div><div class="pec-kl">รายการซ่อม</div></div>
-      <div class="pec-kpi"><div class="pec-kv" style="color:#7C3AED">6.97M</div><div class="pec-kl">งบ (฿)</div></div>
-      <div class="pec-kpi"><div class="pec-kv" style="color:var(--c1)">8</div><div class="pec-kl">กลุ่มอุปกรณ์</div></div>
-    </div>
-    <div class="pec-mission">บริการซ่อมบำรุงอุปกรณ์ทางการแพทย์ให้ยืมแก่ผู้ป่วย ผู้พิการ และผู้สูงอายุในชุมชน โดยศูนย์ซ่อมประจำ อบต./ทต. ทั่วจังหวัดระยอง</div>
-    <!-- Equipment groups bar -->
-    <div class="pec-section">
-      <div class="pec-sect-title">สัดส่วนอุปกรณ์ที่ซ่อม</div>
-      <div class="chart-box" style="height:180px"><canvas id="c2_grp"></canvas></div>
+  <div class="page-hero" style="background:linear-gradient(135deg,#78350F,#D97706)">
+    <div class="ph-label">โครงการที่ 2</div>
+    <div class="ph-title">ศูนย์ซ่อมอุปกรณ์ทางการแพทย์</div>
+    <div class="ph-stats">
+      <div class="ph-stat"><div class="sv">10</div><div class="sl">ศูนย์ซ่อม</div></div>
+      <div class="ph-stat"><div class="sv">฿6.97M</div><div class="sl">งบรวม</div></div>
+      <div class="ph-stat"><div class="sv">8</div><div class="sl">กลุ่มอุปกรณ์</div></div>
     </div>
   </div>
 
-  <!-- Card B: Management & Operations -->
-  <div class="proj-ops-card">
-    <div class="poc-title">⚙️ การจัดการและปฏิบัติการ</div>
-    <div class="poc-btns">
-      <button class="poc-btn" style="--bc:#D97706;--bbl:#FEF3C7" onclick="openProjModal('p2inv')">
-        <span class="poc-btn-icon">📦</span>
-        <div>
-          <div class="poc-btn-title">ข้อมูลศูนย์ซ่อม</div>
-          <div class="poc-btn-sub">10 ศูนย์ · รายการซ่อม · วัสดุ</div>
-        </div>
-        <span class="poc-arrow">›</span>
-      </button>
-      <button class="poc-btn" style="--bc:#0369A1;--bbl:#E0F2FE" onclick="openProjModal('p2bud')">
-        <span class="poc-btn-icon">💰</span>
-        <div>
-          <div class="poc-btn-title">งบประมาณโดยละเอียด</div>
-          <div class="poc-btn-sub">แยกรายปี 2566–2568</div>
-        </div>
-        <span class="poc-arrow">›</span>
-      </button>
-      <button class="poc-btn" style="--bc:#059669;--bbl:#D1FAE5" onclick="openProjModal('p2map')">
-        <span class="poc-btn-icon">🗺️</span>
-        <div>
-          <div class="poc-btn-title">ที่ตั้งศูนย์ซ่อม</div>
-          <div class="poc-btn-sub">10 อำเภอ · ข้อมูลศูนย์</div>
-        </div>
-        <span class="poc-arrow">›</span>
-      </button>
+  <div class="sub-tabs" id="p2tabs">
+    <button class="sub-tab active" style="background:var(--c2)" onclick="showSub('p2','overview',this)">ภาพรวม</button>
+    <button class="sub-tab" onclick="showSub('p2','centers',this)">ศูนย์ซ่อม</button>
+    <button class="sub-tab" onclick="showSub('p2','budget',this)">งบประมาณ</button>
+    <button class="sub-tab" onclick="showSub('p2','materials',this)">วัสดุ</button>
+  </div>
+
+  <div class="sub-section active" id="p2-overview">
+    <div class="kpi-row">
+      <div class="kpi" style="border-color:var(--c2)"><div class="kpi-val" style="color:var(--c2)">10</div><div class="kpi-lbl">ศูนย์ซ่อม</div></div>
+      <div class="kpi" style="border-color:#059669"><div class="kpi-val" style="color:#059669">6.97M</div><div class="kpi-lbl">งบ (บาท)</div></div>
+      <div class="kpi" style="border-color:var(--c1)"><div class="kpi-val" style="color:var(--c1)">11.4K</div><div class="kpi-lbl">เบิกจ่าย</div></div>
+      <div class="kpi" style="border-color:var(--c4)"><div class="kpi-val" style="color:var(--c4)">8</div><div class="kpi-lbl">กลุ่มอุปกรณ์</div></div>
     </div>
-    <!-- Quick stats row -->
-    <div class="poc-quick-row">
-      <div class="poc-q"><div class="poc-qv" style="color:#D97706">฿497K</div><div class="poc-ql">งบ ปี 66</div></div>
-      <div class="poc-q"><div class="poc-qv" style="color:#D97706">฿3.99M</div><div class="poc-ql">งบ ปี 67</div></div>
-      <div class="poc-q"><div class="poc-qv" style="color:#D97706">฿2.48M</div><div class="poc-ql">งบ ปี 68</div></div>
+    <div class="card">
+      <div class="card-title">วัสดุเบิกจ่ายต่อศูนย์</div>
+      <div class="card-sub">รายการวัสดุที่เบิกจ่ายทั้งหมด</div>
+      <div class="chart-box tall"><canvas id="c2_ctr"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">สัดส่วนกลุ่มอุปกรณ์ที่ซ่อม</div>
+      <div class="chart-box"><canvas id="c2_grp"></canvas></div>
+    </div>
+  </div>
+
+  <div class="sub-section" id="p2-centers">
+    <div id="p2_center_list"></div>
+  </div>
+
+  <div class="sub-section" id="p2-budget">
+    <div class="kpi-row">
+      <div class="kpi" style="border-color:var(--c2)"><div class="kpi-val" style="color:var(--c2)">497K</div><div class="kpi-lbl">ปี 2566</div></div>
+      <div class="kpi" style="border-color:var(--c1)"><div class="kpi-val" style="color:var(--c1)">3.99M</div><div class="kpi-lbl">ปี 2567</div></div>
+      <div class="kpi" style="border-color:var(--c3)"><div class="kpi-val" style="color:var(--c3)">2.48M</div><div class="kpi-lbl">ปี 2568</div></div>
+      <div class="kpi" style="border-color:var(--c4)"><div class="kpi-val" style="color:var(--c4)">6.97M</div><div class="kpi-lbl">รวม</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">งบประมาณรายปี</div>
+      <div class="chart-box"><canvas id="c2_budyr"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">งบประมาณรายศูนย์</div>
+      <div id="p2_bud_bars"></div>
+    </div>
+  </div>
+
+  <div class="sub-section" id="p2-materials">
+    <div class="card">
+      <div class="card-title">วัสดุแยกกลุ่มต่อศูนย์</div>
+      <div style="overflow-x:auto">
+        <table class="tbl" id="t2_mat"></table>
+      </div>
     </div>
   </div>
   <div style="height:8px"></div>
 </div>
 
+<!-- P3: ปรับสภาพบ้าน -->
 <div class="page" id="page-p3">
-  <button class="proj-back-btn" onclick="goHome()">← กลับหน้าหลัก</button>
+  <div class="page-hero" style="background:linear-gradient(135deg,#064E3B,#059669)">
+    <div class="ph-label">โครงการที่ 3</div>
+    <div class="ph-title">ปรับสภาพบ้านผู้สูงอายุ & คนพิการ</div>
+    <div class="ph-stats">
+      <div class="ph-stat"><div class="sv">342</div><div class="sl">หลัง</div></div>
+      <div class="ph-stat"><div class="sv">฿15.55M</div><div class="sl">งบรวม</div></div>
+      <div class="ph-stat"><div class="sv">11 ปี</div><div class="sl">2558–2568</div></div>
+    </div>
+  </div>
 
-  <!-- Card A: Executive Summary -->
-  <div class="proj-exec-card" style="--pc:var(--c3);--pcl:var(--c3l)">
-    <div class="pec-hero" style="background:linear-gradient(135deg,#064E3B,#059669)">
-      <div class="pec-icon">🏠</div>
-      <div>
-        <div class="pec-proj-label">โครงการที่ 3</div>
-        <div class="pec-title">ปรับสภาพบ้านผู้สูงอายุ & คนพิการ</div>
-        <div class="pec-sub">ปีงบประมาณ 2558–2568 · 8 อำเภอ จ.ระยอง</div>
-      </div>
+  <div class="sub-tabs" id="p3tabs">
+    <button class="sub-tab active" style="background:var(--c3)" onclick="showSub('p3','overview',this)">ภาพรวม</button>
+    <button class="sub-tab" onclick="showSub('p3','yearly',this)">รายปี</button>
+    <button class="sub-tab" onclick="showSub('p3','district',this)">รายอำเภอ</button>
+    <button class="sub-tab" onclick="showSub('p3','album',this)">📸 รูปภาพ</button>
+  </div>
+
+  <div class="sub-section active" id="p3-overview">
+    <div class="kpi-row">
+      <div class="kpi" style="border-color:var(--c3)"><div class="kpi-val" style="color:var(--c3)">342</div><div class="kpi-lbl">บ้าน (หลัง)</div></div>
+      <div class="kpi" style="border-color:var(--c2)"><div class="kpi-val" style="color:var(--c2)">15.55M</div><div class="kpi-lbl">งบ (บาท)</div></div>
+      <div class="kpi" style="border-color:var(--c1)"><div class="kpi-val" style="color:var(--c1)">8</div><div class="kpi-lbl">อำเภอ</div></div>
+      <div class="kpi" style="border-color:var(--c4)"><div class="kpi-val" style="color:var(--c4)">37</div><div class="kpi-lbl">หน่วยงาน</div></div>
     </div>
-    <div class="pec-kpis">
-      <div class="pec-kpi"><div class="pec-kv" style="color:var(--c3)">342</div><div class="pec-kl">หลัง</div></div>
-      <div class="pec-kpi"><div class="pec-kv" style="color:var(--c2)">15.55M</div><div class="pec-kl">งบ (฿)</div></div>
-      <div class="pec-kpi"><div class="pec-kv" style="color:var(--c1)">8</div><div class="pec-kl">อำเภอ</div></div>
-      <div class="pec-kpi"><div class="pec-kv" style="color:#7C3AED">37</div><div class="pec-kl">หน่วยงาน</div></div>
-    </div>
-    <div class="pec-mission">ปรับปรุงที่อยู่อาศัยให้ปลอดภัยและเหมาะสมสำหรับผู้สูงอายุ ผู้พิการ และผู้ที่มีข้อจำกัดการเคลื่อนไหว ตั้งแต่ปี 2558 จนถึงปัจจุบัน</div>
-    <div class="pec-section">
-      <div class="pec-sect-title">บ้านและงบประมาณรายปีงบประมาณ</div>
+    <div class="card">
+      <div class="card-title">บ้านและงบประมาณรายปี</div>
       <div class="chart-box tall"><canvas id="c3_year"></canvas></div>
     </div>
+    <div class="card">
+      <div class="card-title">ประเภทผู้รับบริการ</div>
+      <div class="chart-box"><canvas id="c3_type"></canvas></div>
+    </div>
   </div>
 
-  <!-- Card B: Management & Operations -->
-  <div class="proj-ops-card">
-    <div class="poc-title">⚙️ การจัดการและปฏิบัติการ</div>
-    <div class="poc-btns">
-      <button class="poc-btn" style="--bc:var(--c3);--bbl:var(--c3l)" onclick="openProjModal('p3inv')">
-        <span class="poc-btn-icon">📦</span>
-        <div>
-          <div class="poc-btn-title">รายละเอียดรายปีและอำเภอ</div>
-          <div class="poc-btn-sub">342 หลัง · 11 ปีงบประมาณ · 8 อำเภอ</div>
-        </div>
-        <span class="poc-arrow">›</span>
-      </button>
-      <button class="poc-btn" style="--bc:#7C3AED;--bbl:#EDE9FE" onclick="showP3Album()">
-        <span class="poc-btn-icon">📸</span>
-        <div>
-          <div class="poc-btn-title">อัลบั้มรูปภาพก่อน-หลัง</div>
-          <div class="poc-btn-sub">28 ราย ปี 2568 · กดเพื่อดูรูปภาพ</div>
-        </div>
-        <span class="poc-arrow">›</span>
-      </button>
-      <button class="poc-btn" style="--bc:var(--c2);--bbl:var(--c2l)" onclick="openProjModal('p3bud')">
-        <span class="poc-btn-icon">💰</span>
-        <div>
-          <div class="poc-btn-title">งบประมาณรายปีและรายอำเภอ</div>
-          <div class="poc-btn-sub">฿15.55M สะสม 11 ปี</div>
-        </div>
-        <span class="poc-arrow">›</span>
-      </button>
-    </div>
-    <!-- Quick district row -->
-    <div class="poc-quick-row" id="p3_quick_dist" style="flex-wrap:wrap"></div>
+  <div class="sub-section" id="p3-yearly">
+    <div id="p3_year_list"></div>
   </div>
 
-  <!-- Album section (hidden by default, toggled) -->
-  <div id="p3AlbumSection" style="display:none">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-      <div class="card-title">📸 อัลบั้มรูปภาพปี 2568</div>
-      <button class="proj-back-btn" style="margin-bottom:0;font-size:.7rem" onclick="hideP3Album()">✕ ซ่อน</button>
+  <div class="sub-section" id="p3-district">
+    <div class="card">
+      <div class="card-title">งบประมาณรายอำเภอ</div>
+      <div id="p3_dist_bars"></div>
     </div>
-    <!-- Stats bar -->
-    <div class="album-stat-row" style="margin-bottom:10px">
-      <div class="album-stat-box"><div class="asb-val" style="color:var(--c3)">28</div><div class="asb-lbl">ผู้รับบริการ</div></div>
-      <div class="album-stat-box"><div class="asb-val" style="color:var(--c2)">16</div><div class="asb-lbl">มี Gallery</div></div>
-      <div class="album-stat-box"><div class="asb-val" style="color:var(--c1)">2568</div><div class="asb-lbl">ปีงบประมาณ</div></div>
+    <div class="card">
+      <div class="card-title">สรุปรายอำเภอ</div>
+      <table class="tbl" id="t3_dist"></table>
     </div>
-    <!-- Search -->
+  </div>
+
+  <div class="sub-section" id="p3-album">
+    <!-- Global Search -->
     <div class="search-wrap" style="margin-bottom:10px">
-      <input class="search-input" id="albumSearch" placeholder="🔍 ค้นหาชื่อ หรือหน่วยงาน..."
-             oninput="handleAlbumSearch(this.value)" autocomplete="off">
+      <input class="search-input" id="albumSearch"
+             placeholder="🔍 ค้นหาชื่อ หรือ หน่วยงาน..."
+             oninput="handleAlbumSearch(this.value)"
+             autocomplete="off" autocorrect="off">
       <button class="search-clear" id="searchClearBtn" onclick="clearAlbumSearch()">✕</button>
     </div>
     <div class="search-results-info" id="searchInfo"></div>
+    <!-- Stats bar -->
+    <div class="album-stat-row">
+      <div class="album-stat-box">
+        <div class="asb-val" style="color:var(--c3)">28</div>
+        <div class="asb-lbl">ผู้รับบริการ</div>
+      </div>
+      <div class="album-stat-box">
+        <div class="asb-val" style="color:var(--c2)">8</div>
+        <div class="asb-lbl">หน่วยงาน</div>
+      </div>
+      <div class="album-stat-box">
+        <div class="asb-val" style="color:var(--c1)">2568</div>
+        <div class="asb-lbl">ปีงบประมาณ</div>
+      </div>
+    </div>
     <!-- Filter -->
     <div class="album-filter" id="albumFilter">
-      <button class="af-btn active" data-agency="all" onclick="filterAlbum('all',this)">ทั้งหมด (28)</button>
-      <button class="af-btn" data-agency="ทต.เมืองแกลง" onclick="filterAlbum('ทต.เมืองแกลง',this)">ทต.เมืองแกลง</button>
-      <button class="af-btn" data-agency="ทต.มาบข่าพัฒนา" onclick="filterAlbum('ทต.มาบข่าพัฒนา',this)">ทต.มาบข่าพัฒนา</button>
-      <button class="af-btn" data-agency="อบต.วังหว้า" onclick="filterAlbum('อบต.วังหว้า',this)">อบต.วังหว้า</button>
-      <button class="af-btn" data-agency="อบต.สำนักท้อน" onclick="filterAlbum('อบต.สำนักท้อน',this)">อบต.สำนักท้อน</button>
-      <button class="af-btn" data-agency="อบต.คลองปูน" onclick="filterAlbum('อบต.คลองปูน',this)">อบต.คลองปูน</button>
-      <button class="af-btn" data-agency="อบต.น้ำเป็น" onclick="filterAlbum('อบต.น้ำเป็น',this)">อบต.น้ำเป็น</button>
-      <button class="af-btn" data-agency="ทต.ปากน้ำประแส" onclick="filterAlbum('ทต.ปากน้ำประแส',this)">ทต.ปากน้ำประแส</button>
-      <button class="af-btn" data-agency="อบต.ตะพง" onclick="filterAlbum('อบต.ตะพง',this)">อบต.ตะพง</button>
+      <button class="af-btn" data-agency="all" active" onclick="filterAlbum('all',this)">ทั้งหมด (28)</button>
+      <button class="af-btn" data-agency="ทต.เมืองแกลง"" onclick="filterAlbum('ทต.เมืองแกลง',this)">ทต.เมืองแกลง</button>
+      <button class="af-btn" data-agency="ทต.มาบข่าพัฒนา"" onclick="filterAlbum('ทต.มาบข่าพัฒนา',this)">ทต.มาบข่าพัฒนา</button>
+      <button class="af-btn" data-agency="อบต.วังหว้า"" onclick="filterAlbum('อบต.วังหว้า',this)">อบต.วังหว้า</button>
+      <button class="af-btn" data-agency="อบต.สำนักท้อน"" onclick="filterAlbum('อบต.สำนักท้อน',this)">อบต.สำนักท้อน</button>
+      <button class="af-btn" data-agency="อบต.คลองปูน"" onclick="filterAlbum('อบต.คลองปูน',this)">อบต.คลองปูน</button>
+      <button class="af-btn" data-agency="อบต.น้ำเป็น"" onclick="filterAlbum('อบต.น้ำเป็น',this)">อบต.น้ำเป็น</button>
+      <button class="af-btn" data-agency="ทต.ปากน้ำประแส"" onclick="filterAlbum('ทต.ปากน้ำประแส',this)">ทต.ปากน้ำประแส</button>
+      <button class="af-btn" data-agency="อบต.ตะพง"" onclick="filterAlbum('อบต.ตะพง',this)">อบต.ตะพง</button>
     </div>
+    <!-- List -->
     <div class="album-list" id="p3AlbumGrid"></div>
-    <div style="text-align:center;font-size:.68rem;color:var(--muted);padding:6px 0">🔒 ไม่แสดงรูปภาพส่วนตัว เพื่อคุ้มครองตาม PDPA</div>
+    <div style="text-align:center;font-size:.7rem;color:var(--muted);padding:8px 0 4px">
+      🔒 ไม่แสดงรูปภาพส่วนตัว เพื่อคุ้มครองสิทธิ์ตาม PDPA
+    </div>
   </div>
-
   <div style="height:8px"></div>
 </div>
 
+<!-- P4: พัฒนาศักยภาพ -->
 <div class="page" id="page-p4">
-  <button class="proj-back-btn" onclick="goHome()">← กลับหน้าหลัก</button>
-
-  <!-- Card A: Executive Summary -->
-  <div class="proj-exec-card" style="--pc:var(--c4);--pcl:var(--c4l)">
-    <div class="pec-hero" style="background:linear-gradient(135deg,#3B0764,#7C3AED)">
-      <div class="pec-icon">🧠</div>
-      <div>
-        <div class="pec-proj-label">โครงการที่ 4</div>
-        <div class="pec-title">พัฒนาศักยภาพเครือข่ายฟื้นฟูสมรรถภาพ</div>
-        <div class="pec-sub">ปีงบประมาณ 2565–2569 · 7 อำเภอ จ.ระยอง</div>
-      </div>
-    </div>
-    <div class="pec-kpis">
-      <div class="pec-kpi"><div class="pec-kv" style="color:var(--c4)">30</div><div class="pec-kl">โครงการ</div></div>
-      <div class="pec-kpi"><div class="pec-kv" style="color:#059669">10</div><div class="pec-kl">เสร็จแล้ว</div></div>
-      <div class="pec-kpi"><div class="pec-kv" style="color:var(--c2)">1.92M</div><div class="pec-kl">งบ (฿)</div></div>
-      <div class="pec-kpi"><div class="pec-kv" style="color:var(--c1)">7</div><div class="pec-kl">อำเภอ</div></div>
-    </div>
-    <div class="pec-mission">อบรมและพัฒนาทักษะบุคลากรสาธารณสุขในเครือข่ายฟื้นฟูสมรรถภาพ ทั้ง รพ. รพ.สต. และ สสจ. เพื่อยกระดับคุณภาพการดูแลผู้ป่วยและผู้พิการในชุมชน</div>
-    <div class="pec-section">
-      <div class="pec-sect-title">โครงการและงบประมาณรายปี</div>
-      <div class="chart-box tall"><canvas id="c4_year"></canvas></div>
+  <div class="page-hero" style="background:linear-gradient(135deg,#3B0764,#7C3AED)">
+    <div class="ph-label">โครงการที่ 4</div>
+    <div class="ph-title">พัฒนาศักยภาพเครือข่ายฟื้นฟูสมรรถภาพ</div>
+    <div class="ph-stats">
+      <div class="ph-stat"><div class="sv">30</div><div class="sl">โครงการ</div></div>
+      <div class="ph-stat"><div class="sv">฿1.92M</div><div class="sl">งบรวม</div></div>
+      <div class="ph-stat"><div class="sv">7</div><div class="sl">อำเภอ</div></div>
     </div>
   </div>
 
-  <!-- Card B: Management & Operations -->
-  <div class="proj-ops-card">
-    <div class="poc-title">⚙️ การจัดการและปฏิบัติการ</div>
-    <div class="poc-btns">
-      <button class="poc-btn" style="--bc:var(--c4);--bbl:var(--c4l)" onclick="openProjModal('p4proj')">
-        <span class="poc-btn-icon">📋</span>
-        <div>
-          <div class="poc-btn-title">รายการโครงการทั้งหมด</div>
-          <div class="poc-btn-sub">30 โครงการ · ปี 2565–2569</div>
-        </div>
-        <span class="poc-arrow">›</span>
-      </button>
-      <button class="poc-btn" style="--bc:var(--c2);--bbl:var(--c2l)" onclick="openProjModal('p4bud')">
-        <span class="poc-btn-icon">💰</span>
-        <div>
-          <div class="poc-btn-title">งบประมาณโดยละเอียด</div>
-          <div class="poc-btn-sub">฿1.92M · แยกรายปีและอำเภอ</div>
-        </div>
-        <span class="poc-arrow">›</span>
-      </button>
-      <button class="poc-btn" style="--bc:#059669;--bbl:#D1FAE5" onclick="openProjModal('p4status')">
-        <span class="poc-btn-icon">✅</span>
-        <div>
-          <div class="poc-btn-title">สถานะโครงการ</div>
-          <div class="poc-btn-sub">10 เสร็จแล้ว · ยังดำเนินการ 20</div>
-        </div>
-        <span class="poc-arrow">›</span>
-      </button>
+  <div class="sub-tabs" id="p4tabs">
+    <button class="sub-tab active" style="background:var(--c4)" onclick="showSub('p4','overview',this)">ภาพรวม</button>
+    <button class="sub-tab" onclick="showSub('p4','projects',this)">โครงการ</button>
+    <button class="sub-tab" onclick="showSub('p4','district',this)">อำเภอ</button>
+    <button class="sub-tab" onclick="showSub('p4','status',this)">สถานะ</button>
+  </div>
+
+  <div class="sub-section active" id="p4-overview">
+    <div class="kpi-row">
+      <div class="kpi" style="border-color:var(--c4)"><div class="kpi-val" style="color:var(--c4)">30</div><div class="kpi-lbl">โครงการ</div></div>
+      <div class="kpi" style="border-color:var(--c2)"><div class="kpi-val" style="color:var(--c2)">1.92M</div><div class="kpi-lbl">งบ (บาท)</div></div>
+      <div class="kpi" style="border-color:var(--c3)"><div class="kpi-val" style="color:var(--c3)">22</div><div class="kpi-lbl">หน่วยบริการ</div></div>
+      <div class="kpi" style="border-color:var(--c1)"><div class="kpi-val" style="color:var(--c1)">7</div><div class="kpi-lbl">อำเภอ</div></div>
     </div>
-    <!-- District quick chips -->
-    <div class="poc-quick-row" id="p4_dist_chips" style="flex-wrap:wrap;gap:6px"></div>
+    <div class="card">
+      <div class="card-title">โครงการและงบรายปี</div>
+      <div class="chart-box tall"><canvas id="c4_year"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">สัดส่วนงบรายอำเภอ</div>
+      <div class="chart-box"><canvas id="c4_dist"></canvas></div>
+    </div>
+  </div>
+
+  <div class="sub-section" id="p4-projects">
+    <div class="card" style="padding-bottom:0">
+      <div class="card-title">รายการโครงการทั้งหมด 30 โครงการ</div>
+      <div class="card-sub">ปีงบประมาณ 2565–2569</div>
+      <div id="p4_proj_list"></div>
+    </div>
+  </div>
+
+  <div class="sub-section" id="p4-district">
+    <div id="p4_dist_list"></div>
+  </div>
+
+  <div class="sub-section" id="p4-status">
+    <div class="card">
+      <div class="card-title">✅ เสร็จเรียบร้อย (10 หน่วยงาน)</div>
+      <div id="p4_done_list"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔄 รอดำเนินการ / ต่อเนื่อง</div>
+      <div id="p4_pending_list"></div>
+    </div>
   </div>
   <div style="height:8px"></div>
 </div>
@@ -2418,339 +2275,6 @@ window.goPage=function(id){
 };
 window.showSub=showSub;
 window.goHome=goHome;
-
-/* ── PROJECT MODAL SYSTEM ────────────────────────────────── */
-const _projModalContent = {};
-
-function openProjModal(id){
-  const modal = document.getElementById('projModal');
-  const body  = document.getElementById('projModalBody');
-  const conf  = _projModalContent[id];
-  if(!conf){ console.warn('No modal content for:', id); return; }
-  document.getElementById('projModalTitle').textContent = conf.title;
-  document.getElementById('projModalMeta').textContent  = conf.meta || '';
-  body.innerHTML = '';
-  if(typeof conf.build === 'function') conf.build(body);
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeProjModal(){
-  document.getElementById('projModal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function handleProjBackdrop(e){ if(e.target.id==='projModal') closeProjModal(); }
-
-/* P3 Album toggle */
-function showP3Album(){
-  const sec = document.getElementById('p3AlbumSection');
-  if(sec){ sec.style.display='block'; sec.scrollIntoView({behavior:'smooth',block:'start'}); }
-  if(window._allAlbums) renderAlbums(window._allAlbums);
-}
-function hideP3Album(){
-  const sec = document.getElementById('p3AlbumSection');
-  if(sec) sec.style.display='none';
-}
-
-/* ── BUILD MODAL CONTENTS (called at init) ─────────────── */
-function buildProjModals(){
-  const COLORS=['#0369A1','#0891B2','#059669','#D97706','#DC2626','#7C3AED','#DB2777','#65A30D'];
-
-  /* ── P2 INVENTORY ─────────────────── */
-  _projModalContent['p2inv'] = {
-    title:'📦 ข้อมูลศูนย์ซ่อมอุปกรณ์', meta:'10 ศูนย์ · 11,437 รายการซ่อม',
-    build(body){
-      body.innerHTML = `
-      <div class="pm-section">
-        <div class="pm-sect-hd" style="border-color:#D97706">รายการซ่อมแยกศูนย์</div>
-        <div class="pm-table-wrap"><table class="pm-table">
-          <thead><tr><th class="l">ศูนย์ซ่อม</th><th>อำเภอ</th><th class="r">รายการซ่อม</th><th class="r">งบรวม</th></tr></thead>
-          <tbody>
-          ${Object.entries(P2.centers).map(([n,c],i)=>{
-            const bTotal=Object.values(c.budget).reduce((s,v)=>s+v,0);
-            return `<tr>
-              <td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${COLORS[i%8]};margin-right:6px"></span>${n}</td>
-              <td class="c">${c.district}</td>
-              <td class="r b" style="color:#D97706">${fmt(c.total)}</td>
-              <td class="r b hi">฿${fmt(bTotal)}</td></tr>`;
-          }).join('')}
-          <tr class="tot"><td colspan="2">รวม</td>
-            <td class="r">${fmt(Object.values(P2.centers).reduce((s,c)=>s+c.total,0))}</td>
-            <td class="r">฿${fmt(Object.values(P2.centers).reduce((s,c)=>s+Object.values(c.budget).reduce((a,b)=>a+b,0),0))}</td></tr>
-          </tbody>
-        </table></div>
-      </div>
-      <div class="pm-section">
-        <div class="pm-sect-hd" style="border-color:#D97706">กลุ่มอุปกรณ์ที่ซ่อม</div>
-        ${Object.entries(P2.groups).map(([g,v],i)=>{
-          const max=Math.max(...Object.values(P2.groups));
-          return `<div class="pm-bar-row">
-            <div class="pm-br-n">${g}</div>
-            <div class="pm-br-b"><div class="pm-br-f" style="width:${Math.round(v/max*100)}%;background:${COLORS[i%8]}"></div></div>
-            <div class="pm-br-v" style="color:${COLORS[i%8]}">${fmt(v)}</div>
-          </div>`;
-        }).join('')}
-      </div>`;
-    }
-  };
-
-  /* ── P2 BUDGET ────────────────────── */
-  _projModalContent['p2bud'] = {
-    title:'💰 งบประมาณศูนย์ซ่อม', meta:'รวม ฿6,965,775 · ปี 2566–2568',
-    build(body){
-      body.innerHTML = `
-      <div class="pm-krow">
-        <div class="pm-k"><div class="pm-kv" style="color:#0369A1">฿497,500</div><div class="pm-kl">ปี 2566</div></div>
-        <div class="pm-k"><div class="pm-kv" style="color:#D97706">฿3,985,955</div><div class="pm-kl">ปี 2567</div></div>
-        <div class="pm-k"><div class="pm-kv" style="color:#059669">฿2,482,320</div><div class="pm-kl">ปี 2568</div></div>
-      </div>
-      <div class="pm-section">
-        <div class="pm-sect-hd" style="border-color:#0369A1">งบประมาณรายศูนย์</div>
-        <div class="pm-table-wrap"><table class="pm-table">
-          <thead><tr><th class="l">ศูนย์ซ่อม</th><th>อำเภอ</th><th class="r">ปี 66</th><th class="r">ปี 67</th><th class="r">ปี 68</th><th class="r">รวม</th></tr></thead>
-          <tbody>
-          ${Object.entries(P2.centers).filter(([n,c])=>Object.values(c.budget).some(v=>v>0)).map(([n,c])=>{
-            const bt=Object.values(c.budget).reduce((s,v)=>s+v,0);
-            return `<tr>
-              <td>${n}</td><td class="c">${c.district}</td>
-              <td class="r">${c.budget[66]?'฿'+fmt(c.budget[66]):'—'}</td>
-              <td class="r">${c.budget[67]?'฿'+fmt(c.budget[67]):'—'}</td>
-              <td class="r">${c.budget[68]?'฿'+fmt(c.budget[68]):'—'}</td>
-              <td class="r b hi">฿${fmt(bt)}</td></tr>`;
-          }).join('')}
-          </tbody>
-        </table></div>
-      </div>`;
-    }
-  };
-
-  /* ── P2 MAP ───────────────────────── */
-  _projModalContent['p2map'] = {
-    title:'🗺️ ที่ตั้งศูนย์ซ่อม', meta:'10 ศูนย์ · กระจายทั่ว จ.ระยอง',
-    build(body){
-      const centers=[
-        {n:'อบต.ตะพง',d:'เมืองระยอง',addr:'ต.ตะพง อ.เมือง จ.ระยอง'},
-        {n:'ทต.บ้านเพ',d:'เมืองระยอง',addr:'ต.เพ อ.เมือง จ.ระยอง'},
-        {n:'ทต.บ้านค่ายพัฒนา',d:'บ้านค่าย',addr:'ต.บ้านค่าย อ.บ้านค่าย จ.ระยอง'},
-        {n:'อบต.ทุ่งควายกิน',d:'แกลง',addr:'ต.ทุ่งควายกิน อ.แกลง จ.ระยอง'},
-        {n:'อบต.น้ำเป็น',d:'เขาชะเมา',addr:'ต.น้ำเป็น อ.เขาชะเมา จ.ระยอง'},
-        {n:'อบต.วังหว้า',d:'แกลง',addr:'ต.วังหว้า อ.แกลง จ.ระยอง'},
-        {n:'ทต.ชุมแสง',d:'วังจันทร์',addr:'ต.ชุมแสง อ.วังจันทร์ จ.ระยอง'},
-        {n:'ทต.มะขามคู่',d:'นิคมพัฒนา',addr:'ต.มะขามคู่ อ.นิคมพัฒนา จ.ระยอง'},
-        {n:'อบต.แม่น้ำคู้',d:'ปลวกแดง',addr:'ต.แม่น้ำคู้ อ.ปลวกแดง จ.ระยอง'},
-        {n:'รพ.บ้านฉาง',d:'บ้านฉาง',addr:'ต.พลา อ.บ้านฉาง จ.ระยอง'},
-      ];
-      body.innerHTML=`<div class="pm-section">
-        <div class="pm-sect-hd" style="border-color:#059669">ศูนย์ซ่อมทั้ง 10 แห่ง</div>
-        ${centers.map((c,i)=>`
-          <div class="pm-item-row">
-            <div class="pm-item-num" style="background:${COLORS[i%8]}">${i+1}</div>
-            <div style="flex:1">
-              <div class="pm-item-name">${c.n}</div>
-              <div class="pm-item-meta">📍 ${c.addr}</div>
-            </div>
-            <div style="font-size:.72rem;font-weight:700;color:${COLORS[i%8]}">${c.d}</div>
-          </div>`).join('')}
-      </div>`;
-    }
-  };
-
-  /* ── P3 INVENTORY ─────────────────── */
-  _projModalContent['p3inv'] = {
-    title:'📦 รายละเอียดรายปีและอำเภอ', meta:'342 หลัง · ปี 2558–2568',
-    build(body){
-      body.innerHTML=`
-      <div class="pm-section">
-        <div class="pm-sect-hd" style="border-color:var(--c3)">บ้านแยกรายปีงบประมาณ</div>
-        <div class="pm-table-wrap"><table class="pm-table">
-          <thead><tr><th class="l">ปีงบประมาณ</th><th class="r">หลัง</th><th class="r">อายุเฉลี่ย</th><th class="r">งบ (฿)</th></tr></thead>
-          <tbody>
-          ${P3.years.map((y,i)=>`<tr>
-            <td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${COLORS[i%8]};margin-right:6px"></span>${y.label}</td>
-            <td class="r b">${y.count}</td>
-            <td class="r">${y.avgAge} ปี</td>
-            <td class="r" style="color:#059669">฿${fmt(y.budget)}</td>
-          </tr>`).join('')}
-          <tr class="tot"><td>รวม</td><td class="r">${P3.years.reduce((s,y)=>s+y.count,0)}</td><td></td>
-            <td class="r">฿${fmt(P3.years.reduce((s,y)=>s+y.budget,0))}</td></tr>
-          </tbody>
-        </table></div>
-      </div>
-      <div class="pm-section">
-        <div class="pm-sect-hd" style="border-color:var(--c3)">บ้านแยกรายอำเภอ</div>
-        <div class="pm-table-wrap"><table class="pm-table">
-          <thead><tr><th class="l">อำเภอ</th><th class="r">หลัง</th><th class="r">งบรวม (฿)</th></tr></thead>
-          <tbody>
-          ${Object.entries(P3.districts).sort((a,b)=>b[1].budget-a[1].budget).map(([d,v],i)=>`<tr>
-            <td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${COLORS[i%8]};margin-right:6px"></span>${d}</td>
-            <td class="r b">${v.houses}</td>
-            <td class="r" style="color:#059669">฿${fmt(v.budget)}</td>
-          </tr>`).join('')}
-          <tr class="tot"><td>รวม</td><td class="r">342</td><td class="r">฿${fmt(Object.values(P3.districts).reduce((s,v)=>s+v.budget,0))}</td></tr>
-          </tbody>
-        </table></div>
-      </div>
-      <div class="pm-section">
-        <div class="pm-sect-hd" style="border-color:var(--c3)">ประเภทผู้รับบริการ</div>
-        ${P3.types.map((t,i)=>{const max=Math.max(...P3.types.map(x=>x.v));return`<div class="pm-bar-row">
-          <div class="pm-br-n">${t.l}</div>
-          <div class="pm-br-b"><div class="pm-br-f" style="width:${Math.round(t.v/max*100)}%;background:${COLORS[i%8]}"></div></div>
-          <div class="pm-br-v" style="color:${COLORS[i%8]}">${t.v} ราย</div>
-        </div>`;}).join('')}
-      </div>`;
-    }
-  };
-
-  /* ── P3 BUDGET ────────────────────── */
-  _projModalContent['p3bud'] = {
-    title:'💰 งบประมาณปรับสภาพบ้าน', meta:'฿15,554,966 สะสม 11 ปีงบประมาณ',
-    build(body){
-      const maxBud=Math.max(...P3.years.map(y=>y.budget));
-      body.innerHTML=`
-      <div class="pm-krow">
-        <div class="pm-k"><div class="pm-kv" style="color:var(--c3)">342</div><div class="pm-kl">หลังรวม</div></div>
-        <div class="pm-k"><div class="pm-kv" style="color:#D97706">฿45,483</div><div class="pm-kl">เฉลี่ย/หลัง</div></div>
-        <div class="pm-k"><div class="pm-kv" style="color:#059669">11 ปี</div><div class="pm-kl">ดำเนินการ</div></div>
-      </div>
-      <div class="pm-section">
-        <div class="pm-sect-hd" style="border-color:var(--c3)">งบประมาณรายปี</div>
-        ${P3.years.map((y,i)=>`<div class="pm-bar-row">
-          <div class="pm-br-n">${y.label}</div>
-          <div class="pm-br-b"><div class="pm-br-f" style="width:${Math.round(y.budget/maxBud*100)}%;background:${COLORS[i%8]}"></div></div>
-          <div class="pm-br-v" style="color:${COLORS[i%8]}">฿${fmt(y.budget)}</div>
-        </div>`).join('')}
-      </div>
-      <div class="pm-section">
-        <div class="pm-sect-hd" style="border-color:var(--c3)">งบประมาณรายอำเภอ (8 อำเภอ)</div>
-        ${Object.entries(P3.districts).sort((a,b)=>b[1].budget-a[1].budget).map(([d,v],i)=>{
-          const max=Math.max(...Object.values(P3.districts).map(x=>x.budget));
-          return`<div class="pm-bar-row">
-            <div class="pm-br-n">${d}</div>
-            <div class="pm-br-b"><div class="pm-br-f" style="width:${Math.round(v.budget/max*100)}%;background:${COLORS[i%8]}"></div></div>
-            <div class="pm-br-v" style="color:${COLORS[i%8]}">฿${fmt(v.budget)}</div>
-          </div>`;}).join('')}
-      </div>`;
-    }
-  };
-
-  /* ── P4 PROJECTS ──────────────────── */
-  _projModalContent['p4proj'] = {
-    title:'📋 รายการโครงการทั้งหมด', meta:'30 โครงการ · ปีงบประมาณ 2565–2569',
-    build(body){
-      body.innerHTML=`<div class="pm-section">
-        ${P4.projects.map((p,i)=>`<div class="pm-item-row">
-          <div class="pm-item-num" style="background:${COLORS[i%8]}">${i+1}</div>
-          <div style="flex:1">
-            <div class="pm-item-name">${p.agency}</div>
-            <div class="pm-item-meta">📍 ${p.district} · ปี 25${p.yr}</div>
-          </div>
-          <div style="font-size:.8rem;font-weight:700;color:${COLORS[i%8]}">฿${fmt(p.budget)}</div>
-        </div>`).join('')}
-      </div>`;
-    }
-  };
-
-  /* ── P4 BUDGET ────────────────────── */
-  _projModalContent['p4bud'] = {
-    title:'💰 งบประมาณพัฒนาศักยภาพ', meta:'฿1,920,190 · 30 โครงการ 7 อำเภอ',
-    build(body){
-      const yrs=[65,66,67,68,69];
-      const distAgg={};
-      P4.projects.forEach(p=>{distAgg[p.district]=(distAgg[p.district]||0)+p.budget});
-      const maxDist=Math.max(...Object.values(distAgg));
-      body.innerHTML=`
-      <div class="pm-krow">
-        ${yrs.map((y,i)=>{
-          const v=P4.projects.filter(p=>p.yr===y).reduce((s,p)=>s+p.budget,0);
-          return`<div class="pm-k"><div class="pm-kv" style="color:${COLORS[i]}">${v?'฿'+fmt(v):'—'}</div><div class="pm-kl">ปี 25${y}</div></div>`;
-        }).join('')}
-      </div>
-      <div class="pm-section">
-        <div class="pm-sect-hd" style="border-color:var(--c4)">งบประมาณรายอำเภอ</div>
-        ${Object.entries(distAgg).sort((a,b)=>b[1]-a[1]).map(([d,v],i)=>`<div class="pm-bar-row">
-          <div class="pm-br-n">${d}</div>
-          <div class="pm-br-b"><div class="pm-br-f" style="width:${Math.round(v/maxDist*100)}%;background:${COLORS[i%8]}"></div></div>
-          <div class="pm-br-v" style="color:${COLORS[i%8]}">฿${fmt(v)}</div>
-        </div>`).join('')}
-      </div>
-      <div class="pm-section">
-        <div class="pm-sect-hd" style="border-color:var(--c4)">งบประมาณรายโครงการ</div>
-        <div class="pm-table-wrap"><table class="pm-table">
-          <thead><tr><th class="l">หน่วยงาน</th><th>อำเภอ</th><th>ปี</th><th class="r">งบ (฿)</th></tr></thead>
-          <tbody>
-          ${P4.projects.map((p,i)=>`<tr>
-            <td>${p.agency}</td><td class="c">${p.district}</td>
-            <td class="c">25${p.yr}</td>
-            <td class="r b" style="color:var(--c4)">฿${fmt(p.budget)}</td>
-          </tr>`).join('')}
-          <tr class="tot"><td colspan="3">รวม</td><td class="r">฿${fmt(P4.projects.reduce((s,p)=>s+p.budget,0))}</td></tr>
-          </tbody>
-        </table></div>
-      </div>`;
-    }
-  };
-
-  /* ── P4 STATUS ────────────────────── */
-  _projModalContent['p4status'] = {
-    title:'✅ สถานะโครงการ', meta:'10 เสร็จแล้ว · 20 ยังดำเนินการ',
-    build(body){
-      body.innerHTML=`
-      <div class="pm-section">
-        <div class="pm-sect-hd" style="border-color:#059669">✅ เสร็จเรียบร้อย (10 โครงการ)</div>
-        ${P4.done.map((a,i)=>`<div class="pm-item-row">
-          <div class="pm-item-num" style="background:#059669">${i+1}</div>
-          <div style="flex:1">
-            <div class="pm-item-name">${a.agency}</div>
-            <div class="pm-item-meta">📍 ${a.district}</div>
-          </div>
-          <div>
-            <span class="pm-badge pm-badge-done">✅ เสร็จ</span>
-            <div style="font-size:.72rem;font-weight:700;color:#059669;margin-top:2px">฿${fmt(a.budget)}</div>
-          </div>
-        </div>`).join('')}
-      </div>
-      <div class="pm-section">
-        <div class="pm-sect-hd" style="border-color:#D97706">🔄 ยังดำเนินการ / ต่อเนื่อง</div>
-        ${P4.projects.filter(p=>!P4.done.some(d=>d.agency===p.agency)).map((p,i)=>`<div class="pm-item-row">
-          <div class="pm-item-num" style="background:#D97706">${i+1}</div>
-          <div style="flex:1">
-            <div class="pm-item-name">${p.agency}</div>
-            <div class="pm-item-meta">📍 ${p.district} · ปี 25${p.yr}</div>
-          </div>
-          <span class="pm-badge pm-badge-pend">🔄 ดำเนินการ</span>
-        </div>`).join('')}
-      </div>`;
-    }
-  };
-
-  /* ── Build P3 quick district row ── */
-  const qd = document.getElementById('p3_quick_dist');
-  if(qd){
-    qd.innerHTML = Object.entries(P3.districts).slice(0,5).map(([d,v],i)=>`
-      <div class="poc-q">
-        <div class="poc-qv" style="color:${['#059669','#0369A1','#D97706','#DC2626','#7C3AED'][i]}">${v.houses}</div>
-        <div class="poc-ql">${d}</div>
-      </div>`).join('') + '<div class="poc-q"><div class="poc-qv" style="color:var(--muted)">...</div><div class="poc-ql">อื่นๆ</div></div>';
-  }
-
-  /* ── Build P4 district chips ── */
-  const dc = document.getElementById('p4_dist_chips');
-  if(dc){
-    const distAgg={};
-    P4.projects.forEach(p=>{distAgg[p.district]=(distAgg[p.district]||0)+1});
-    const COLS=['#7C3AED','#0369A1','#D97706','#DC2626','#059669','#0891B2','#DB2777'];
-    dc.innerHTML = Object.entries(distAgg).map(([d,n],i)=>`
-      <div class="poc-q" style="flex-shrink:0">
-        <div class="poc-qv" style="color:${COLS[i%7]}">${n}</div>
-        <div class="poc-ql">${d}</div>
-      </div>`).join('');
-  }
-}
-
-/* Auto-init on DOMContentLoaded */
-window.addEventListener('DOMContentLoaded',()=>{
-  setTimeout(buildProjModals, 200);
-});
-
 
 /* ── ALBUM SEARCH ────────────────────────────────── */
 let _searchQuery = '';
@@ -8618,21 +8142,5 @@ function toggleCard(card, pid){
 </div></div></div>
   </div>
 </div>
-
-<!-- ── UNIFIED PROJECT MODAL ──────────────────── -->
-<div id="projModal" onclick="handleProjBackdrop(event)">
-  <div id="projSheet">
-    <div class="pm-handle"></div>
-    <div class="pm-head">
-      <div>
-        <div class="pm-title" id="projModalTitle"></div>
-        <div class="pm-meta"  id="projModalMeta"></div>
-      </div>
-      <button class="pm-close" onclick="closeProjModal()">✕</button>
-    </div>
-    <div class="pm-body" id="projModalBody"></div>
-  </div>
-</div>
-
 </body>
 </html>
