@@ -1034,7 +1034,11 @@ body{
 .p3-search-inp:focus{border-color:#059669}
 
 /* Beneficiary list */
-.p3-ben-list{padding:8px 14px}
+.p3-ben-list{max-height:calc(15 * 62px);overflow-y:auto;padding:0 14px;scroll-behavior:smooth}
+.p3-ben-list::-webkit-scrollbar{width:4px}
+.p3-ben-list::-webkit-scrollbar-track{background:transparent}
+.p3-ben-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.p3-ben-item{padding:10px 0}
 .p3-ben-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;
   border-bottom:1px solid var(--border)}
 .p3-ben-item:last-child{border-bottom:none}
@@ -1097,6 +1101,23 @@ body{
   background:var(--white);font-family:'Sarabun',sans-serif;font-size:.76rem;font-weight:700;
   color:var(--muted);cursor:pointer;transition:all .15s}
 .p3m-nav-btn:hover{border-color:#059669;color:#059669}
+
+
+/* P3 detail album grid */
+.p3-album-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:480px){.p3-album-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:768px){.p3-album-grid{grid-template-columns:repeat(4,1fr)}}
+
+
+/* Sticky count row inside scrollable list */
+.p3-list-sticky-hd{
+  position:sticky;top:0;z-index:5;
+  background:linear-gradient(180deg,var(--white) 85%,transparent);
+  padding:8px 0 4px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.p3-list-sticky-hd-label{font-size:.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.p3-list-sticky-hd-count{font-size:.65rem;font-weight:700;color:var(--c3)}
 
 </style>
 </head>
@@ -2912,7 +2933,10 @@ function renderP3BenList(list){
   }
   // Paginate: show first 50, load more on scroll
   const show=list.slice(0,60);
-  el.innerHTML=show.map((b,i)=>{
+  el.innerHTML=`<div class="p3-list-sticky-hd">
+    <span class="p3-list-sticky-hd-label">รายชื่อผู้รับงบประมาณ</span>
+    <span class="p3-list-sticky-hd-count">${list.length} ราย</span>
+  </div>` + show.map((b,i)=>{
     const st=getP3StatusInfo(b.dis);
     const yrCol=P3_YR_COLORS[b.y]||'#059669';
     const addrShort=b.addr.length>32?b.addr.substring(0,32)+'…':b.addr;
@@ -3048,7 +3072,7 @@ function openP3Detail(){
     _p3ListInit=true;
     renderP3BenList(P3_BENS);
     // Init album
-    if(window._allAlbums) renderAlbums(window._allAlbums);
+    if(window._allAlbums || P3.albums) renderDetailAlbum(window._allAlbums || P3.albums);
   }
 }
 function exitP3Detail(){
@@ -3060,6 +3084,126 @@ function exitP3Detail(){
   window.scrollTo(0,0);
 }
 let _p3ListInit=false;
+
+/* ── P3 DETAIL ALBUM (uses p3AlbumGrid2) ──────── */
+const AVATAR_COLORS2=['#0369A1','#0891B2','#059669','#D97706','#DC2626','#7C3AED','#DB2777','#65A30D','#EA580C','#6366F1'];
+
+function ageGroup2(age){
+  if(age<40) return{label:'วัยทำงาน',bg:'#DBEAFE',col:'#1D4ED8'};
+  if(age<60) return{label:'วัยกลางคน',bg:'#FEF3C7',col:'#92400E'};
+  return{label:'ผู้สูงอายุ',bg:'#D1FAE5',col:'#065F46'};
+}
+
+function renderDetailAlbum(list, filterAgency){
+  const ag2 = document.getElementById('p3AlbumGrid2');
+  if(!ag2) return;
+  
+  let filtered = list;
+  if(filterAgency && filterAgency !== 'all'){
+    filtered = list.filter(a => a.agency === filterAgency);
+  }
+  
+  ag2.innerHTML = '';
+  
+  if(!filtered.length){
+    ag2.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--muted)">ไม่พบข้อมูล</div>';
+    return;
+  }
+  
+  filtered.forEach((a, i) => {
+    const idx = P3.albums.indexOf(a);
+    const hasGal = !!(a.galNow || a.galThen);
+    const initials = a.name.replace(/^(นาง|นาย|นางสาว)/,'').trim().charAt(0);
+    const color = AVATAR_COLORS2[idx % AVATAR_COLORS2.length];
+    const ag_label = ageGroup2(a.age);
+    const nowCount  = (a.galNow  || []).length;
+    const thenCount = (a.galThen || []).length;
+
+    // Build media section
+    let mediaSection = '';
+    if(hasGal){
+      mediaSection = `<div style="display:flex;gap:5px;padding:0 10px 8px">
+        ${nowCount ? `<button onclick="openGallery(${idx},'now')"
+          style="flex:1;padding:7px 4px;border-radius:8px;border:1.5px solid ${color};
+                 background:${color}18;font-family:'Sarabun',sans-serif;font-size:.68rem;
+                 font-weight:700;color:${color};cursor:pointer;display:flex;align-items:center;
+                 justify-content:center;gap:3px">
+          📷 ก่อน <span style="background:${color};color:#fff;font-size:.58rem;padding:1px 5px;border-radius:10px">${nowCount}</span>
+        </button>` : ''}
+        ${thenCount ? `<button onclick="openGallery(${idx},'then')"
+          style="flex:1;padding:7px 4px;border-radius:8px;border:1.5px solid #059669;
+                 background:#D1FAE522;font-family:'Sarabun',sans-serif;font-size:.68rem;
+                 font-weight:700;color:#059669;cursor:pointer;display:flex;align-items:center;
+                 justify-content:center;gap:3px">
+          ✅ หลัง <span style="background:#059669;color:#fff;font-size:.58rem;padding:1px 5px;border-radius:10px">${thenCount}</span>
+        </button>` : ''}
+      </div>`;
+    } else {
+      // Single image toggle
+      mediaSection = `<div style="padding:0 10px 8px">
+        <div style="border-radius:8px;overflow:hidden;height:80px;background:var(--bg);position:relative;margin-bottom:5px">
+          ${a.imgNow ? `<img src="${a.imgNow}" style="width:100%;height:100%;object-fit:cover"
+            onerror="this.style.display='none'" loading="lazy">` : ''}
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.5rem;opacity:.3">📸</div>
+        </div>
+      </div>`;
+    }
+
+    ag2.innerHTML += `<div style="background:var(--white);border-radius:12px;
+      box-shadow:0 1px 4px rgba(0,0,0,.08);border:1.5px solid var(--border);overflow:hidden;
+      transition:all .18s" onmouseenter="this.style.borderColor='${color}'" onmouseleave="this.style.borderColor='var(--border)'">
+      <!-- Card top -->
+      <div style="display:flex;align-items:center;gap:8px;padding:9px 10px 6px">
+        <div style="width:32px;height:32px;border-radius:9px;background:${color};
+          display:flex;align-items:center;justify-content:center;font-size:.8rem;
+          font-weight:700;color:#fff;flex-shrink:0">${initials}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.72rem;font-weight:700;color:var(--text);
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${a.name}</div>
+          <div style="font-size:.6rem;color:var(--muted);margin-top:1px">${a.agency} · ${a.age} ปี</div>
+        </div>
+      </div>
+      <!-- Tags -->
+      <div style="padding:0 10px 6px;display:flex;gap:4px">
+        <span style="font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:20px;
+          background:${ag_label.bg};color:${ag_label.col}">${ag_label.label}</span>
+        ${hasGal ? `<span style="font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:20px;
+          background:#EDE9FE;color:#6D28D9">🖼️ ${nowCount+thenCount} รูป</span>` :
+          `<span style="font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:20px;
+          background:#F0FDF4;color:#15803D">📸 มีรูป</span>`}
+      </div>
+      ${mediaSection}
+      <!-- Footer link -->
+      <div style="padding:0 10px 9px">
+        <a href="${a.url}" target="_blank" style="display:block;text-align:center;
+          font-size:.68rem;font-weight:700;color:${color};text-decoration:none;
+          padding:5px;border-radius:7px;background:${color}12">ดูรูปทั้งหมด ↗</a>
+      </div>
+    </div>`;
+  });
+}
+
+/* Detail album filter (separate from main filterAlbum) */
+function p3DetailFilterAlbum(agency, btn){
+  document.querySelectorAll('#p3-detail .af-btn').forEach(b=>{
+    b.classList.remove('active'); b.style.background=''; b.style.borderColor=''; b.style.color='';
+  });
+  btn.classList.add('active');
+  btn.style.background='var(--c3)'; btn.style.borderColor='var(--c3)'; btn.style.color='#fff';
+  renderDetailAlbum(window._allAlbums || P3.albums, agency);
+}
+
+/* Detail album search */
+function p3DetailSearchAlbum(q){
+  const agency = (document.querySelector('#p3-detail .af-btn.active') || {}).dataset?.agency || 'all';
+  let list = window._allAlbums || P3.albums;
+  if(agency !== 'all') list = list.filter(a => a.agency === agency);
+  if(q){
+    const lq = q.toLowerCase();
+    list = list.filter(a => a.name.toLowerCase().includes(lq) || a.agency.toLowerCase().includes(lq));
+  }
+  renderDetailAlbum(list, null); // already filtered above
+}
 
 /* Intercept P3 nav */
 const _origGoPageP3=window.goPage;
@@ -13861,9 +14005,13 @@ function toggleCard(card, pid){
         style="--ac:#0369A1">ปี 2558–2562 (121)</button>
     </div>
     <!-- Search -->
-    <div class="p3-search-wrap">
+    <div class="p3-search-wrap" style="position:relative">
       <input class="p3-search-inp" id="p3DirSearch" placeholder="🔍 ค้นหาชื่อ หรือที่อยู่..."
-             oninput="p3SearchBens(this.value)">
+             oninput="p3SearchBens(this.value);document.getElementById('p3srclr').style.display=this.value?'flex':'none'">
+      <button id="p3srclr" onclick="document.getElementById('p3DirSearch').value='';p3SearchBens('');this.style.display='none'"
+        style="display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);
+               width:20px;height:20px;border-radius:50%;border:none;background:var(--border);
+               cursor:pointer;align-items:center;justify-content:center;font-size:.7rem;color:var(--muted)">✕</button>
     </div>
     <!-- List (rendered by JS) -->
     <div class="p3-ben-list" id="p3BenList"></div>
@@ -13887,24 +14035,24 @@ function toggleCard(card, pid){
     <!-- Search -->
     <div class="search-wrap" style="padding:10px 14px;margin-bottom:0">
       <input class="search-input" id="albumSearch" placeholder="🔍 ค้นหาชื่อ หรือ หน่วยงาน..."
-             oninput="handleAlbumSearch(this.value)" autocomplete="off">
+             oninput="p3DetailSearchAlbum(this.value)" autocomplete="off">
       <button class="search-clear" id="searchClearBtn" onclick="clearAlbumSearch()">✕</button>
     </div>
     <div class="search-results-info" id="searchInfo" style="padding:0 14px 6px"></div>
     <!-- Filter chips -->
     <div class="album-filter" id="albumFilter" style="padding:6px 14px">
-      <button class="af-btn active" data-agency="all" onclick="filterAlbum('all',this)">ทั้งหมด (28)</button>
-      <button class="af-btn" data-agency="ทต.เมืองแกลง" onclick="filterAlbum('ทต.เมืองแกลง',this)">ทต.เมืองแกลง</button>
-      <button class="af-btn" data-agency="ทต.มาบข่าพัฒนา" onclick="filterAlbum('ทต.มาบข่าพัฒนา',this)">ทต.มาบข่าพัฒนา</button>
-      <button class="af-btn" data-agency="อบต.วังหว้า" onclick="filterAlbum('อบต.วังหว้า',this)">อบต.วังหว้า</button>
-      <button class="af-btn" data-agency="อบต.สำนักท้อน" onclick="filterAlbum('อบต.สำนักท้อน',this)">อบต.สำนักท้อน</button>
-      <button class="af-btn" data-agency="อบต.คลองปูน" onclick="filterAlbum('อบต.คลองปูน',this)">อบต.คลองปูน</button>
-      <button class="af-btn" data-agency="อบต.น้ำเป็น" onclick="filterAlbum('อบต.น้ำเป็น',this)">อบต.น้ำเป็น</button>
-      <button class="af-btn" data-agency="ทต.ปากน้ำประแส" onclick="filterAlbum('ทต.ปากน้ำประแส',this)">ทต.ปากน้ำประแส</button>
-      <button class="af-btn" data-agency="อบต.ตะพง" onclick="filterAlbum('อบต.ตะพง',this)">อบต.ตะพง</button>
+      <button class="af-btn active" data-agency="all" onclick="p3DetailFilterAlbum('all',this)" data-agency="all">ทั้งหมด (28)</button>
+      <button class="af-btn" data-agency="ทต.เมืองแกลง" onclick="p3DetailFilterAlbum('ทต.เมืองแกลง',this)" data-agency="ทต.เมืองแกลง">ทต.เมืองแกลง</button>
+      <button class="af-btn" data-agency="ทต.มาบข่าพัฒนา" onclick="p3DetailFilterAlbum('ทต.มาบข่าพัฒนา',this)" data-agency="ทต.มาบข่าพัฒนา">ทต.มาบข่าพัฒนา</button>
+      <button class="af-btn" data-agency="อบต.วังหว้า" onclick="p3DetailFilterAlbum('อบต.วังหว้า',this)" data-agency="อบต.วังหว้า">อบต.วังหว้า</button>
+      <button class="af-btn" data-agency="อบต.สำนักท้อน" onclick="p3DetailFilterAlbum('อบต.สำนักท้อน',this)" data-agency="อบต.สำนักท้อน">อบต.สำนักท้อน</button>
+      <button class="af-btn" data-agency="อบต.คลองปูน" onclick="p3DetailFilterAlbum('อบต.คลองปูน',this)" data-agency="อบต.คลองปูน">อบต.คลองปูน</button>
+      <button class="af-btn" data-agency="อบต.น้ำเป็น" onclick="p3DetailFilterAlbum('อบต.น้ำเป็น',this)" data-agency="อบต.น้ำเป็น">อบต.น้ำเป็น</button>
+      <button class="af-btn" data-agency="ทต.ปากน้ำประแส" onclick="p3DetailFilterAlbum('ทต.ปากน้ำประแส',this)" data-agency="ทต.ปากน้ำประแส">ทต.ปากน้ำประแส</button>
+      <button class="af-btn" data-agency="อบต.ตะพง" onclick="p3DetailFilterAlbum('อบต.ตะพง',this)" data-agency="อบต.ตะพง">อบต.ตะพง</button>
     </div>
-    <div class="album-list" id="p3AlbumGrid" style="padding:0 14px 14px"></div>
-    <div style="text-align:center;font-size:.68rem;color:var(--muted);padding:6px 14px 12px">🔒 ไม่แสดงรูปภาพส่วนตัว เพื่อคุ้มครองตาม PDPA</div>
+    <div class="p3-album-grid" id="p3AlbumGrid2" style="padding:10px 14px 14px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px"></div>
+    <div style="text-align:center;font-size:.68rem;color:var(--muted);padding:4px 14px 12px">🔒 ไม่แสดงรูปภาพส่วนตัว เพื่อคุ้มครองตาม PDPA</div>
   </div>
 
   <div style="height:8px"></div>
