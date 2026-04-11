@@ -1098,6 +1098,203 @@ body{
   color:var(--muted);cursor:pointer;transition:all .15s}
 .p3m-nav-btn:hover{border-color:#059669;color:#059669}
 
+
+/* ══ P3 SMART OVERHAUL ══════════════════════════════════════════ */
+.p3-qnav{display:flex;gap:6px;margin-bottom:14px}
+.p3-qbtn{
+  flex:1;padding:9px 8px;border-radius:10px;
+  border:2px solid var(--border);background:var(--white);
+  font-family:'Sarabun',sans-serif;font-size:.78rem;font-weight:700;
+  color:var(--muted);cursor:pointer;transition:all .18s;
+}
+.p3-qbtn.active,.p3-qbtn:hover{background:#059669;border-color:#059669;color:#fff}
+
+.p3-smart-card{
+  background:var(--white);border-radius:16px;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid var(--border);
+  overflow:hidden;margin-bottom:14px;
+}
+.p3sc-hd{padding:13px 16px 10px;border-bottom:1px solid var(--border)}
+.p3sc-title{font-size:.92rem;font-weight:700;color:var(--text)}
+.p3sc-sub{font-size:.7rem;color:var(--muted);margin-top:2px}
+
+/* Charts */
+.p3-charts-row{
+  display:flex;flex-wrap:wrap;gap:12px;
+  padding:14px 14px 10px;border-bottom:1px solid var(--border);
+}
+.p3-chart-box{background:#F8FAFC;border-radius:12px;padding:10px}
+.p3-chart-label{font-size:.65rem;font-weight:700;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+
+/* District bars */
+.p3-dist-bars{padding:10px 14px 14px}
+.p3-db-title{font-size:.65rem;font-weight:700;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.p3-db-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.p3-db-lbl{font-size:.72rem;font-weight:600;color:var(--text2);min-width:80px;max-width:100px}
+.p3-db-track{flex:1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden}
+.p3-db-fill{height:100%;border-radius:3px}
+.p3-db-val{font-size:.68rem;font-weight:700;color:#059669;min-width:70px;text-align:right}
+
+/* Simplified Table */
+.p3-table-wrap{
+  overflow-x:auto;
+  max-height:calc(10 * 48px + 36px);/* 10 rows + header */
+  overflow-y:auto;
+}
+.p3-table-wrap::-webkit-scrollbar{width:4px;height:4px}
+.p3-table-wrap::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:2px}
+.p3-table{width:100%;border-collapse:collapse;min-width:440px}
+.p3-table thead{position:sticky;top:0;z-index:2}
+.p3-table thead tr{background:linear-gradient(135deg,#064E3B,#059669)}
+.p3-table th{
+  padding:9px 10px;font-size:.63rem;font-weight:700;
+  color:rgba(255,255,255,.9);text-align:left;white-space:nowrap;
+  letter-spacing:.03em;
+}
+.p3th-no{width:36px;text-align:center}
+.p3th-name{min-width:130px}
+.p3th-status{width:110px}
+.p3th-bud{width:85px;text-align:right}
+.p3th-yr{width:72px;text-align:center}
+.p3th-act{width:54px;text-align:center}
+.p3-table tbody tr{border-bottom:1px solid var(--border);transition:background .12s}
+.p3-table tbody tr:last-child{border-bottom:none}
+.p3-table tbody tr:hover{background:#F0FDF4}
+.p3-table td{padding:8px 10px;font-size:.78rem;color:var(--text2)}
+.p3td-no{text-align:center;font-size:.68rem;color:var(--muted);font-weight:700}
+.p3td-name{font-weight:700;color:var(--text)}
+.p3td-bud{text-align:right;font-weight:700;color:#059669}
+.p3td-yr{text-align:center}
+.p3-yr-chip{font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:20px;display:inline-block}
+.p3-view-btn{
+  padding:4px 11px;border-radius:20px;border:1.5px solid #059669;
+  background:#F0FDF4;color:#059669;font-family:'Sarabun',sans-serif;
+  font-size:.68rem;font-weight:700;cursor:pointer;white-space:nowrap;
+  transition:all .15s;
+}
+.p3-view-btn:hover{background:#059669;color:#fff}
+.p3-list-footer{
+  padding:8px 14px;border-top:1px solid var(--border);
+  font-size:.7rem;color:var(--muted);text-align:center;
+}
+
+/* Album */
+.p3-album-stats{
+  display:flex;gap:0;border-bottom:1px solid var(--border);
+}
+.p3-ast{flex:1;padding:10px;text-align:center;border-right:1px solid var(--border)}
+.p3-ast:last-child{border-right:none}
+.p3-asv{font-size:1.3rem;font-weight:700;line-height:1}
+.p3-asl{font-size:.62rem;color:var(--muted);font-weight:700;margin-top:3px;text-transform:uppercase}
+.p3-album-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:10px;
+  padding:12px 14px 14px;
+}
+@media(min-width:440px){.p3-album-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:640px){.p3-album-grid{grid-template-columns:repeat(4,1fr)}}
+
+.p3-album-card{
+  border-radius:12px;overflow:hidden;
+  box-shadow:0 1px 4px rgba(0,0,0,.08);
+  border:1.5px solid var(--border);background:var(--white);
+  transition:all .18s;cursor:pointer;
+}
+.p3-album-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.13);transform:translateY(-2px)}
+.p3-album-thumb{
+  position:relative;height:100px;background:#F1F5F9;overflow:hidden;
+}
+.p3-album-thumb img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .3s;
+}
+.p3-album-card:hover .p3-album-thumb img{transform:scale(1.05)}
+.p3-album-thumb-placeholder{
+  position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;font-size:2rem;color:var(--border);
+}
+.p3-album-thumb-overlay{
+  position:absolute;inset:0;background:rgba(0,0,0,0);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.p3-album-card:hover .p3-album-thumb-overlay{background:rgba(0,0,0,.25)}
+.p3-album-thumb-overlay span{
+  color:#fff;font-size:.7rem;font-weight:700;opacity:0;
+  background:rgba(0,0,0,.5);padding:3px 8px;border-radius:20px;
+  transition:opacity .2s;
+}
+.p3-album-card:hover .p3-album-thumb-overlay span{opacity:1}
+.p3-album-card-info{padding:7px 9px 8px}
+.p3-ac-name{font-size:.72rem;font-weight:700;color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.p3-ac-tags{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:5px}
+.p3-ac-link{
+  display:block;text-align:center;font-size:.65rem;font-weight:700;
+  padding:4px;border-radius:7px;text-decoration:none;transition:background .15s;
+}
+
+/* ══ P3 BENEFICIARY PROFILE MODAL ══════════════════════════ */
+#p3BenModal{
+  position:fixed;inset:0;z-index:820;display:none;
+  background:rgba(0,0,0,.65);backdrop-filter:blur(4px);
+  align-items:flex-end;justify-content:center;
+}
+#p3BenModal.open{display:flex}
+#p3BenSheet{
+  background:#fff;width:100%;max-width:520px;border-radius:20px 20px 0 0;
+  max-height:88vh;display:flex;flex-direction:column;
+  transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+#p3BenModal.open #p3BenSheet{transform:translateY(0)}
+.p3bm-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0;flex-shrink:0}
+.p3bm-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px 8px;border-bottom:1px solid var(--border);flex-shrink:0;
+}
+.p3bm-title{font-size:.88rem;font-weight:700;color:var(--text)}
+.p3bm-close{
+  width:32px;height:32px;border-radius:50%;border:none;background:var(--bg);
+  cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;
+}
+.p3bm-body{overflow-y:auto;flex:1;padding:14px 16px}
+.p3bm-profile{
+  display:flex;align-items:center;gap:12px;
+  padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:12px;
+}
+.p3bm-avatar{
+  width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;
+}
+.p3bm-name{font-size:.98rem;font-weight:700;color:var(--text);margin-bottom:5px}
+.p3bm-budget{
+  background:linear-gradient(135deg,#064E3B,#059669);border-radius:12px;
+  padding:11px 14px;margin-bottom:12px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.p3bm-bud-lbl{font-size:.68rem;color:rgba(255,255,255,.7);margin-bottom:2px}
+.p3bm-bud-val{font-size:1.25rem;font-weight:700;color:#fff}
+.p3bm-fields{display:flex;flex-direction:column;gap:0}
+.p3bm-row{
+  display:flex;gap:10px;padding:9px 0;
+  border-bottom:1px solid var(--border);
+}
+.p3bm-row:last-child{border-bottom:none}
+.p3bm-lbl{font-size:.7rem;font-weight:700;color:var(--muted);min-width:115px;flex-shrink:0}
+.p3bm-val{font-size:.78rem;color:var(--text2);flex:1}
+.p3bm-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;border-top:1px solid var(--border);flex-shrink:0;
+}
+.p3bm-navbtn{
+  padding:8px 18px;border-radius:10px;border:1.5px solid var(--border);
+  background:var(--white);font-family:'Sarabun',sans-serif;font-size:.76rem;
+  font-weight:700;color:var(--muted);cursor:pointer;transition:all .15s;
+}
+.p3bm-navbtn:hover{border-color:#059669;color:#059669}
+.p3bm-counter{font-size:.7rem;color:var(--muted)}
+
 </style>
 </head>
 <body>
@@ -1739,7 +1936,6 @@ body{
     <!-- List -->
     <div class="album-list" id="p3AlbumGrid"></div>
     <div style="text-align:center;font-size:.7rem;color:var(--muted);padding:8px 0 4px">
-      🔒 ไม่แสดงรูปภาพส่วนตัว เพื่อคุ้มครองสิทธิ์ตาม PDPA
     </div>
   </div>
   <div style="height:8px"></div>
@@ -2205,7 +2401,6 @@ function ensureCharts(page){
       t.innerHTML+=`<tr><td>${d}</td><td class="num">${v.houses}</td><td class="num" style="color:#059669;font-weight:700">฿${fmt(v.budget)}</td></tr>`;
     });
     t.innerHTML+=`<tr class="tot"><td>รวม</td><td class="num">342</td><td class="num">฿${fmt(15554696)}</td></tr></tbody>`;
-    // Album info cards — no personal photos (PDPA)
     const AVATAR_COLORS = [
       '#0369A1','#059669','#D97706','#7C3AED','#DC2626',
       '#0891B2','#65A30D','#DB2777','#EA580C','#6366F1',
@@ -2315,7 +2510,6 @@ function ensureCharts(page){
           </div>
           ${mediaSection}
           <div style="padding:8px 13px 10px;display:flex;justify-content:space-between;align-items:center">
-            <span style="font-size:.65rem;color:var(--muted)">🔒 ปกป้องตาม PDPA</span>
             <a href="${a.url}" target="_blank"
                style="font-size:.7rem;font-weight:700;color:var(--c3);text-decoration:none;
                       background:var(--c3l);padding:4px 12px;border-radius:20px">
@@ -2900,155 +3094,316 @@ function getP3StatusInfo(dis){
 
 let _p3Filter='all', _p3Search='', _p3VisibleBens=[];
 
+
+/* ════════════════════════════════════════════════════════
+   P3 SMART OVERHAUL — complete replacement JS block
+   ════════════════════════════════════════════════════════ */
+const P3_YR_COL={
+  '2558-2560':'#6366F1','2561':'#0369A1','2562':'#0891B2','2563':'#059669',
+  '2564':'#65A30D','2565':'#D97706','2566':'#EA580C','2567':'#DC2626','2568':'#7C3AED'
+};
+const RAW_BASE='https://raw.githubusercontent.com/iamsilky/gongtoon.db/main/';
+
+function resolveImgSrc(src){
+  if(!src) return '';
+  return src.startsWith('http') ? src : RAW_BASE + src.replace(/^\.?\//,'');
+}
+function p3ImgErr(el){
+  if(!el.src.endsWith('.JPG')) el.src=el.src.replace(/\.jpg$/i,'.JPG');
+  else { el.style.display='none'; el.nextElementSibling&&(el.nextElementSibling.style.display='flex'); }
+}
+window._p3ImgErr = p3ImgErr;
+
+function p3StatusInfo(dis){
+  const d=dis.toLowerCase();
+  if(d.includes('สูงอายุ')&&(d.includes('พิการ')||/ป\.\d/.test(dis)))
+    return{icon:'👴♿',bg:'#EDE9FE',col:'#6D28D9',short:'สูงอายุ/พิการ'};
+  if(d.includes('สูงอายุ'))
+    return{icon:'👴',bg:'#D1FAE5',col:'#065F46',short:'ผู้สูงอายุ'};
+  if(d.includes('พิการ')||/ป\.\d/.test(dis))
+    return{icon:'♿',bg:'#DBEAFE',col:'#1D4ED8',short:'คนพิการ'};
+  if(d.includes('เคลื่อน'))
+    return{icon:'🦽',bg:'#FEF3C7',col:'#92400E',short:'ข้อจำกัดการเคลื่อน'};
+  return{icon:'👥',bg:'#F1F5F9',col:'#374151',short:dis.substring(0,12)};
+}
+
+/* ── SIMPLIFIED TABLE ──────────────────────────────────── */
+let _p3Filter='all', _p3Search='', _p3CurrentList=P3_BENS;
+
 function renderP3BenList(list){
-  _p3VisibleBens=list;
-  const el=document.getElementById('p3BenList');
+  _p3CurrentList=list;
+  const tb=document.getElementById('p3BenTable');
   const footer=document.getElementById('p3DirFooter');
-  if(!el) return;
-  if(list.length===0){
-    el.innerHTML='<div style="text-align:center;padding:2rem;color:var(--muted)">🔍 ไม่พบข้อมูล</div>';
+  const count=document.getElementById('p3-dir-count');
+  if(!tb) return;
+  if(!list.length){
+    tb.innerHTML=`<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted)">🔍 ไม่พบข้อมูล</td></tr>`;
     if(footer) footer.textContent='ไม่พบรายการ';
+    if(count) count.textContent='0 ราย';
     return;
   }
-  // Paginate: show first 50, load more on scroll
-  const show=list.slice(0,60);
-  el.innerHTML=show.map((b,i)=>{
-    const st=getP3StatusInfo(b.dis);
-    const yrCol=P3_YR_COLORS[b.y]||'#059669';
-    const addrShort=b.addr.length>32?b.addr.substring(0,32)+'…':b.addr;
+  const show=list.slice(0,120);
+  tb.innerHTML=show.map((b,i)=>{
+    const st=p3StatusInfo(b.dis);
+    const yc=P3_YR_COL[b.y]||'#059669';
     const globalIdx=P3_BENS.indexOf(b);
-    return`<div class="p3-ben-item">
-      <div class="p3-ben-num" style="background:${yrCol}">${b.idx}</div>
-      <div class="p3-ben-body">
-        <div class="p3-ben-name">${st.icon} ${b.nm}</div>
-        <div class="p3-ben-row2">
-          <span class="p3-ben-age">อายุ ${b.age} ปี</span>
-          <span class="p3-status-badge" style="background:${st.bg};color:${st.col}">${st.text}</span>
-          <span class="p3-yr-badge" style="background:${yrCol}22;color:${yrCol}">ปี ${b.y}</span>
-        </div>
-        <div class="p3-ben-addr">📍 ${addrShort}</div>
-      </div>
-      <div class="p3-ben-right">
-        <div class="p3-ben-bud">฿${b.bud.toLocaleString('th-TH')}</div>
-        <button class="p3-detail-btn" onclick="openP3BenModal(${globalIdx})">ดูข้อมูล</button>
-      </div>
-    </div>`;
+    return`<tr>
+      <td class="p3td-no"><span style="display:inline-flex;width:22px;height:22px;border-radius:6px;
+        background:${yc}22;color:${yc};font-size:.62rem;font-weight:700;
+        align-items:center;justify-content:center">${b.idx}</span></td>
+      <td class="p3td-name">${st.icon} ${b.nm}</td>
+      <td><span class="p3-yr-chip" style="background:${st.bg};color:${st.col}">${st.short}</span></td>
+      <td class="p3td-bud">฿${b.bud.toLocaleString('th-TH')}</td>
+      <td class="p3td-yr"><span class="p3-yr-chip" style="background:${yc}22;color:${yc}">${b.y}</span></td>
+      <td style="text-align:center"><button class="p3-view-btn" onclick="openP3BenModal(${globalIdx})">ดู</button></td>
+    </tr>`;
   }).join('');
-  if(footer){
-    footer.textContent = list.length > 60
-      ? `แสดง 60 จาก ${list.length} ราย · กรองหรือค้นหาเพื่อดูทั้งหมด`
-      : `แสดงทั้งหมด ${list.length} ราย`;
-  }
-  const count=document.getElementById('p3-dir-count');
+  if(footer) footer.textContent = list.length>120 ? `แสดง 120 จาก ${list.length} ราย · กรองเพื่อดูทั้งหมด` : `แสดงทั้งหมด ${list.length} ราย`;
   if(count) count.textContent=`${list.length} ราย`;
 }
 
 function p3GetFiltered(){
   let list=P3_BENS;
-  if(_p3Filter==='earlier')
-    list=list.filter(b=>['2558-2560','2561','2562'].includes(b.y));
-  else if(_p3Filter!=='all')
-    list=list.filter(b=>b.y===_p3Filter);
-  if(_p3Search){
-    const q=_p3Search.toLowerCase();
-    list=list.filter(b=>b.nm.toLowerCase().includes(q)||b.addr.toLowerCase().includes(q));
-  }
+  if(_p3Filter==='earlier') list=list.filter(b=>['2558-2560','2561','2562'].includes(b.y));
+  else if(_p3Filter!=='all') list=list.filter(b=>b.y===_p3Filter);
+  if(_p3Search){ const q=_p3Search.toLowerCase(); list=list.filter(b=>b.nm.toLowerCase().includes(q)||b.addr.toLowerCase().includes(q)); }
   return list;
 }
-
-function p3FilterYear(yr, btn){
+function p3FilterYear(yr,btn){
   _p3Filter=yr;
-  document.querySelectorAll('.p3-fbtn').forEach(b=>{
-    b.classList.remove('active');b.style.background='';b.style.borderColor='';b.style.color='';
-  });
+  document.querySelectorAll('.p3-fbtn').forEach(b=>{b.classList.remove('active');b.style.background='';b.style.borderColor='';b.style.color='';});
   btn.classList.add('active');
-  const col=yr==='all'?'#059669':
-    yr==='earlier'?'#0369A1':
-    P3_YR_COLORS[yr]||'#059669';
-  btn.style.background=col; btn.style.borderColor=col; btn.style.color='#fff';
+  const col=yr==='all'?'#059669':yr==='earlier'?'#0369A1':P3_YR_COL[yr]||'#059669';
+  btn.style.background=col;btn.style.borderColor=col;btn.style.color='#fff';
   renderP3BenList(p3GetFiltered());
 }
+function p3SearchBens(q){ _p3Search=q.trim(); renderP3BenList(p3GetFiltered()); }
 
-function p3SearchBens(q){
-  _p3Search=q.trim();
-  renderP3BenList(p3GetFiltered());
-}
-
-/* ── BENEFICIARY MODAL ────────────────────────── */
-let _p3ModalIdx=0;
-
+/* ── BENEFICIARY MODAL ──────────────────────────────────── */
+let _p3BenModalIdx=0;
 function openP3BenModal(idx){
-  _p3ModalIdx=idx;
-  renderP3ModalContent(idx);
-  document.getElementById('p3benModal').classList.add('open');
+  _p3BenModalIdx=idx;
+  _renderBenModal(idx);
+  document.getElementById('p3BenModal').classList.add('open');
   document.body.style.overflow='hidden';
 }
 function closeP3BenModal(){
-  document.getElementById('p3benModal').classList.remove('open');
+  document.getElementById('p3BenModal').classList.remove('open');
   document.body.style.overflow='';
 }
-function p3ModalNav(dir){
-  const newIdx=(_p3ModalIdx+dir+P3_BENS.length)%P3_BENS.length;
-  _p3ModalIdx=newIdx;
-  renderP3ModalContent(newIdx);
+function p3BenModalNav(dir){
+  _p3BenModalIdx=(_p3BenModalIdx+dir+P3_BENS.length)%P3_BENS.length;
+  _renderBenModal(_p3BenModalIdx);
 }
-function renderP3ModalContent(idx){
+function _renderBenModal(idx){
   const b=P3_BENS[idx];
-  const st=getP3StatusInfo(b.dis);
-  const yrCol=P3_YR_COLORS[b.y]||'#059669';
-  const body=document.getElementById('p3mBody');
-  const counter=document.getElementById('p3mCounter');
-  const title=document.getElementById('p3mTitle');
-  if(title) title.textContent=`ราย #${b.idx} — ${b.y}`;
-  if(counter) counter.textContent=`${idx+1} / ${P3_BENS.length}`;
-  if(!body) return;
+  const st=p3StatusInfo(b.dis);
+  const yc=P3_YR_COL[b.y]||'#059669';
   const fields=[
     ['🎂 อายุ',`${b.age} ปี`],
-    ['♿ ประเภท/ความพิการ',b.dis],
+    ['♿ ประเภท',b.dis],
     ['📍 ที่อยู่',b.addr],
     b.ag&&b.ag!=='—'?['🏢 หน่วยงาน',b.ag]:null,
     b.da?['📅 วันที่อนุมัติ',b.da]:null,
     b.dm?['📋 วันที่ทำ MOU',b.dm]:null,
     b.nt?['📝 หมายเหตุ',b.nt]:null,
   ].filter(Boolean);
-
+  const body=document.getElementById('p3BenModalBody');
+  const counter=document.getElementById('p3BenCounter');
+  if(counter) counter.textContent=`${idx+1} / ${P3_BENS.length}`;
+  if(!body) return;
   body.innerHTML=`
-    <div class="p3m-profile-top">
-      <div class="p3m-avatar" style="background:${yrCol}22">${st.icon}</div>
-      <div style="flex:1">
-        <div class="p3m-profile-name">${b.nm}</div>
-        <div class="p3m-profile-tags">
-          <span class="p3-status-badge" style="background:${st.bg};color:${st.col}">${st.text}</span>
-          <span class="p3-yr-badge" style="background:${yrCol}22;color:${yrCol}">ปี ${b.y}</span>
-        </div>
+    <div class="p3bm-profile">
+      <div class="p3bm-avatar" style="background:${yc}22">${st.icon}</div>
+      <div>
+        <div class="p3bm-name">${b.nm}</div>
+        <span class="p3-yr-chip" style="background:${st.bg};color:${st.col}">${st.short}</span>
+        <span class="p3-yr-chip" style="background:${yc}22;color:${yc};margin-left:4px">ปี ${b.y}</span>
       </div>
     </div>
-    <div class="p3m-bud-banner">
-      <div><div class="p3m-bud-label">💰 งบประมาณที่ได้รับ</div>
-        <div class="p3m-bud-amount">฿${b.bud.toLocaleString('th-TH')}</div></div>
-      <div style="font-size:1.5rem">${st.icon}</div>
+    <div class="p3bm-budget">
+      <div><div class="p3bm-bud-lbl">💰 งบประมาณที่ได้รับ</div>
+        <div class="p3bm-bud-val">฿${b.bud.toLocaleString('th-TH')}</div></div>
+      <div style="font-size:2rem">${st.icon}</div>
     </div>
-    <div class="p3m-fields">
-      ${fields.map(([l,v])=>`<div class="p3m-field">
-        <span class="p3m-fl">${l}</span>
-        <span class="p3m-fv">${v}</span>
+    <div class="p3bm-fields">
+      ${fields.map(([l,v])=>`<div class="p3bm-row">
+        <span class="p3bm-lbl">${l}</span><span class="p3bm-val">${v}</span>
       </div>`).join('')}
     </div>`;
 }
 
-/* ── P3 NAVIGATION ────────────────────────────── */
+/* ── ALBUM FUNCTIONS ─────────────────────────────────────── */
+let _p3AlbumFilter='all', _p3AlbumSearch='';
+function _getAlbumList(){
+  let list=window._allAlbums||P3.albums;
+  if(_p3AlbumFilter!=='all') list=list.filter(a=>a.agency===_p3AlbumFilter);
+  if(_p3AlbumSearch){ const q=_p3AlbumSearch.toLowerCase(); list=list.filter(a=>a.name.toLowerCase().includes(q)||a.agency.toLowerCase().includes(q)); }
+  return list;
+}
+function p3AlbumFilter(ag,btn){
+  _p3AlbumFilter=ag;
+  document.querySelectorAll('#p3AlbumFilter .p3-fbtn').forEach(b=>{b.classList.remove('active');b.style.background='';b.style.borderColor='';b.style.color='';});
+  btn.classList.add('active'); btn.style.background='#7C3AED'; btn.style.borderColor='#7C3AED'; btn.style.color='#fff';
+  renderP3Album(_getAlbumList());
+}
+function p3AlbumSearch(q){
+  _p3AlbumSearch=q.trim();
+  renderP3Album(_getAlbumList());
+}
+
+function renderP3Album(list){
+  const grid=document.getElementById('p3AlbumGrid2');
+  if(!grid) return;
+  grid.innerHTML='';
+  if(!list.length){ grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--muted)">ไม่พบข้อมูล</div>'; return; }
+  list.forEach(a=>{
+    const idx=P3.albums.indexOf(a);
+    const color=AVATAR_COLORS[idx%AVATAR_COLORS.length];
+    const ag_lbl=ageGroup(a.age);
+    const hasGal=!!(a.galNow||a.galThen);
+    const nowCnt=(a.galNow||[]).length, thnCnt=(a.galThen||[]).length;
+    const initials=a.name.replace(/^(นาง|นาย|นางสาว)/,'').trim().charAt(0);
+    // Thumbnail: use first galNow image or imgNow
+    const thumbSrc=hasGal&&nowCnt?(a.galNow[0]):resolveImgSrc(a.imgNow||'');
+    let galBtns='';
+    if(hasGal){
+      if(nowCnt) galBtns+=`<button onclick="event.stopPropagation();openGallery(${idx},'now')"
+        style="flex:1;padding:5px 3px;border-radius:7px;border:1px solid ${color};
+        background:${color}18;font-family:'Sarabun',sans-serif;font-size:.6rem;font-weight:700;
+        color:${color};cursor:pointer;display:flex;align-items:center;justify-content:center;gap:2px">
+        📷<span style="background:${color};color:#fff;font-size:.55rem;padding:0 4px;border-radius:10px">${nowCnt}</span></button>`;
+      if(thnCnt) galBtns+=`<button onclick="event.stopPropagation();openGallery(${idx},'then')"
+        style="flex:1;padding:5px 3px;border-radius:7px;border:1px solid #059669;
+        background:#D1FAE522;font-family:'Sarabun',sans-serif;font-size:.6rem;font-weight:700;
+        color:#059669;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:2px">
+        ✅<span style="background:#059669;color:#fff;font-size:.55rem;padding:0 4px;border-radius:10px">${thnCnt}</span></button>`;
+    }
+    const div=document.createElement('div');
+    div.className='p3-album-card';
+    div.onclick=()=>{ if(hasGal) openGallery(idx,'now'); else if(thumbSrc) _p3LightboxSingle(thumbSrc,a.name); };
+    div.innerHTML=`
+      <div class="p3-album-thumb">
+        ${thumbSrc?`<img src="${thumbSrc}" onerror="window._p3ImgErr(this)" loading="lazy">`:''}
+        <div class="p3-album-thumb-placeholder" style="${thumbSrc?'display:none':''}">📸</div>
+        <div class="p3-album-thumb-overlay"><span>${hasGal?'🖼️ ดูอัลบั้ม':'🔍 ขยาย'}</span></div>
+      </div>
+      <div class="p3-album-card-info">
+        <div class="p3-ac-name">${a.name}</div>
+        <div class="p3-ac-tags">
+          <span style="font-size:.58rem;font-weight:700;padding:1px 6px;border-radius:20px;background:${ag_lbl.bg};color:${ag_lbl.col}">${ag_lbl.label}</span>
+          <span style="font-size:.58rem;font-weight:700;padding:1px 6px;border-radius:20px;background:${color}18;color:${color}">${a.agency}</span>
+        </div>
+        ${hasGal?`<div style="display:flex;gap:4px;margin-bottom:5px">${galBtns}</div>`:''}
+        <a href="${a.url}" target="_blank" onclick="event.stopPropagation()"
+          class="p3-ac-link" style="color:${color};background:${color}12">ดูรูปทั้งหมด ↗</a>
+      </div>`;
+    grid.appendChild(div);
+  });
+}
+
+/* Single-image lightbox for non-gallery entries */
+function _p3LightboxSingle(src, name){
+  // Use the existing galLightbox if available, else use galBackdrop
+  if(!document.getElementById('galLightbox')) return;
+  window._galImages=[src]; window._galIdx=0;
+  document.getElementById('galLbImg').src=src;
+  document.getElementById('galLbCounter').textContent=name||'';
+  document.getElementById('galLightbox').classList.add('open');
+}
+
+/* ── CHART INIT (called from openP3Detail) ──────────────── */
+let _p3ChartsBuilt=false;
+function buildP3Charts(){
+  if(_p3ChartsBuilt) return; _p3ChartsBuilt=true;
+
+  // Donut — beneficiary types
+  const typeEl=document.getElementById('c3_type_new');
+  if(typeEl){
+    new Chart(typeEl,{
+      type:'doughnut',
+      data:{
+        labels:P3.types.map(t=>t.l),
+        datasets:[{
+          data:P3.types.map(t=>t.v),
+          backgroundColor:['#059669bb','#0369A1bb','#7C3AEDbb','#D97706bb','#9CA3AFbb'],
+          borderColor:'#fff',borderWidth:3
+        }]
+      },
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        cutout:'60%',
+        plugins:{
+          legend:{
+            position:'bottom',
+            labels:{color:'#374151',font:{family:'Sarabun',size:9},boxWidth:8,padding:6}
+          },
+          tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.parsed} ราย`}}
+        }
+      }
+    });
+  }
+
+  // Bar+Line — year data
+  const yearEl=document.getElementById('c3_year_new');
+  if(yearEl){
+    new Chart(yearEl,{
+      type:'bar',
+      data:{
+        labels:P3.years.map(y=>y.label),
+        datasets:[
+          {type:'bar',label:'บ้าน (หลัง)',data:P3.years.map(y=>y.count),
+           backgroundColor:'#05966933',borderColor:'#059669',borderWidth:2,borderRadius:4,yAxisID:'y'},
+          {type:'line',label:'งบ (M฿)',data:P3.years.map(y=>+(y.budget/1e6).toFixed(2)),
+           borderColor:'#D97706',backgroundColor:'transparent',pointRadius:4,
+           pointBackgroundColor:'#D97706',tension:.4,yAxisID:'y1'}
+        ]
+      },
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:true,labels:{color:'#374151',font:{family:'Sarabun',size:9},boxWidth:8}}},
+        scales:{
+          x:{ticks:{color:'#9CA3AF',font:{family:'Sarabun',size:8},maxRotation:30},grid:{display:false}},
+          y:{ticks:{color:'#059669',font:{family:'Sarabun',size:9}},grid:{color:'rgba(0,0,0,.04)'},
+             title:{display:true,text:'หลัง',color:'#059669',font:{size:9}}},
+          y1:{position:'right',ticks:{color:'#D97706',font:{family:'Sarabun',size:9}},grid:{display:false},
+              title:{display:true,text:'M฿',color:'#D97706',font:{size:9}}}
+        }
+      }
+    });
+  }
+
+  // District bars
+  const distBars=document.getElementById('p3DistBars');
+  if(distBars){
+    const DCOLS=['#059669','#0369A1','#D97706','#DC2626','#7C3AED','#0891B2','#DB2777','#65A30D'];
+    const maxBud=Math.max(...Object.values(P3.districts).map(v=>v.budget));
+    distBars.innerHTML=`<div class="p3-db-title">งบประมาณรายอำเภอ</div>`+
+      Object.entries(P3.districts).sort((a,b)=>b[1].budget-a[1].budget).map(([d,v],i)=>`
+        <div class="p3-db-row">
+          <div class="p3-db-lbl">${d}</div>
+          <div class="p3-db-track"><div class="p3-db-fill" style="width:${Math.round(v.budget/maxBud*100)}%;background:${DCOLS[i%8]}"></div></div>
+          <div class="p3-db-val">฿${(v.budget/1000).toFixed(0)}K · ${v.houses} หลัง</div>
+        </div>`).join('');
+  }
+}
+
+/* ── NAVIGATION ─────────────────────────────────────────── */
+function p3ScrollTo(id){ const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
+function p3SetQNav(btn){ document.querySelectorAll('.p3-qbtn').forEach(b=>{b.classList.remove('active')}); btn.classList.add('active'); }
+
+let _p3Init=false;
 function openP3Detail(){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('p3-detail').classList.add('active');
   document.querySelector('.bottom-nav').style.display='none';
   document.querySelector('.app-header').style.display='none';
   window.scrollTo(0,0);
-  // Init list on first open
-  if(!_p3ListInit){
-    _p3ListInit=true;
+  if(!_p3Init){
+    _p3Init=true;
+    buildP3Charts();
     renderP3BenList(P3_BENS);
-    // Init album
-    if(window._allAlbums) renderAlbums(window._allAlbums);
+    renderP3Album(window._allAlbums||P3.albums);
   }
 }
 function exitP3Detail(){
@@ -3059,133 +3414,17 @@ function exitP3Detail(){
   document.querySelector('.app-header').style.display='';
   window.scrollTo(0,0);
 }
-let _p3ListInit=false;
 
-/* Intercept P3 nav */
-const _origGoPageP3=window.goPage;
-window.goPage=function(id){
-  if(id==='p3'){openP3Detail();return;}
-  exitP3Detail();
-  _origGoPageP3(id);
-};
+/* Intercept goPage for p3 */
+(function(){
+  const _orig=window.goPage;
+  window.goPage=function(id){
+    if(id==='p3'){ openP3Detail(); return; }
+    if(document.getElementById('p3-detail').classList.contains('active')) exitP3Detail();
+    _orig(id);
+  };
+})();
 
-
-/* ── P2 DETAIL ─────────────────────────────────── */
-function openP2Detail(){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('p2-detail').classList.add('active');
-  document.querySelector('.bottom-nav').style.display='none';
-  document.querySelector('.app-header').style.display='none';
-  window.scrollTo(0,0);
-}
-function exitP2Detail(){
-  document.getElementById('p2-detail').classList.remove('active');
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-home').classList.add('active');
-  document.querySelector('.bottom-nav').style.display='';
-  document.querySelector('.app-header').style.display='';
-  window.scrollTo(0,0);
-}
-function openP2BudModal(){
-  document.getElementById('p2budModal').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeP2BudModal(){
-  document.getElementById('p2budModal').classList.remove('open');
-  document.body.style.overflow='';
-}
-function toggleP2Inv(btn){
-  const detail = btn.nextElementSibling;
-  const isOpen = btn.classList.contains('open');
-  btn.classList.toggle('open',!isOpen);
-  detail.style.display = isOpen ? 'none' : 'block';
-}
-/* Intercept P2 nav */
-const _origGoPageP2 = window.goPage;
-window.goPage = function(id){
-  if(id==='p2'){ openP2Detail(); return; }
-  exitP2Detail();
-  _origGoPageP2(id);
-};
-
-
-/* ── ALBUM SEARCH ────────────────────────────────── */
-let _searchQuery = '';
-
-function handleAlbumSearch(q){
-  _searchQuery = q.trim().toLowerCase();
-  const btn = document.getElementById('searchClearBtn');
-  if(btn) btn.classList.toggle('visible', q.length > 0);
-  filterAlbumCards();
-}
-
-function clearAlbumSearch(){
-  const inp = document.getElementById('albumSearch');
-  if(inp) inp.value = '';
-  _searchQuery = '';
-  const btn = document.getElementById('searchClearBtn');
-  if(btn) btn.classList.remove('visible');
-  filterAlbumCards();
-}
-
-function filterAlbumCards(){
-  const q = _searchQuery;
-  // Get current agency filter
-  const activeChip = document.querySelector('.af-btn.active');
-  const agency = activeChip ? activeChip.dataset.agency || 'all' : 'all';
-
-  let list = window._allAlbums || P3.albums;
-
-  // Agency filter
-  if(agency !== 'all') list = list.filter(a => a.agency === agency);
-
-  // Search filter
-  if(q){
-    list = list.filter(a =>
-      a.name.toLowerCase().includes(q) ||
-      a.agency.toLowerCase().includes(q)
-    );
-  }
-
-  renderAlbums(list, q);
-
-  // Update info
-  const info = document.getElementById('searchInfo');
-  if(info){
-    if(q) info.textContent = `พบ ${list.length} รายการ จาก "${_searchQuery}"`;
-    else  info.textContent = list.length < P3.albums.length ? `แสดง ${list.length} รายการ` : '';
-  }
-}
-
-/* Highlight matched text */
-function hlText(text, q){
-  if(!q) return text;
-  const escaped = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  return text.replace(new RegExp(`(${escaped})`,'gi'),
-    '<span class="search-highlight">$1</span>');
-}
-
-
-/* ── BUDGET & LOCATION MODALS ─────────────────────── */
-const _bcolors = ['#0369A1', '#0891B2', '#059669', '#D97706', '#DC2626', '#7C3AED', '#DB2777', '#65A30D'];
-
-function openBudModal(){
-  document.getElementById('budModal').classList.add('open');
-  document.body.style.overflow='hidden';
-  const b=document.querySelector('.p1modal-nav-btn[id^="budn-"]');
-  if(b){ b.style.background=_bcolors[0]; b.style.borderColor=_bcolors[0]; b.style.color='#fff'; }
-}
-function closeBudModal(){
-  document.getElementById('budModal').classList.remove('open');
-  document.body.style.overflow='';
-}
-function handleBudBackdrop(e){ if(e.target.id==='budModal') closeBudModal(); }
-function budJumpTo(di){
-  openBudModal();
-  document.querySelectorAll('[id^="budn-"]').forEach((b,i)=>{
-    b.style.background=i===di?_bcolors[di]:''; b.style.borderColor=i===di?_bcolors[di]:'';
-    b.style.color=i===di?'#fff':'';
-  });
   const el=document.getElementById('budd-'+di);
   if(el) setTimeout(()=>{ document.getElementById('budBody').scrollTop=el.offsetTop-10; },60);
 }
@@ -13818,7 +14057,16 @@ function toggleCard(card, pid){
 
 <!-- ── P3 DETAIL VIEW ─────────────────────────────────── -->
 <div id="p3-detail">
+  <!-- Back + Quick Nav -->
   <button class="p3-back-btn" onclick="exitP3Detail()">← กลับ Dashboard หลัก</button>
+  <div class="p3-qnav">
+    <button class="p3-qbtn active" id="p3qb1"
+      onclick="p3ScrollTo('p3ChartCard');p3SetQNav(this)">📊 ภาพรวม</button>
+    <button class="p3-qbtn" id="p3qb2"
+      onclick="p3ScrollTo('p3DirCard');p3SetQNav(this)">👥 รายชื่อ</button>
+    <button class="p3-qbtn" id="p3qb3"
+      onclick="p3ScrollTo('p3AlbumCard');p3SetQNav(this)">📸 อัลบั้ม</button>
+  </div>
 
   <!-- Hero -->
   <div class="p3-hero-card">
@@ -13826,103 +14074,139 @@ function toggleCard(card, pid){
     <div class="p3-hero-title">ปรับสภาพบ้านผู้สูงอายุและผู้พิการ</div>
     <div class="p3-hero-kpis">
       <div class="p3-hkpi"><div class="sv">342</div><div class="sl">ราย</div></div>
-      <div class="p3-hkpi"><div class="sv">฿15,554,963</div><div class="sl">งบรวม</div></div>
+      <div class="p3-hkpi"><div class="sv">฿15.55M</div><div class="sl">งบรวม</div></div>
       <div class="p3-hkpi"><div class="sv">11 ปี</div><div class="sl">2558–2568</div></div>
       <div class="p3-hkpi"><div class="sv">8</div><div class="sl">อำเภอ</div></div>
     </div>
-    <div class="p3-hero-mission">โครงการปรับปรุงที่อยู่อาศัยให้ปลอดภัยและเหมาะสมสำหรับผู้สูงอายุ คนพิการ และผู้ที่มีข้อจำกัดด้านการเคลื่อนไหว ครอบคลุมทั้ง 8 อำเภอใน จ.ระยอง</div>
+    <div class="p3-hero-mission">ปรับปรุงที่อยู่อาศัยให้ปลอดภัยสำหรับผู้สูงอายุ คนพิการ และผู้มีข้อจำกัดด้านการเคลื่อนไหว ครอบคลุม 8 อำเภอ จ.ระยอง ปีงบประมาณ 2558–2568</div>
   </div>
 
-  <!-- Card A: Beneficiary Directory -->
-  <div class="p3-dir-card">
-    <div class="p3-dir-hd">
+  <!-- ── CHART CARD ─────────────────────────────────────────────── -->
+  <div class="p3-smart-card" id="p3ChartCard">
+    <div class="p3sc-hd">
+      <div class="p3sc-title">📊 ภาพรวมโครงการ</div>
+      <div class="p3sc-sub">สัดส่วนประเภทผู้รับบริการ · งบรายปี</div>
+    </div>
+    <div class="p3-charts-row">
+      <!-- Donut: beneficiary types -->
+      <div class="p3-chart-box" style="flex:1;min-width:140px">
+        <div class="p3-chart-label">ประเภทผู้รับบริการ</div>
+        <div style="position:relative;height:160px">
+          <canvas id="c3_type_new"></canvas>
+        </div>
+      </div>
+      <!-- Bar: year budget -->
+      <div class="p3-chart-box" style="flex:2;min-width:200px">
+        <div class="p3-chart-label">งบประมาณ &amp; จำนวนบ้านรายปี</div>
+        <div style="position:relative;height:160px">
+          <canvas id="c3_year_new"></canvas>
+        </div>
+      </div>
+    </div>
+    <!-- Budget district bars -->
+    <div class="p3-dist-bars" id="p3DistBars"></div>
+  </div>
+
+  <!-- ── DIRECTORY CARD ──────────────────────────────────────────── -->
+  <div class="p3-smart-card" id="p3DirCard">
+    <div class="p3sc-hd">
       <div>
-        <div class="p3-dir-title">👥 รายละเอียดผู้รับงบประมาณ</div>
-        <div class="p3-dir-sub" id="p3-dir-count">342 ราย · ทุกปีงบประมาณ</div>
+        <div class="p3sc-title">👥 รายชื่อผู้รับงบประมาณ</div>
+        <div class="p3sc-sub" id="p3-dir-count">342 ราย · ทุกปีงบประมาณ</div>
       </div>
     </div>
     <!-- Year filter -->
     <div class="p3-filter-bar" id="p3YearFilter">
       <button class="p3-fbtn active" data-yr="all" onclick="p3FilterYear('all',this)"
         style="background:#059669;border-color:#059669;color:#fff">ทั้งหมด</button>
-      <button class="p3-fbtn" data-yr="2568" onclick="p3FilterYear('2568',this)"
-        style="--ac:#7C3AED">ปี 2568 (28)</button>
-      <button class="p3-fbtn" data-yr="2567" onclick="p3FilterYear('2567',this)"
-        style="--ac:#DC2626">ปี 2567 (45)</button>
-      <button class="p3-fbtn" data-yr="2566" onclick="p3FilterYear('2566',this)"
-        style="--ac:#EA580C">ปี 2566 (40)</button>
-      <button class="p3-fbtn" data-yr="2565" onclick="p3FilterYear('2565',this)"
-        style="--ac:#D97706">ปี 2565 (39)</button>
-      <button class="p3-fbtn" data-yr="2564" onclick="p3FilterYear('2564',this)"
-        style="--ac:#65A30D">ปี 2564 (40)</button>
-      <button class="p3-fbtn" data-yr="2563" onclick="p3FilterYear('2563',this)"
-        style="--ac:#059669">ปี 2563 (29)</button>
-      <button class="p3-fbtn" data-yr="earlier" onclick="p3FilterYear('earlier',this)"
-        style="--ac:#0369A1">ปี 2558–2562 (121)</button>
+      <button class="p3-fbtn" data-yr="2568" onclick="p3FilterYear('2568',this)">ปี 2568 (28)</button>
+      <button class="p3-fbtn" data-yr="2567" onclick="p3FilterYear('2567',this)">ปี 2567 (45)</button>
+      <button class="p3-fbtn" data-yr="2566" onclick="p3FilterYear('2566',this)">ปี 2566 (40)</button>
+      <button class="p3-fbtn" data-yr="2565" onclick="p3FilterYear('2565',this)">ปี 2565 (39)</button>
+      <button class="p3-fbtn" data-yr="2564" onclick="p3FilterYear('2564',this)">ปี 2564 (40)</button>
+      <button class="p3-fbtn" data-yr="2563" onclick="p3FilterYear('2563',this)">ปี 2563 (29)</button>
+      <button class="p3-fbtn" data-yr="earlier" onclick="p3FilterYear('earlier',this)">ปี 2558–2562 (121)</button>
     </div>
     <!-- Search -->
-    <div class="p3-search-wrap">
+    <div style="padding:8px 14px;position:relative">
       <input class="p3-search-inp" id="p3DirSearch" placeholder="🔍 ค้นหาชื่อ หรือที่อยู่..."
-             oninput="p3SearchBens(this.value)">
+             oninput="p3SearchBens(this.value);document.getElementById('p3srclr').style.display=this.value?'flex':'none'">
+      <button id="p3srclr" onclick="document.getElementById('p3DirSearch').value='';p3SearchBens('');this.style.display='none'"
+        style="display:none;position:absolute;right:22px;top:50%;transform:translateY(-50%);
+               width:20px;height:20px;border-radius:50%;border:none;background:var(--border);
+               cursor:pointer;align-items:center;justify-content:center;font-size:.7rem">✕</button>
     </div>
-    <!-- List (rendered by JS) -->
-    <div class="p3-ben-list" id="p3BenList"></div>
+    <!-- Simplified table -->
+    <div class="p3-table-wrap">
+      <table class="p3-table">
+        <thead>
+          <tr>
+            <th class="p3th-no">#</th>
+            <th class="p3th-name">ชื่อ-นามสกุล</th>
+            <th class="p3th-status">สถานะ</th>
+            <th class="p3th-bud">งบ (฿)</th>
+            <th class="p3th-yr">ปี</th>
+            <th class="p3th-act"></th>
+          </tr>
+        </thead>
+        <tbody id="p3BenTable"></tbody>
+      </table>
+    </div>
     <div class="p3-list-footer" id="p3DirFooter">โหลดข้อมูล...</div>
   </div>
 
-  <!-- Card B: Photo Album -->
-  <div class="p3-dir-card" style="margin-bottom:14px">
-    <div class="p3-dir-hd">
+  <!-- ── ALBUM CARD ───────────────────────────────────────────────── -->
+  <div class="p3-smart-card" id="p3AlbumCard" style="margin-bottom:14px">
+    <div class="p3sc-hd">
       <div>
-        <div class="p3-dir-title">📸 อัลบั้มรูปภาพโครงการ ปี 2568</div>
-        <div class="p3-dir-sub">28 ราย · กด "ดูรูปภาพ" เพื่อดูอัลบั้มก่อน-หลัง</div>
+        <div class="p3sc-title">📸 อัลบั้มรูปภาพ ปี 2568</div>
+        <div class="p3sc-sub">28 ราย · คลิกรูปเพื่อดูแบบเต็มจอ</div>
       </div>
     </div>
-    <!-- Stats bar -->
-    <div class="album-stat-row" style="margin:0;border-bottom:1px solid var(--border)">
-      <div class="album-stat-box"><div class="asb-val" style="color:var(--c3)">28</div><div class="asb-lbl">ผู้รับบริการ</div></div>
-      <div class="album-stat-box"><div class="asb-val" style="color:#7C3AED">15</div><div class="asb-lbl">มี Gallery</div></div>
-      <div class="album-stat-box"><div class="asb-val" style="color:var(--c1)">2568</div><div class="asb-lbl">ปีงบประมาณ</div></div>
+    <!-- Stats -->
+    <div class="p3-album-stats">
+      <div class="p3-ast"><div class="p3-asv" style="color:var(--c3)">28</div><div class="p3-asl">ผู้รับบริการ</div></div>
+      <div class="p3-ast"><div class="p3-asv" style="color:#7C3AED">15</div><div class="p3-asl">มี Gallery</div></div>
+      <div class="p3-ast"><div class="p3-asv" style="color:var(--c1)">2568</div><div class="p3-asl">ปีงบประมาณ</div></div>
     </div>
-    <!-- Search -->
-    <div class="search-wrap" style="padding:10px 14px;margin-bottom:0">
-      <input class="search-input" id="albumSearch" placeholder="🔍 ค้นหาชื่อ หรือ หน่วยงาน..."
-             oninput="handleAlbumSearch(this.value)" autocomplete="off">
-      <button class="search-clear" id="searchClearBtn" onclick="clearAlbumSearch()">✕</button>
+    <!-- Search + filter -->
+    <div style="padding:8px 14px">
+      <input class="p3-search-inp" id="p3AlbumSearch" placeholder="🔍 ค้นหาชื่อ หรือ หน่วยงาน..."
+             oninput="p3AlbumSearch(this.value)" style="margin-bottom:6px">
     </div>
-    <div class="search-results-info" id="searchInfo" style="padding:0 14px 6px"></div>
-    <!-- Filter chips -->
-    <div class="album-filter" id="albumFilter" style="padding:6px 14px">
-      <button class="af-btn active" data-agency="all" onclick="filterAlbum('all',this)">ทั้งหมด (28)</button>
-      <button class="af-btn" data-agency="ทต.เมืองแกลง" onclick="filterAlbum('ทต.เมืองแกลง',this)">ทต.เมืองแกลง</button>
-      <button class="af-btn" data-agency="ทต.มาบข่าพัฒนา" onclick="filterAlbum('ทต.มาบข่าพัฒนา',this)">ทต.มาบข่าพัฒนา</button>
-      <button class="af-btn" data-agency="อบต.วังหว้า" onclick="filterAlbum('อบต.วังหว้า',this)">อบต.วังหว้า</button>
-      <button class="af-btn" data-agency="อบต.สำนักท้อน" onclick="filterAlbum('อบต.สำนักท้อน',this)">อบต.สำนักท้อน</button>
-      <button class="af-btn" data-agency="อบต.คลองปูน" onclick="filterAlbum('อบต.คลองปูน',this)">อบต.คลองปูน</button>
-      <button class="af-btn" data-agency="อบต.น้ำเป็น" onclick="filterAlbum('อบต.น้ำเป็น',this)">อบต.น้ำเป็น</button>
-      <button class="af-btn" data-agency="ทต.ปากน้ำประแส" onclick="filterAlbum('ทต.ปากน้ำประแส',this)">ทต.ปากน้ำประแส</button>
-      <button class="af-btn" data-agency="อบต.ตะพง" onclick="filterAlbum('อบต.ตะพง',this)">อบต.ตะพง</button>
+    <div class="p3-filter-bar" id="p3AlbumFilter" style="padding:0 14px 8px">
+      <button class="p3-fbtn active" data-ag="all" onclick="p3AlbumFilter('all',this)"
+        style="background:#7C3AED;border-color:#7C3AED;color:#fff">ทั้งหมด (28)</button>
+      <button class="p3-fbtn" data-ag="ทต.เมืองแกลง" onclick="p3AlbumFilter('ทต.เมืองแกลง',this)">ทต.เมืองแกลง</button>
+      <button class="p3-fbtn" data-ag="ทต.มาบข่าพัฒนา" onclick="p3AlbumFilter('ทต.มาบข่าพัฒนา',this)">ทต.มาบข่าพัฒนา</button>
+      <button class="p3-fbtn" data-ag="อบต.วังหว้า" onclick="p3AlbumFilter('อบต.วังหว้า',this)">อบต.วังหว้า</button>
+      <button class="p3-fbtn" data-ag="อบต.สำนักท้อน" onclick="p3AlbumFilter('อบต.สำนักท้อน',this)">อบต.สำนักท้อน</button>
+      <button class="p3-fbtn" data-ag="อบต.คลองปูน" onclick="p3AlbumFilter('อบต.คลองปูน',this)">อบต.คลองปูน</button>
+      <button class="p3-fbtn" data-ag="อบต.น้ำเป็น" onclick="p3AlbumFilter('อบต.น้ำเป็น',this)">อบต.น้ำเป็น</button>
+      <button class="p3-fbtn" data-ag="ทต.ปากน้ำประแส" onclick="p3AlbumFilter('ทต.ปากน้ำประแส',this)">ทต.ปากน้ำประแส</button>
+      <button class="p3-fbtn" data-ag="อบต.ตะพง" onclick="p3AlbumFilter('อบต.ตะพง',this)">อบต.ตะพง</button>
     </div>
-    <div class="album-list" id="p3AlbumGrid" style="padding:0 14px 14px"></div>
-    <div style="text-align:center;font-size:.68rem;color:var(--muted);padding:6px 14px 12px">🔒 ไม่แสดงรูปภาพส่วนตัว เพื่อคุ้มครองตาม PDPA</div>
+    <!-- Album grid -->
+    <div class="p3-album-grid" id="p3AlbumGrid2"></div>
   </div>
 
   <div style="height:8px"></div>
 </div>
 
+
 <!-- P3 Beneficiary Detail Modal -->
-<div id="p3benModal" onclick="if(event.target.id==='p3benModal')closeP3BenModal()">
-  <div id="p3benSheet">
-    <div class="p3m-handle"></div>
-    <div class="p3m-head">
-      <div class="p3m-htitle" id="p3mTitle">รายละเอียดผู้รับงบประมาณ</div>
-      <button class="p3m-hclose" onclick="closeP3BenModal()">✕</button>
+<div id="p3BenModal" onclick="if(event.target.id==='p3BenModal')closeP3BenModal()">
+  <div id="p3BenSheet">
+    <div class="p3bm-handle"></div>
+    <div class="p3bm-head">
+      <div class="p3bm-title">รายละเอียดผู้รับงบประมาณ</div>
+      <button class="p3bm-close" onclick="closeP3BenModal()">✕</button>
     </div>
-    <div class="p3m-body" id="p3mBody"></div>
-    <div class="p3m-nav">
-      <button class="p3m-nav-btn" onclick="p3ModalNav(-1)">‹ ก่อนหน้า</button>
-      <span id="p3mCounter" style="font-size:.72rem;color:var(--muted);align-self:center"></span>
-      <button class="p3m-nav-btn" onclick="p3ModalNav(1)">ถัดไป ›</button>
+    <div class="p3bm-body" id="p3BenModalBody"></div>
+    <div class="p3bm-nav">
+      <button class="p3bm-navbtn" onclick="p3BenModalNav(-1)">‹ ก่อนหน้า</button>
+      <span class="p3bm-counter" id="p3BenCounter"></span>
+      <button class="p3bm-navbtn" onclick="p3BenModalNav(1)">ถัดไป ›</button>
     </div>
   </div>
 </div>
