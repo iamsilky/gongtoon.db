@@ -1923,15 +1923,15 @@ body{
     </div>
     <!-- Filter -->
     <div class="album-filter" id="albumFilter">
-      <button class="af-btn" data-agency="all" active" onclick="filterAlbum('all',this)">ทั้งหมด (28)</button>
-      <button class="af-btn" data-agency="ทต.เมืองแกลง"" onclick="filterAlbum('ทต.เมืองแกลง',this)">ทต.เมืองแกลง</button>
-      <button class="af-btn" data-agency="ทต.มาบข่าพัฒนา"" onclick="filterAlbum('ทต.มาบข่าพัฒนา',this)">ทต.มาบข่าพัฒนา</button>
-      <button class="af-btn" data-agency="อบต.วังหว้า"" onclick="filterAlbum('อบต.วังหว้า',this)">อบต.วังหว้า</button>
-      <button class="af-btn" data-agency="อบต.สำนักท้อน"" onclick="filterAlbum('อบต.สำนักท้อน',this)">อบต.สำนักท้อน</button>
-      <button class="af-btn" data-agency="อบต.คลองปูน"" onclick="filterAlbum('อบต.คลองปูน',this)">อบต.คลองปูน</button>
-      <button class="af-btn" data-agency="อบต.น้ำเป็น"" onclick="filterAlbum('อบต.น้ำเป็น',this)">อบต.น้ำเป็น</button>
-      <button class="af-btn" data-agency="ทต.ปากน้ำประแส"" onclick="filterAlbum('ทต.ปากน้ำประแส',this)">ทต.ปากน้ำประแส</button>
-      <button class="af-btn" data-agency="อบต.ตะพง"" onclick="filterAlbum('อบต.ตะพง',this)">อบต.ตะพง</button>
+      <button class="af-btn active" data-agency="all" onclick="filterAlbum('all',this)">ทั้งหมด (28)</button>
+      <button class="af-btn" data-agency="ทต.เมืองแกลง" onclick="filterAlbum('ทต.เมืองแกลง',this)">ทต.เมืองแกลง</button>
+      <button class="af-btn" data-agency="ทต.มาบข่าพัฒนา" onclick="filterAlbum('ทต.มาบข่าพัฒนา',this)">ทต.มาบข่าพัฒนา</button>
+      <button class="af-btn" data-agency="อบต.วังหว้า" onclick="filterAlbum('อบต.วังหว้า',this)">อบต.วังหว้า</button>
+      <button class="af-btn" data-agency="อบต.สำนักท้อน" onclick="filterAlbum('อบต.สำนักท้อน',this)">อบต.สำนักท้อน</button>
+      <button class="af-btn" data-agency="อบต.คลองปูน" onclick="filterAlbum('อบต.คลองปูน',this)">อบต.คลองปูน</button>
+      <button class="af-btn" data-agency="อบต.น้ำเป็น" onclick="filterAlbum('อบต.น้ำเป็น',this)">อบต.น้ำเป็น</button>
+      <button class="af-btn" data-agency="ทต.ปากน้ำประแส" onclick="filterAlbum('ทต.ปากน้ำประแส',this)">ทต.ปากน้ำประแส</button>
+      <button class="af-btn" data-agency="อบต.ตะพง" onclick="filterAlbum('อบต.ตะพง',this)">อบต.ตะพง</button>
     </div>
     <!-- List -->
     <div class="album-list" id="p3AlbumGrid"></div>
@@ -3479,10 +3479,6 @@ function exitP3Detail(){
   };
 })();
 
-  const el=document.getElementById('budd-'+di);
-  if(el) setTimeout(()=>{ document.getElementById('budBody').scrollTop=el.offsetTop-10; },60);
-}
-
 function openLocModal(){
   document.getElementById('locModal').classList.add('open');
   document.body.style.overflow='hidden';
@@ -3586,7 +3582,7 @@ function invJumpTo(di){
 const _origGoPage = window.goPage;
 window.goPage = function(id){
   if(id==='p1'){ openP1Detail(); return; }
-  exitP1Detail();
+  if(document.getElementById('p1-detail').classList.contains('active')) exitP1Detail();
   _origGoPage(id);
 };
 
@@ -3598,6 +3594,152 @@ function toggleCard(card, pid){
     card.classList.add('expanded');
     card.scrollIntoView({behavior:'smooth', block:'nearest'});
   }
+}
+
+/* ── P2 DETAIL FUNCTIONS ──────────────────────────────────── */
+function openP2Detail(){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p2-detail').classList.add('active');
+  document.querySelector('.bottom-nav').style.display='none';
+  document.querySelector('.app-header').style.display='none';
+  window.scrollTo(0,0);
+}
+function exitP2Detail(){
+  document.getElementById('p2-detail').classList.remove('active');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-home').classList.add('active');
+  document.querySelector('.bottom-nav').style.display='';
+  document.querySelector('.app-header').style.display='';
+  window.scrollTo(0,0);
+}
+
+/* P2 Budget Modal */
+function openP2BudModal(){
+  document.getElementById('p2budModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeP2BudModal(){
+  document.getElementById('p2budModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+/* P2 Inventory toggle */
+function toggleP2Inv(btn){
+  const detail = btn.nextElementSibling;
+  const chev = btn.querySelector('.p2-chev');
+  if(!detail) return;
+  const isOpen = detail.style.display !== 'none';
+  detail.style.display = isOpen ? 'none' : 'block';
+  if(chev) chev.textContent = isOpen ? '\u25be' : '\u25b4';
+}
+
+/* ── P1 BUDGET MODAL FUNCTIONS ────────────────────────────── */
+const _bcolors=['#0369A1','#0891B2','#059669','#D97706','#DC2626','#7C3AED','#DB2777','#65A30D'];
+function openBudModal(){
+  document.getElementById('budModal').classList.add('open');
+  document.body.style.overflow='hidden';
+  const btns=document.querySelectorAll('[id^="budn-"]');
+  if(btns[0]){ btns[0].style.background=_bcolors[0]; btns[0].style.borderColor=_bcolors[0]; btns[0].style.color='#fff'; }
+}
+function closeBudModal(){
+  document.getElementById('budModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function handleBudBackdrop(e){
+  if(e.target.id==='budModal') closeBudModal();
+}
+function budJumpTo(di){
+  openBudModal();
+  document.querySelectorAll('[id^="budn-"]').forEach((b,i)=>{
+    b.style.background=i===di?_bcolors[di]:'';
+    b.style.borderColor=i===di?_bcolors[di]:'';
+    b.style.color=i===di?'#fff':'';
+  });
+  const el=document.getElementById('budd-'+di);
+  if(el) setTimeout(()=>{ document.getElementById('budBody').scrollTop=el.offsetTop-10; },60);
+}
+
+/* Intercept goPage for P2 (mirrors P1 and P3 pattern) */
+(function(){
+  const _prev=window.goPage;
+  window.goPage=function(id){
+    if(id==='p2'){ openP2Detail(); return; }
+    if(document.getElementById('p2-detail').classList.contains('active')) exitP2Detail();
+    _prev(id);
+  };
+})();
+
+/* ── P3 ALBUM TAB — MISSING HELPERS ──────────────────────────
+   These functions support the album grid inside the p3-album
+   sub-section (page-p3 → renderAlbums / filterAlbum).        */
+
+/* showImg: toggle before/after single image on a card */
+window.showImg = function(idx, type){
+  const imgNow  = document.getElementById('img-now-'+idx);
+  const imgThen = document.getElementById('img-then-'+idx);
+  const tabNow  = document.getElementById('tab-now-'+idx);
+  const tabThen = document.getElementById('tab-then-'+idx);
+  if(!imgNow || !imgThen) return;
+  if(type==='now'){
+    imgNow.style.display  = 'block';
+    imgThen.style.display = 'none';
+    if(tabNow)  { tabNow.style.background='var(--c3l)'; tabNow.style.color='var(--c3)'; }
+    if(tabThen) { tabThen.style.background='var(--bg)'; tabThen.style.color='var(--muted)'; }
+  } else {
+    imgNow.style.display  = 'none';
+    imgThen.style.display = 'block';
+    if(tabNow)  { tabNow.style.background='var(--bg)'; tabNow.style.color='var(--muted)'; }
+    if(tabThen) { tabThen.style.background='#D1FAE5'; tabThen.style.color='#059669'; }
+  }
+};
+
+/* hlText: wrap matching text in a highlight span */
+function hlText(text, query){
+  if(!query) return text;
+  const re = new RegExp('('+query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+  return text.replace(re,'<mark style="background:#FEF08A;border-radius:2px;padding:0 1px">$1</mark>');
+}
+
+/* filterAlbumCards: filter .album-person cards by active agency button + search query */
+let _albumSearchQuery = '';
+function filterAlbumCards(){
+  const activeBtn = document.querySelector('#albumFilter .af-btn.active');
+  const agency = activeBtn ? activeBtn.dataset.agency : 'all';
+  const q = _albumSearchQuery.toLowerCase();
+  document.querySelectorAll('#p3AlbumGrid .album-person').forEach(card=>{
+    const agencyMatch = (agency==='all') || (card.dataset.agency === agency);
+    const nameEl   = card.querySelector('.album-person-name');
+    const agencyEl = card.querySelector('.album-person-agency');
+    const textMatch = !q ||
+      (nameEl   && nameEl.textContent.toLowerCase().includes(q)) ||
+      (agencyEl && agencyEl.textContent.toLowerCase().includes(q));
+    card.style.display = (agencyMatch && textMatch) ? '' : 'none';
+  });
+  // Update search results info
+  const info = document.getElementById('searchInfo');
+  if(info){
+    const visible = document.querySelectorAll('#p3AlbumGrid .album-person:not([style*="none"])').length;
+    const total   = document.querySelectorAll('#p3AlbumGrid .album-person').length;
+    info.textContent = q ? `แสดง ${visible} / ${total} ราย` : '';
+  }
+}
+
+/* handleAlbumSearch: called by the search input oninput */
+function handleAlbumSearch(val){
+  _albumSearchQuery = val.trim();
+  const clrBtn = document.getElementById('searchClearBtn');
+  if(clrBtn) clrBtn.style.display = val ? 'flex' : 'none';
+  filterAlbumCards();
+}
+
+/* clearAlbumSearch: clear button resets search */
+function clearAlbumSearch(){
+  const inp = document.getElementById('albumSearch');
+  if(inp){ inp.value = ''; }
+  _albumSearchQuery = '';
+  const clrBtn = document.getElementById('searchClearBtn');
+  if(clrBtn) clrBtn.style.display = 'none';
+  filterAlbumCards();
 }
 
 </script>
