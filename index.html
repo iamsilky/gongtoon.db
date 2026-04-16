@@ -2187,6 +2187,19 @@ const CHART_DEFAULTS = {
   }
 };
 const COLORS = ['#0369A1','#059669','#D97706','#7C3AED','#DC2626','#0891B2','#65A30D','#DB2777'];
+const AVATAR_COLORS = [
+  '#0369A1','#059669','#D97706','#7C3AED','#DC2626',
+  '#0891B2','#65A30D','#DB2777','#EA580C','#6366F1',
+  '#0369A1','#059669','#D97706','#7C3AED','#DC2626',
+  '#0891B2','#65A30D','#DB2777','#EA580C','#6366F1',
+  '#0369A1','#059669','#D97706','#7C3AED','#DC2626',
+  '#0891B2','#65A30D','#DB2777'
+];
+function ageGroup(age){
+  if(age<40) return {label:'วัยทำงาน',bg:'#DBEAFE',color:'#1D4ED8'};
+  if(age<60) return {label:'วัยกลางคน',bg:'#FEF3C7',color:'#92400E'};
+  return {label:'ผู้สูงอายุ',bg:'#D1FAE5',color:'#065F46'};
+}
 
 function makeBar(el,data,color='#0369A1'){
   el.innerHTML='';
@@ -3137,7 +3150,7 @@ function renderP3BenList(list){
   const count=document.getElementById('p3-dir-count');
   if(!tb) return;
   if(!list.length){
-    tb.innerHTML=`<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted)">🔍 ไม่พบข้อมูล</td></tr>`;
+    tb.innerHTML=`<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted)">🔍 ไม่พบข้อมูล</td></tr>`;
     if(footer) footer.textContent='ไม่พบรายการ';
     if(count) count.textContent='0 ราย';
     return;
@@ -3147,6 +3160,13 @@ function renderP3BenList(list){
     const st=p3StatusInfo(b.dis);
     const yc=P3_YR_COL[b.y]||'#059669';
     const globalIdx=P3_BENS.indexOf(b);
+    
+    // Check if member has photos in P3.albums
+    const hasPhotos = P3.albums.some(a => a.name === b.nm);
+    const photoIcon = hasPhotos 
+      ? '<span title="มีรูปภาพ" style="display:inline-flex;width:20px;height:20px;border-radius:50%;background:#D1FAE5;color:#059669;font-size:.7rem;align-items:center;justify-content:center;margin-right:4px">📷</span>'
+      : '<span title="ไม่มีรูปภาพ" style="display:inline-flex;width:20px;height:20px;border-radius:50%;background:#F3F4F6;color:#9CA3AF;font-size:.7rem;align-items:center;justify-content:center;margin-right:4px;opacity:0.5">📷</span>';
+    
     return`<tr>
       <td class="p3td-no"><span style="display:inline-flex;width:22px;height:22px;border-radius:6px;
         background:${yc}22;color:${yc};font-size:.62rem;font-weight:700;
@@ -3155,6 +3175,7 @@ function renderP3BenList(list){
       <td><span class="p3-yr-chip" style="background:${st.bg};color:${st.col}">${st.short}</span></td>
       <td class="p3td-bud">฿${b.bud.toLocaleString('th-TH')}</td>
       <td class="p3td-yr"><span class="p3-yr-chip" style="background:${yc}22;color:${yc}">${b.y}</span></td>
+      <td style="text-align:center">${photoIcon}</td>
       <td style="text-align:center"><button class="p3-view-btn" onclick="openP3BenModal(${globalIdx})">ดู</button></td>
     </tr>`;
   }).join('');
@@ -3271,7 +3292,7 @@ function _renderBenModal(idx){
       // Add "View All Photos" button if there are galleries
       if(hasGalNow || hasGalThen) {
         const totalPhotos = (hasGalNow ? album.galNow.length : 0) + (hasGalThen ? album.galThen.length : 0);
-        galleryHTML += `<button onclick="openGallery(${albumIdx},'${hasGalNow ? 'now' : 'then'}')" style="width:100%;margin-top:8px;padding:8px;border-radius:8px;border:1.5px solid #059669;background:transparent;color:#059669;font-family:'Sarabun',sans-serif;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .15s" onmouseover="this.style.background='#059669';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#059669'">
+        galleryHTML += `<button onclick="closeP3BenModal();setTimeout(()=>openGallery(${albumIdx},'${hasGalNow ? 'now' : 'then'}'),300)" style="width:100%;margin-top:8px;padding:8px;border-radius:8px;border:1.5px solid #059669;background:transparent;color:#059669;font-family:'Sarabun',sans-serif;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .15s" onmouseover="this.style.background='#059669';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#059669'">
           🖼️ ดูรูปภาพทั้งหมด (${totalPhotos} รูป)
         </button>`;
       }
@@ -14415,6 +14436,7 @@ function clearAlbumSearch(){
             <th class="p3th-status">สถานะ</th>
             <th class="p3th-bud">งบ (฿)</th>
             <th class="p3th-yr">ปี</th>
+            <th style="width:40px;text-align:center" title="สถานะรูปภาพ">📷</th>
             <th class="p3th-act"></th>
           </tr>
         </thead>
