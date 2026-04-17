@@ -352,6 +352,7 @@ body {
   max-height: 70vh;
   overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
 }
 
 .modal-footer {
@@ -478,15 +479,19 @@ body {
   font-weight: 700;
 }
 
-/* ===== MODAL SEARCH ===== */
+/* ===== MODAL SEARCH - FIXED WITH STICKY POSITIONING ===== */
 .modal-search-container {
   position: sticky;
   top: 0;
   background: var(--white);
-  z-index: 100;
-  padding: 1rem 0 1.25rem 0;
-  border-bottom: 2px solid var(--border-light);
+  z-index: 200;
+  padding: 1rem 0;
   margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-light);
+  margin-left: -2rem;
+  margin-right: -2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .modal-search-input {
@@ -533,9 +538,6 @@ body {
   font-weight: 700;
   padding: 1rem;
   border-bottom: 2px solid var(--border-light);
-  position: sticky;
-  top: 80px;
-  z-index: 10;
   text-transform: uppercase;
   font-size: 0.8rem;
   letter-spacing: 0.05em;
@@ -640,12 +642,13 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
-/* ===== SECTION HEADERS ===== */
+/* ===== SECTION HEADERS - FIXED SPACING ===== */
 .section-header {
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--text-dark);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
   padding-bottom: 0.75rem;
   border-bottom: 2px solid var(--border-light);
   display: flex;
@@ -816,6 +819,13 @@ body {
     max-height: 60vh;
   }
   
+  .modal-search-container {
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  
   .modal-footer {
     padding: 1rem;
     flex-wrap: wrap;
@@ -878,30 +888,182 @@ body {
   }
 }
 
-/* ===== PRINT STYLES ===== */
+/* ===== ADVANCED PRINT STYLES (PROFESSIONAL REPORT FORMAT) ===== */
 @media print {
+  /* Hide UI elements */
   .navbar-official,
   .global-search-container,
+  .modal-header .btn-close,
   .modal-footer,
-  .btn-close,
   .tabs-container,
   .quick-filters,
-  .modal-search-container {
+  .modal-search-container,
+  .project-stats,
+  .filter-btn,
+  .no-results {
     display: none !important;
+  }
+  
+  /* Page setup */
+  @page {
+    size: A4;
+    margin: 2cm 1.5cm;
   }
   
   body {
     background: white;
     padding: 0;
+    margin: 0;
+  }
+  
+  /* Remove shadows and borders for print */
+  .modal-content,
+  .table-responsive,
+  .summary-card,
+  .chart-container {
+    box-shadow: none !important;
+    border: 1px solid #ddd;
   }
   
   .modal-body {
     max-height: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  
+  /* Print header (Project title) */
+  .modal-header {
+    background: white !important;
+    color: #0f172a !important;
+    border-bottom: 3px solid #0f172a;
+    padding: 1rem 0 !important;
+    border-radius: 0 !important;
+    page-break-after: avoid;
+  }
+  
+  .modal-title {
+    color: #0f172a !important;
+    font-size: 1.5rem !important;
+  }
+  
+  .modal-title-icon {
+    display: none;
+  }
+  
+  /* Report metadata */
+  .alert-info-custom {
+    background: #f0f9ff !important;
+    border: 1px solid #0369a1 !important;
+    color: #0c4a6e !important;
+    page-break-after: avoid;
+    margin-bottom: 1.5rem;
     padding: 1rem;
   }
   
-  .project-card {
+  /* Summary cards for print */
+  .summary-cards {
+    page-break-after: avoid;
+    margin-bottom: 1.5rem;
+  }
+  
+  .summary-card {
+    border: 1px solid #ddd;
+    background: white;
     page-break-inside: avoid;
+  }
+  
+  /* Section headers */
+  .section-header {
+    color: #0f172a;
+    border-bottom: 2px solid #0f172a;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    page-break-after: avoid;
+  }
+  
+  /* Tables */
+  .table-responsive {
+    border: 1px solid #ddd;
+    page-break-inside: avoid;
+    overflow: visible;
+  }
+  
+  .table-custom {
+    page-break-inside: auto;
+  }
+  
+  .table-custom thead {
+    display: table-header-group;
+  }
+  
+  .table-custom thead th {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border: 1px solid #ddd !important;
+    font-weight: 700;
+    padding: 0.5rem !important;
+  }
+  
+  .table-custom tbody tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  
+  .table-custom tbody td {
+    border: 1px solid #ddd !important;
+    padding: 0.5rem !important;
+    color: #0f172a;
+  }
+  
+  /* Charts */
+  .chart-container {
+    page-break-inside: avoid;
+    border: 1px solid #ddd;
+    padding: 1rem;
+  }
+  
+  /* Badges */
+  .badge-status {
+    border: 1px solid #999;
+    background: white !important;
+    color: #000 !important;
+  }
+  
+  /* Tab content - show all when printing */
+  .tab-content {
+    display: block !important;
+    page-break-before: always;
+  }
+  
+  .tab-content:first-of-type {
+    page-break-before: auto;
+  }
+  
+  /* Add print header */
+  .modal-body::before {
+    content: "รายงานข้อมูลโครงการ";
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #0f172a;
+    border-bottom: 3px solid #0f172a;
+    padding-bottom: 0.5rem;
+  }
+  
+  /* Add print footer with page numbers */
+  @page {
+    @bottom-right {
+      content: "หน้า " counter(page) " จาก " counter(pages);
+      font-size: 0.9rem;
+      color: #666;
+    }
+    @bottom-left {
+      content: "กองทุนหลักประกันสุขภาพจังหวัดระยอง";
+      font-size: 0.9rem;
+      color: #666;
+    }
   }
 }
 </style>
@@ -1151,7 +1313,7 @@ body {
           <button class="tab-btn" onclick="switchTab2('budget')">💰 งบประมาณ</button>
         </div>
 
-        <!-- TAB 1: EQUIPMENT INVENTORY -->
+        <!-- TAB 1: EQUIPMENT INVENTORY (FIXED - REMOVED รหัส_อุปกรณ์ COLUMN) -->
         <div id="tab2-inventory" class="tab-content active">
           <h6 class="section-header"><span class="section-icon">📦</span>รายการอุปกรณ์ทั้งหมด (29 ประเภท)</h6>
           
@@ -1163,9 +1325,8 @@ body {
             <table class="table table-custom" id="p2InventoryTable">
               <thead>
                 <tr>
-                  <th style="width:8%;">ลำดับ</th>
-                  <th style="width:15%;">รหัส</th>
-                  <th style="width:77%;">รายการอุปกรณ์</th>
+                  <th style="width:10%;">ลำดับ</th>
+                  <th style="width:90%;">รายการอุปกรณ์</th>
                 </tr>
               </thead>
               <tbody id="p2InventoryBody"></tbody>
@@ -1301,7 +1462,7 @@ body {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn-close-custom" data-bs-dismiss="modal">ปิด</button>
-        <button type="button" class="btn-primary-custom" onclick="window.print()">🖨️ พิมพ์</button>
+        <button type="button" class="btn-primary-custom" onclick="window.print()">🖨️ พิมพ์รายงาน</button>
       </div>
     </div>
   </div>
@@ -1360,20 +1521,18 @@ body {
 <!-- ===== BOOTSTRAP JS ===== -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-
-<!-- ===== CUSTOM JAVASCRIPT WITH FULL DATA ===== -->
+<!-- ===== CUSTOM JAVASCRIPT WITH FULL DATA AND FIXES ===== -->
 <script>
 'use strict';
 
 // ===== HARDCODED DATA FROM EXCEL =====
 const projectData = {
-  // PROJECT 2: Equipment Demonstration & Lending Center (FULL DATA)
   project2: {
-    equipment: [{"id": "Equip_01", "name": "เครื่องช่วยเดินชนิด_4_ขา_(walker)"}, {"id": "Equip_02", "name": "เครื่องช่วยเดินชนิด_4_ขา_(walker)_แบบพับได้"}, {"id": "Equip_03", "name": "เครื่องดูดเสมหะ_(suction)"}, {"id": "Equip_04", "name": "เครื่องผลิตออกซิเจน_ขนาด_5_ลิตร"}, {"id": "Equip_05", "name": "เครื่องผลิตออกซิเจน_ขนาด_10_ลิตร"}, {"id": "Equip_06", "name": "เตียงผู้ป่วยเฟาว์เล่อร์แบบ_3_ไก_(แบบ_ก)"}, {"id": "Equip_07", "name": "เตียงผู้ป่วยเฟาว์เล่อร์แบบ_2_ไก_(แบบ_ข)"}, {"id": "Equip_08", "name": "เตียงผู้ป่วยสามไกร์ราวปีกนกพร้อมเบาะและเสาน้ำเกลือ"}, {"id": "Equip_09", "name": "เตียงผู้ป่วยสามไกร์ราวสไลด์พร้อมเบาะและเสาน้ำเกลือ"}, {"id": "Equip_10", "name": "เตียงฝึกยืนสำหรับเด็ก"}, {"id": "Equip_11", "name": "เตียงฝึกยืนสำหรับผู้ใหญ่"}, {"id": "Equip_12", "name": "เตียงผู้ป่วยปรับด้วยไฟฟ้า"}, {"id": "Equip_13", "name": "ที่นอนลมแบบรังผึ้ง"}, {"id": "Equip_14", "name": "ที่นอนลมแบบลอน_(ใหญ่)"}, {"id": "Equip_15", "name": "ที่นั่งสำหรับถ่ายและอาบน้ำได้"}, {"id": "Equip_16", "name": "เบาะรองนั่งป้องกันแผลกดทับ"}, {"id": "Equip_17", "name": "เบาะรองนั่ั่งสำหรับคนพิการ"}, {"id": "Equip_18", "name": "แผ่งรองตัวสำหรับผู้ป่วยอัมพาตหรือที่นอนลม"}, {"id": "Equip_19", "name": "ไม้ค้ำยันรักแร้แบบไม้"}, {"id": "Equip_20", "name": "ไม้ค้ำยันรักแร้แบบอลูมิเนียม"}, {"id": "Equip_21", "name": "ไม้เท้า_1_ปุ่ม"}, {"id": "Equip_22", "name": "ไม้เท้าสำหรับคนตาบอดพับได้"}, {"id": "Equip_23", "name": "ไม้เท้าอลูมิเนียมแบบสามขา"}, {"id": "Equip_24", "name": "รถเข็นนั่งปรับเอนได้"}, {"id": "Equip_25", "name": "รถเข็นแบบชนิดเบา"}, {"id": "Equip_26", "name": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับไม่ได้"}, {"id": "Equip_27", "name": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับให้เหมาะสมกับความพิการได้"}, {"id": "Equip_28", "name": "รถสามล้อโยกมาตรฐานสำหรับคนพิการ"}, {"id": "Equip_29", "name": "พุชอัพบ็อก_(push_up_box)"}],
-    serviceUnits: [{"id": "workplace_01", "type": "โรงพยาบาล", "name": "รพ.ระยอง", "tambon": "ท่าประดู่", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/x7ypYXDBCfHKyqUm8", "phone": "038611104"}, {"id": "workplace_02", "type": "โรงพยาบาล", "name": "รพ.เฉลิมพระเกียรติฯ", "tambon": "ห้วยโป่ง", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/FwZBL9JLZx3am5es8", "phone": "038684444"}, {"id": "workplace_03", "type": "สสอ.", "name": "สสอ.เมืองระยอง", "tambon": "เนินพระ", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/PtQ8f3tvGSG9rJjYA", "phone": "038614435"}, {"id": "workplace_04", "type": "รพ.สต.", "name": "รพ.สต.กะเฉด", "tambon": "มาบข่า", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/scSrzCWTTkBhvGpV9", "phone": "038634222"}, {"id": "workplace_05", "type": "รพ.สต.", "name": "รพ.สต.แกลง", "tambon": "แกลง", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/verN7HsCeySiZ3faA", "phone": "038648588"}, {"id": "workplace_06", "type": "รพ.สต.", "name": "รพ.สต.คลองบางไผ่", "tambon": "สำนักท้อน", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/H7iiJYeoTkRXnH2m6", "phone": ""}, {"id": "workplace_07", "type": "รพ.สต.", "name": "รพ.สต.ก้นหนอง", "tambon": "บ้านแลง", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/7nVEntNKHYvVV9vp8", "phone": "038626275"}, {"id": "workplace_08", "type": "รพ.สต.", "name": "รพ.สต.บ้านยายจั่น", "tambon": "สำนักทอง", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/SQMfH9MwNhP9Qm4z7", "phone": ""}, {"id": "workplace_09", "type": "รพ.สต.", "name": "รพ.สต.เพ", "tambon": "เพ", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/z3iCVyfTLEJD7f1t8", "phone": "038652613"}, {"id": "workplace_10", "type": "รพ.สต.", "name": "รพ.สต.บ้านเกาะเสม็ด", "tambon": "เพ", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/RKzc8of4Nk99vjEv7", "phone": "038644123"}, {"id": "workplace_11", "type": "อื่นๆ", "name": "ศูนย์บริการสาธารณสุข_ทน.ระยอง", "tambon": "ท่าประดู่", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/EQr4U3K9r1Qe6TH39", "phone": "038610124"}, {"id": "workplace_12", "type": "โรงพยาบาล", "name": "รพ.นิคมพัฒนา", "tambon": "มะขามคู่", "district": "นิคมพัฒนา", "map_link": "https://maps.app.goo.gl/ERYrvujia4nK2wgD8", "phone": "038038050"}, {"id": "workplace_13", "type": "สสอ.", "name": "สสอ.นิคมพัฒนา", "tambon": "นิคมพัฒนา", "district": "นิคมพัฒนา", "map_link": "https://maps.app.goo.gl/5NKEDpWrN89q66Ca8", "phone": "038636827"}, {"id": "workplace_14", "type": "รพ.สต.", "name": "รพ.สต.บ้านกระเฉท", "tambon": "มาบข่า", "district": "นิคมพัฒนา", "map_link": "https://maps.app.goo.gl/A2MjCJzWPmWBJT8FA", "phone": "038637917"}, {"id": "workplace_15", "type": "โรงพยาบาล", "name": "รพ.บ้านฉาง", "tambon": "พลา", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/iWzbo3darsCvDLTu6", "phone": "038603838"}, {"id": "workplace_16", "type": "สสอ.", "name": "สสอ.บ้านฉาง", "tambon": "พลา", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/VXphNcYcm546hPsH6", "phone": "038601142"}, {"id": "workplace_17", "type": "อื่นๆ", "name": "ศูนย์บริการสาธารณสุข_อบต.สำนักท้อน", "tambon": "สำนักท้อน", "district": "บ้านฉาง", "map_link": "", "phone": ""}, {"id": "workplace_18", "type": "รพ.สต.", "name": "รพ.สต.บ้านสระแก้ว", "tambon": "สำนักท้อน", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/KbM7pXct14uTN1CXA", "phone": "038030484"}, {"id": "workplace_19", "type": "รพ.สต.", "name": "รพ.สต.สำนักท้อน", "tambon": "สำนักท้อน", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/9KbRYLw4q2EBT1as7", "phone": ""}, {"id": "workplace_20", "type": "รพ.สต.", "name": "รพ.สต.บ้านยายร้า", "tambon": "บ้านฉาง", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/74mRZT5duNgwf9DKA", "phone": "038696088"}, {"id": "workplace_21", "type": "รพ.สต.", "name": "รพ.สต.บ้านเขาครอก", "tambon": "สำนักท้อน", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/TxRkjmTQFCj28BEm7", "phone": ""}, {"id": "workplace_22", "type": "รพ.สต.", "name": "รพ.สต.บ้านหนองน้ำเย็น", "tambon": "สำนักท้อน", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/AwmWyPd54Mnw5LXV9", "phone": "038030625"}, {"id": "workplace_23", "type": "โรงพยาบาล", "name": "รพ.เขาชะเมาฯ", "tambon": "ห้วยทับมอญ", "district": "เขาชะเมา", "map_link": "https://maps.app.goo.gl/wyGPZvBQ5kK9vvwu8", "phone": "038996022"}, {"id": "workplace_24", "type": "รพ.สต.", "name": "รพ.สต.บ้านชำฆ้อ", "tambon": "ชำฆ้อ", "district": "เขาชะเมา", "map_link": "https://maps.app.goo.gl/DsnxC75VDZH8eZ8a8", "phone": ""}, {"id": "workplace_25", "type": "รพ.สต.", "name": "รพ.สต.แสงส่องหล้า 2", "tambon": "ห้วยทับมอญ", "district": "เขาชะเมา", "map_link": "https://maps.app.goo.gl/hR64pRUnMbYV85an8", "phone": ""}, {"id": "workplace_26", "type": "รพ.สต.", "name": "รพ.สต.บ้านเขาน้อย", "tambon": "เขาน้อย", "district": "เขาชะเมา", "map_link": "https://maps.app.goo.gl/DByjxN3xe9dWXLN69", "phone": ""}, {"id": "workplace_27", "type": "รพ.สต.", "name": "รพ.สต.บ้านสามแยกน้ำเป็น", "tambon": "น้ำเป็น", "district": "เขาชะเมา", "map_link": "https://maps.app.goo.gl/RGo3A37vmM5jWP4e8", "phone": ""}, {"id": "workplace_28", "type": "อื่นๆ", "name": "สถานีอนามัยเฉลิมพระเกียรติ_60_พรรษา_นวมินทราชินี_บ้านน้ำใส", "tambon": "น้ำเป็น", "district": "เขาชะเมา", "map_link": "https://maps.app.goo.gl/GoAzRpfHDdAAHxoQ7", "phone": ""}, {"id": "workplace_29", "type": "โรงพยาบาล", "name": "รพ.แกลง", "tambon": "ทางเกวียน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/fRVTxr61x6wnokCz9", "phone": "038677534"}, {"id": "workplace_30", "type": "รพ.สต.", "name": "รพ.สต.กองดิน", "tambon": "กองดิน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/WWR19UJGUcXz584Z6", "phone": "038806363"}, {"id": "workplace_31", "type": "รพ.สต.", "name": "รพ.สต.บ้านนา", "tambon": "บ้้านนา", "district": "แกลง", "map_link": "https://maps.app.goo.gl/6QCjy1vssFvYbbrv9", "phone": "0870565795"}, {"id": "workplace_32", "type": "รพ.สต.", "name": "รพ.สต.กร่ำ", "tambon": "กร่ำ", "district": "แกลง", "map_link": "https://maps.app.goo.gl/sfa7dzMcubg4wXps5", "phone": ""}, {"id": "workplace_33", "type": "รพ.สต.", "name": "รพ.สต.บ้านสองพี่น้อง", "tambon": "ห้วยยาง", "district": "แกลง", "map_link": "https://maps.app.goo.gl/2jF8pYyoGBwU86PUA", "phone": "032787446"}, {"id": "workplace_34", "type": "รพ.สต.", "name": "รพ.สต.บ้านวัดบุนนาค", "tambon": "ชากโดน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/ZRNRW7pXZc9YR7i86", "phone": ""}, {"id": "workplace_35", "type": "รพ.สต.", "name": "รพ.สต.บ้านเนินหย่อง", "tambon": "วังหว้า", "district": "แกลง", "map_link": "https://maps.app.goo.gl/UgZs1chtazyZCCMT9", "phone": "038944550"}, {"id": "workplace_36", "type": "รพ.สต.", "name": "รพ.สต.บ้านโพธิฐาน", "tambon": "ทุ่งควายกิน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/KYxUmQqJyJc8YEe3A", "phone": "038669432"}, {"id": "workplace_37", "type": "รพ.สต.", "name": "รพ.สต.บ้านเขาดิน", "tambon": "ทุ่งควายกิน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/vFzU5ofCdGgwA4ki9", "phone": ""}, {"id": "workplace_38", "type": "รพ.สต.", "name": "รพ.สต.บ้านชำสมอ", "tambon": "กองดิน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/PH7xZoP3v7Lcw5v88", "phone": "038668936"}, {"id": "workplace_39", "type": "รพ.สต.", "name": "รพ.สต.วังหว้า", "tambon": "วังหว้า", "district": "แกลง", "map_link": "https://maps.app.goo.gl/XUJb6xHok19exwR97", "phone": "038671911"}, {"id": "workplace_40", "type": "รพ.สต.", "name": "รพ.สต.บ้านคลองคา", "tambon": "ห้วยยาง", "district": "แกลง", "map_link": "https://maps.app.goo.gl/GLnznSBepT6K5nkE8", "phone": ""}, {"id": "workplace_41", "type": "รพ.สต.", "name": "รพ.สต.บ้านถนนกะเพรา", "tambon": "เนิินฆ้อ", "district": "แกลง", "map_link": "https://maps.app.goo.gl/eUxs8GfpXqkQFYdG8", "phone": ""}, {"id": "workplace_42", "type": "รพ.สต.", "name": "รพ.สต.ชากพง", "tambon": "ชากพง", "district": "แกลง", "map_link": "https://maps.app.goo.gl/d11RmAUEqJf3GN276", "phone": "038638459"}, {"id": "workplace_43", "type": "รพ.สต.", "name": "รพ.สต.บ้านจำรุง", "tambon": "เนินฆ้อ", "district": "แกลง", "map_link": "https://maps.app.goo.gl/qm5u7vNLW8S1hsjL7", "phone": ""}, {"id": "workplace_44", "type": "รพ.สต.", "name": "รพ.สต.กระแสบน", "tambon": "กระแสบน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/gqDWu8YQWZdWtna77", "phone": "038992120"}, {"id": "workplace_45", "type": "รพ.สต.", "name": "รพ.สต.หนองแพงพวย", "tambon": "เนินฆ้อ", "district": "แกลง", "map_link": "https://maps.app.goo.gl/XNkZuq4b4LgMaM4s8", "phone": ""}, {"id": "workplace_46", "type": "รพ.สต.", "name": "รพ.สต.พังราด", "tambon": "พังราด", "district": "แกลง", "map_link": "https://maps.app.goo.gl/6iYaqhiugweBzwPx6", "phone": ""}, {"id": "workplace_47", "type": "รพ.สต.", "name": "รพ.สต.บ้านเขาหินแท่น", "tambon": "ทางเกวียน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/UUsfW2fNbrdFvAgg9", "phone": "0892404288"}, {"id": "workplace_48", "type": "รพ.สต.", "name": "รพ.สต.เต้าปูนหาย", "tambon": "ห้วยยาง", "district": "แกลง", "map_link": "https://maps.app.goo.gl/VfAnSNSXo8tHoCZk8", "phone": ""}, {"id": "workplace_49", "type": "รพ.สต.", "name": "รพ.สต.สองสลึง", "tambon": "สองสลึง", "district": "แกลง", "map_link": "https://maps.app.goo.gl/GS2ME57McUhYzcGH7", "phone": ""}, {"id": "workplace_50", "type": "รพ.สต.", "name": "รพ.สต.คลองป่าไม้", "tambon": "กระแสบน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/wFQQdcgVvCoZRz5t5", "phone": "038017506"}, {"id": "workplace_51", "type": "รพ.สต.", "name": "รพ.สต.คลองปูน", "tambon": "คลองปูน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/vxmQJ1nwTtoyzKf27", "phone": ""}, {"id": "workplace_52", "type": "รพ.สต.", "name": "รพ.สต.ปากน้ำกระแส", "tambon": "ปากน้ำกระแส", "district": "แกลง", "map_link": "https://maps.app.goo.gl/DpjZ4a6udtxKSJBK9", "phone": ""}, {"id": "workplace_53", "type": "อื่นๆ", "name": "ศูนย์บริการสาธารณสุข_ทต.เมืองแกลง", "tambon": "ทางเกวียน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/pk16aW7TiFAtfKyG7", "phone": "038672654"}, {"id": "workplace_54", "type": "โรงพยาบาล", "name": "รพ.วังจันทร์", "tambon": "ชุมแสง", "district": "วังจันทร์", "map_link": "https://maps.app.goo.gl/UAQuNZ5AXbKFnuGk7", "phone": "038666174"}, {"id": "workplace_55", "type": "สสอ.", "name": "สสอ.วังจันทร์", "tambon": "ชุมแสง", "district": "วังจันทร์", "map_link": "https://maps.app.goo.gl/2FxFmZaafnvhVotj7", "phone": ""}, {"id": "workplace_56", "type": "รพ.สต.", "name": "รพ.สต.บ้านคลองเขต", "tambon": "ป่ายุบใน", "district": "วังจันทร์", "map_link": "https://maps.app.goo.gl/rZSC3fBnKPeNe39T6", "phone": "038015158"}, {"id": "workplace_57", "type": "รพ.สต.", "name": "รพ.สต.บ้านวังจันทร์", "tambon": "ป่ายุบใน", "district": "วังจันทร์", "map_link": "https://maps.app.goo.gl/CmRnWV9Wsr41vQMr9", "phone": "038626053"}, {"id": "workplace_58", "type": "รพ.สต.", "name": "รพ.สต.บ้านเขาตาอิ๋น", "tambon": "คลองกิ่ว", "district": "วังจันทร์", "map_link": "https://maps.app.goo.gl/sVhe4wA7wsyJENsaA", "phone": "038666642"}, {"id": "workplace_59", "type": "รพ.สต.", "name": "รพ.สต.บ้านเขาสิงห์โต", "tambon": "ป่ายุบใน", "district": "วังจันทร์", "map_link": "https://maps.app.goo.gl/Wmi4q8HSt1EGuigK6", "phone": ""}, {"id": "workplace_60", "type": "โรงพยาบาล", "name": "รพ.บ้านค่าย", "tambon": "หนองละลอก", "district": "บ้านค่าย", "map_link": "https://maps.app.goo.gl/YkT5XqFz59adb8EaA", "phone": "038641005"}, {"id": "workplace_61", "type": "สสอ.", "name": "สสอ.บ้านค่าย", "tambon": "บ้านค่าย", "district": "บ้านค่าย", "map_link": "https://maps.app.goo.gl/xvyd77gaoNtP1shr9", "phone": ""}, {"id": "workplace_62", "type": "รพ.สต.", "name": "รพ.สต.หนองสะพาน", "tambon": "หนองตะพาน", "district": "บ้านค่าย", "map_link": "https://maps.app.goo.gl/fCpmQMsHtSBVXwPw5", "phone": "038025232"}, {"id": "workplace_63", "type": "รพ.สต.", "name": "รพ.สต.เนินสว่าง", "tambon": "เนินสว่าง", "district": "บ้านค่าย", "map_link": "https://maps.app.goo.gl/i2sRkGnjadua8Q8K9", "phone": "038018010"}, {"id": "workplace_64", "type": "รพ.สต.", "name": "รพ.สต.บ้านหนองพะวา", "tambon": "บางบุตร", "district": "บ้านค่าย", "map_link": "https://maps.app.goo.gl/u3XuBGruCd7vEsQA7", "phone": ""}, {"id": "workplace_65", "type": "โรงพยาบาล", "name": "รพ.ปลวกแดง", "tambon": "ปลวกแดง", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/o9SKoSzyD1MKh7rv9", "phone": "033650413"}, {"id": "workplace_66", "type": "สสอ.", "name": "สสอ.ปลวกแดง", "tambon": "ปลวกแดง", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/edjh9mBkvHYV5QDHA", "phone": "038659069"}, {"id": "workplace_67", "type": "รพ.สต.", "name": "รพ.สต.บ้านหนองค้างคาว", "tambon": "ตาสิทธิ์", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/jrRuXP7ZAyJL5wit5", "phone": "0838586253"}, {"id": "workplace_68", "type": "รพ.สต.", "name": "รพ.สต.บ้านมาบยางพร", "tambon": "มาบยางพร", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/cgS1iAtkCgucaQTv8", "phone": "038891599"}, {"id": "workplace_69", "type": "รพ.สต.", "name": "รพ.สต.บ้านหนองไร่", "tambon": "หนองไร่", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/jM3Xx7aZGXf8jqud9", "phone": "0892493434"}, {"id": "workplace_70", "type": "รพ.สต.", "name": "รพ.สต.คลองน้ำแดง", "tambon": "หนองไร่่", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/bQZVgBqjvCRpn9566", "phone": "0871496499"}, {"id": "workplace_71", "type": "รพ.สต.", "name": "รพ.สต.บ้านปากแพรก", "tambon": "ละหาร", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/728bjT99fKdAiPtQ6", "phone": "038961237"}, {"id": "workplace_72", "type": "รพ.สต.", "name": "รพ.สต.บึงตาต้า", "tambon": "หนองไร่", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/si9GUkXkAf3ijUC99", "phone": ""}, {"id": "workplace_73", "type": "รพ.สต.", "name": "รพ.สต.บ้านห้วยปราบ", "tambon": "มาบยางพร", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/ckWcoTHTihqX4yeTA", "phone": ""}],
-    districtBudgets: [{"district": "เมืองระยอง", "budget": 4625950}, {"district": "นิคม", "budget": 2802850}, {"district": "บ้านฉาง", "budget": 6589290}, {"district": "เขาชะเมา", "budget": 1419050}, {"district": "แกลง", "budget": 6721600}, {"district": "วังจันทร์", "budget": 2500510}, {"district": "บ้านค่าย", "budget": 1573620}, {"district": "ปลวกแดง", "budget": 1986940}],
-    unitBudgets: [{"unit": "รพ.ระยอง", "district": "เมืองระยอง", "y2564": 1263800, "y2565": 0, "y2566": 398600, "y2567": 500000, "y2568": 0}, {"unit": "รพ.เฉลิมพระเกียรติฯ", "district": "เมืองระยอง", "y2564": 73500, "y2565": 0, "y2566": 499680, "y2567": 0, "y2568": 0}, {"unit": "สสอ.เมืองระยอง", "district": "เมืองระยอง", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 482400, "y2568": 0}, {"unit": "รพ.สต.กะเฉด_(ครั้งที่_1)", "district": "เมืองระยอง", "y2564": 0, "y2565": 0, "y2566": 50000, "y2567": 99500, "y2568": 91600}, {"unit": "รพ.สต.กะเฉด_(ครั้งที่_2)", "district": "เมืองระยอง", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 0, "y2568": 76970}, {"unit": "รพ.สต.แกลง", "district": "เมืองระยอง", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 94900, "y2568": 99400}, {"unit": "รพ.นิคมพัฒนา", "district": "นิคม", "y2564": 165750, "y2565": 498500, "y2566": 0, "y2567": 499100, "y2568": 498600}, {"unit": "สสอ.นิคมพัฒนา_(ครั้งที่_1)", "district": "นิคม", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 494900, "y2568": 0}, {"unit": "สสอ.นิคมพัฒนา_(ครั้ั้งที่_2)", "district": "นิคม", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 450700, "y2568": 0}, {"unit": "รพ.สต.บ้านกระเฉท", "district": "นิคม", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 96000, "y2568": 99300}, {"unit": "รพ.บ้านฉาง_(ครั้งที่_1)", "district": "บ้านฉาง", "y2564": 1453000, "y2565": 348850, "y2566": 499700, "y2567": 499600, "y2568": 500000}, {"unit": "รพ.บ้านฉาง_(ครั้ั้งที่_2)", "district": "บ้านฉาง", "y2564": 0, "y2565": 0, "y2566": 499600, "y2567": 0, "y2568": 0}, {"unit": "สสอ.บ้านฉาง_(ครั้งที่_1)", "district": "บ้านฉาง", "y2564": 0, "y2565": 0, "y2566": 499400, "y2567": 491400, "y2568": 490500}, {"unit": "สสอ.บ้านฉาง_(ครั้ั้งที่_2)", "district": "บ้านฉาง", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 479400, "y2568": 0}, {"unit": "ศูนย์บริการสาธารณสุข_อบต.สำนักท้อน", "district": "บ้านฉาง", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 390840, "y2568": 0}, {"unit": "รพ.สต.บ้านสระแก้ว", "district": "บ้านฉาง", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 0, "y2568": 83300}, {"unit": "รพ.แกลง", "district": "แกลง", "y2564": 1168900, "y2565": 0, "y2566": 499600, "y2567": 500000, "y2568": 499800}, {"unit": "รพ.สต.กองดิน_(ครั้งที่_1)", "district": "แกลง", "y2564": 0, "y2565": 0, "y2566": 50000, "y2567": 99200, "y2568": 97000}, {"unit": "รพ.สต.กองดิน_(ครั้งที่_2)", "district": "แกลง", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 95600, "y2568": 96000}, {"unit": "รพ.สต.คลองป่าไม้_(ครั้งที่_1)", "district": "แกลง", "y2564": 0, "y2565": 0, "y2566": 44800, "y2567": 94600, "y2568": 0}, {"unit": "รพ.สต.คลองป่าไม้_(ครั้งที่_2)", "district": "แกลง", "y2564": 0, "y2565": 0, "y2566": 84600, "y2567": 0, "y2568": 0}, {"unit": "รพ.สต.บ้านนา", "district": "แกลง", "y2564": 0, "y2565": 0, "y2566": 50000, "y2567": 80000, "y2568": 99200}, {"unit": "รพ.วังจันทร์", "district": "วังจันทร์", "y2564": 321100, "y2565": 385100, "y2566": 0, "y2567": 434600, "y2568": 300000}, {"unit": "สสอ.บ้านวังจันทร์", "district": "วังจันทร์", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 96400, "y2568": 0}, {"unit": "รพ.สต.บ้านคลองเขต", "district": "วังจันทร์", "y2564": 0, "y2565": 0, "y2566": 98550, "y2567": 83300, "y2568": 0}],
-    inventory: [{"unit": "รพ.ระยอง", "equipment": "ไม้เท้าอลูมิเนียมแบบสามขา", "total": 16, "damaged": 0, "available": 0, "borrowed": 16}, {"unit": "รพ.ระยอง", "equipment": "ไม้เท้าสำหรับคนตาบอดพับได้", "total": 10, "damaged": 0, "available": 0, "borrowed": 10}, {"unit": "รพ.ระยอง", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับให้เหมาะสมกับความพิการได้", "total": 47, "damaged": 0, "available": 0, "borrowed": 47}, {"unit": "รพ.ระยอง", "equipment": "เบาะรองนั่งสำหรับคนพิการ", "total": 3, "damaged": 0, "available": 0, "borrowed": 3}, {"unit": "รพ.ระยอง", "equipment": "แผ่นรองตัวสำหรับผู้ป่วยอัมพาตหรือที่นอนลม", "total": 1, "damaged": 0, "available": 0, "borrowed": 1}, {"unit": "รพ.ระยอง", "equipment": "เตียงฝึกยืนสำหรับเด็ก", "total": 1, "damaged": 0, "available": 0, "borrowed": 1}, {"unit": "รพ.ระยอง", "equipment": "รถเข็นแบบชนิดเบา", "total": 1, "damaged": 0, "available": 0, "borrowed": 1}, {"unit": "รพ.ระยอง", "equipment": "รถเข็นนั่งปรับเอนได้", "total": 21, "damaged": 0, "available": 0, "borrowed": 21}, {"unit": "รพ.ระยอง", "equipment": "ที่นอนลมแบบลอน_(ใหญ่)", "total": 24, "damaged": 0, "available": 0, "borrowed": 24}, {"unit": "รพ.ระยอง", "equipment": "ที่นอนลมแบบรังผึ้ง", "total": 4, "damaged": 0, "available": 0, "borrowed": 4}, {"unit": "รพ.ระยอง", "equipment": "เบาะรองนั่งป้องกันแผลกดทับ", "total": 48, "damaged": 0, "available": 0, "borrowed": 48}, {"unit": "รพ.ระยอง", "equipment": "ที่นั่งสำหรับถ่ายและอาบน้ำได้", "total": 6, "damaged": 0, "available": 0, "borrowed": 6}, {"unit": "รพ.ระยอง", "equipment": "เครื่องผลิตออกซิเจน_ขนาด_5_ลิตร", "total": 7, "damaged": 0, "available": 0, "borrowed": 7}, {"unit": "รพ.ระยอง", "equipment": "เครื่องผลิตออกซิเจน_ขนาด_10_ลิตร", "total": 2, "damaged": 0, "available": 0, "borrowed": 2}, {"unit": "รพ.ระยอง", "equipment": "เครื่องดูดเสมหะ_(SUCTION)", "total": 8, "damaged": 0, "available": 0, "borrowed": 8}, {"unit": "รพ.ระยอง", "equipment": "เตียงผู้ป่วยเฟาว์เล่อร์แบบ_3_ไก_(แบบ_ก)", "total": 22, "damaged": 0, "available": 0, "borrowed": 22}, {"unit": "รพ.ระยอง", "equipment": "เตียงผู้ป่วยสามไกร์ราวสไลด์พร้อมเบาะและเสาน้ำเกลือ", "total": 5, "damaged": 0, "available": 0, "borrowed": 5}, {"unit": "รพ.เฉลิมพระเกียรติฯ", "equipment": "ไม้ค้ำยันรักแร้แบบอลูมิเนียม", "total": 82, "damaged": 2, "available": 24, "borrowed": 56}, {"unit": "รพ.เฉลิมพระเกียรติฯ", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับให้เหมาะสมกับความพิการได้", "total": 25, "damaged": 0, "available": 1, "borrowed": 24}, {"unit": "รพ.บ้านฉาง", "equipment": "ไม้ค้ำยันรักแร้แบบอลูมิเนียม", "total": 84, "damaged": 0, "available": 40, "borrowed": 44}, {"unit": "รพ.บ้านฉาง", "equipment": "ไม้เท้าอลูมิเนียมแบบสามขา", "total": 101, "damaged": 0, "available": 40, "borrowed": 61}, {"unit": "รพ.บ้านฉาง", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับให้เหมาะสมกับความพิการได้", "total": 60, "damaged": 2, "available": 0, "borrowed": 58}, {"unit": "รพ.บ้านฉาง", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับไม่ได้", "total": 21, "damaged": 0, "available": 21, "borrowed": 0}, {"unit": "รพ.บ้านฉาง", "equipment": "เตียงฝึกยืนสำหรับเด็ก", "total": 1, "damaged": 0, "available": 1, "borrowed": 0}, {"unit": "รพ.บ้านฉาง", "equipment": "รถเข็นนั่งปรับเอนได้", "total": 1, "damaged": 0, "available": 0, "borrowed": 1}, {"unit": "รพ.บ้านฉาง", "equipment": "ที่นอนลมแบบลอน_(ใหญ่)", "total": 42, "damaged": 0, "available": 0, "borrowed": 42}, {"unit": "รพ.บ้านฉาง", "equipment": "ที่นอนลมแบบรังผึ้ง", "total": 1, "damaged": 0, "available": 1, "borrowed": 0}, {"unit": "รพ.บ้านฉาง", "equipment": "ที่นั่งสำหรับถ่ายและอาบน้ำได้", "total": 5, "damaged": 0, "available": 4, "borrowed": 1}, {"unit": "รพ.บ้านฉาง", "equipment": "Push_up_box", "total": 6, "damaged": 0, "available": 0, "borrowed": 6}, {"unit": "รพ.บ้านฉาง", "equipment": "เครื่องผลิตออกซิเจน_ขนาด_10_ลิตร", "total": 22, "damaged": 12, "available": 3, "borrowed": 7}, {"unit": "รพ.บ้านฉาง", "equipment": "เครื่องดูดเสมหะ_(SUCTION)", "total": 20, "damaged": 0, "available": 3, "borrowed": 17}, {"unit": "รพ.บ้านฉาง", "equipment": "เตียงผู้ป่วยเฟาว์เล่อร์แบบ_3_ไก_(แบบ_ก)", "total": 57, "damaged": 0, "available": 0, "borrowed": 57}, {"unit": "รพ.บ้านฉาง", "equipment": "เตียงผู้ป่วยสามไกร์ราวสไลด์พร้อมเบาะและเสาน้ำเกลือ", "total": 12, "damaged": 0, "available": 12, "borrowed": 0}, {"unit": "รพ.บ้านฉาง", "equipment": "เครื่องช่วยเดินชนิด_4_ขา_(WALKER)", "total": 89, "damaged": 0, "available": 30, "borrowed": 59}, {"unit": "รพ.บ้านฉาง", "equipment": "ไม้เท้า_1_ปุ่ม", "total": 30, "damaged": 0, "available": 30, "borrowed": 0}, {"unit": "สสอ.บ้านฉาง", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับให้เหมาะสมกับความพิการได้", "total": 9, "damaged": 0, "available": 0, "borrowed": 9}, {"unit": "สสอ.บ้านฉาง", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับไม่ได้", "total": 30, "damaged": 0, "available": 15, "borrowed": 15}, {"unit": "สสอ.บ้านฉาง", "equipment": "ที่นอนลมแบบลอน_(ใหญ่)", "total": 16, "damaged": 0, "available": 5, "borrowed": 11}, {"unit": "รพ.แกลง", "equipment": "ไม้เท้าสำหรับคนตาบอดพับได้", "total": 4, "damaged": 0, "available": 0, "borrowed": 4}, {"unit": "รพ.แกลง", "equipment": "ไม้ค้ำยันรักแร้แบบไม้", "total": 13, "damaged": 0, "available": 0, "borrowed": 13}],
+    equipment: [{"id": "Equip_01", "name": "เครื่องช่วยเดินชนิด_4_ขา_(walker)"}, {"id": "Equip_02", "name": "เครื่องช่วยเดินชนิด_4_ขา_(walker)_แบบพับได้"}, {"id": "Equip_03", "name": "เครื่องดูดเสมหะ_(suction)"}, {"id": "Equip_04", "name": "เครื่องผลิตออกซิเจน_ขนาด_5_ลิตร"}, {"id": "Equip_05", "name": "เครื่องผลิตออกซิเจน_ขนาด_10_ลิตร"}, {"id": "Equip_06", "name": "ชุดสายระบายปัสสาวะ"}, {"id": "Equip_07", "name": "ชุดสายให้อาหารสำหรับผู้ป่วย"}, {"id": "Equip_08", "name": "ที่นอนลมกันแผงกดทับ"}, {"id": "Equip_09", "name": "ที่นอนรองกันแผงกดทับ"}, {"id": "Equip_10", "name": "ไม้ค้ำยันรักแร้แบบอลูมิเนียม"}, {"id": "Equip_11", "name": "ไม้ค้ำยันรักแร้แบบไม้"}, {"id": "Equip_12", "name": "ไม้เท้าอลูมิเนียมแบบสามขา"}, {"id": "Equip_13", "name": "ไม้เท้าสำหรับคนตาบอดพับได้"}, {"id": "Equip_14", "name": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับให้เหมาะสมกับความพิการได้"}, {"id": "Equip_15", "name": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับไม่ได้"}, {"id": "Equip_16", "name": "รถนั่งคนพิการชนิดมอเตอร์ไฟฟ้า"}, {"id": "Equip_17", "name": "เบาะรองนั่งสำหรับคนพิการ"}, {"id": "Equip_18", "name": "เตียงผู้ป่วยแบบมือหมุน_2_ไก"}, {"id": "Equip_19", "name": "เตียงผู้ป่วยแบบมือหมุน_3_ไก"}, {"id": "Equip_20", "name": "เตียงผู้ป่วยไฟฟ้า"}, {"id": "Equip_21", "name": "แผ่นรองตัวสำหรับผู้ป่วยอัมพาตหรือที่นอนลม"}, {"id": "Equip_22", "name": "โต๊ะวางอาหารผู้ป่วย"}, {"id": "Equip_23", "name": "โต๊ะหัดยืนสำหรับคนพิการ"}, {"id": "Equip_24", "name": "โต๊ะหัดเดินสำหรับคนพิการ"}, {"id": "Equip_25", "name": "เก้าอี้นั่งอาบน้ำ"}, {"id": "Equip_26", "name": "เก้าอี้นั่งถ่ายสำหรับคนพิการ"}, {"id": "Equip_27", "name": "ราวจับในห้องน้ำ"}, {"id": "Equip_28", "name": "อุปกรณ์ช่วยสวมถุงเท้า"}, {"id": "Equip_29", "name": "อื่นๆ"}],
+    serviceUnits: [{"id": "workplace_01", "type": "โรงพยาบาล", "name": "รพ.ระยอง", "tambon": "ท่าประดู่", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/x7ypYXDBCfHKyqUm8", "phone": "038611104"}, {"id": "workplace_02", "type": "โรงพยาบาล", "name": "รพ.เฉลิมพระเกียรติฯ", "tambon": "ห้วยโป่ง", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/FwZBL9JLZx3am5es8", "phone": "038684444"}, {"id": "workplace_03", "type": "สสอ.", "name": "สสอ.เมืองระยอง", "tambon": "เนินพระ", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/PtQ8f3tvGSG9rJjYA", "phone": "038614435"}, {"id": "workplace_04", "type": "รพ.สต.", "name": "รพ.สต.กะเฉด", "tambon": "มาบข่า", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/scSrzCWTTkBhvGpV9", "phone": "038634222"}, {"id": "workplace_05", "type": "รพ.สต.", "name": "รพ.สต.แกลง", "tambon": "แกลง", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/verN7HsCeySiZ3faA", "phone": "038634315"}, {"id": "workplace_06", "type": "รพ.สต.", "name": "รพ.สต.ทับมา", "tambon": "ทับมา", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/tCM7Y3FgdYnL58hW9", "phone": "038634321"}, {"id": "workplace_07", "type": "รพ.สต.", "name": "รพ.สต.เนินฆ้อ", "tambon": "เนินพระ", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/1Y6rS6XDpdLaQb719", "phone": "038614458"}, {"id": "workplace_08", "type": "รพ.สต.", "name": "รพ.สต.เพ", "tambon": "เพ", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/Wr8A8vB8G9N9rGcj8", "phone": "038634443"}, {"id": "workplace_09", "type": "รพ.สต.", "name": "รพ.สต.บ้านฉาง", "tambon": "บ้านฉาง", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/SZUmhT8PU6pXP4vq8", "phone": "038634461"}, {"id": "workplace_10", "type": "รพ.สต.", "name": "รพ.สต.สำนักทอน", "tambon": "สำนักทอน", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/rC5gaTfV3RxYRHLa6", "phone": "038634378"}, {"id": "workplace_11", "type": "รพ.สต.", "name": "รพ.สต.ห้วยโป่ง", "tambon": "ห้วยโป่ง", "district": "เมืองระยอง", "map_link": "https://maps.app.goo.gl/XjU4z2YwmMvdMLGTA", "phone": "038684431"}, {"id": "workplace_12", "type": "โรงพยาบาล", "name": "รพ.นิคมพัฒนา", "tambon": "มาบยางพร", "district": "นิคมพัฒนา", "map_link": "https://maps.app.goo.gl/Vbgu2o3wSLaVZHUh9", "phone": "038898222"}, {"id": "workplace_13", "type": "สสอ.", "name": "สสอ.นิคมพัฒนา", "tambon": "มาบยางพร", "district": "นิคมพัฒนา", "map_link": "https://maps.app.goo.gl/JkAdWV9LhSy4iSAc9", "phone": "038898248"}, {"id": "workplace_14", "type": "รพ.สต.", "name": "รพ.สต.บ้านกระเฉท", "tambon": "นิคมพัฒนา", "district": "นิคมพัฒนา", "map_link": "https://maps.app.goo.gl/Md66CWKjDSQwPfTr6", "phone": "038898326"}, {"id": "workplace_15", "type": "รพ.สต.", "name": "รพ.สต.บ้านบึง", "tambon": "พนานิคม", "district": "นิคมพัฒนา", "map_link": "https://maps.app.goo.gl/uWFkSEwPihmjRRfRA", "phone": "038898339"}, {"id": "workplace_16", "type": "รพ.สต.", "name": "รพ.สต.มาบข่า", "tambon": "มาบข่า", "district": "นิคมพัฒนา", "map_link": "https://maps.app.goo.gl/FGXyZwkbB87wfzid7", "phone": "038898356"}, {"id": "workplace_17", "type": "รพ.สต.", "name": "รพ.สต.มาบยางพร", "tambon": "มาบยางพร", "district": "นิคมพัฒนา", "map_link": "https://maps.app.goo.gl/KjwPaAeGFbSJ6FVy5", "phone": "038898366"}, {"id": "workplace_18", "type": "โรงพยาบาล", "name": "รพ.บ้านฉาง", "tambon": "บ้านฉาง", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/pv5qXLqVggxq6Wnh9", "phone": "038601450"}, {"id": "workplace_19", "type": "สสอ.", "name": "สสอ.บ้านฉาง", "tambon": "บ้านฉาง", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/Xwa7fqZ6a1n3SwXH7", "phone": "038601370"}, {"id": "workplace_20", "type": "รพ.สต.", "name": "รพ.สต.คลองปูน", "tambon": "คลองปูน", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/wNhQZG6a3FDjx2uc7", "phone": "038601337"}, {"id": "workplace_21", "type": "รพ.สต.", "name": "รพ.สต.ชากโดน", "tambon": "ชากโดน", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/WzX3xSedGsw5rZC2A", "phone": "038601355"}, {"id": "workplace_22", "type": "รพ.สต.", "name": "รพ.สต.พลา", "tambon": "พลา", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/aeEtJRz3nN5qRt2F6", "phone": "038601315"}, {"id": "workplace_23", "type": "รพ.สต.", "name": "รพ.สต.บางบุตร", "tambon": "บางบุตร", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/oBdR9QPxHyeMBgky7", "phone": "038601306"}, {"id": "workplace_24", "type": "รพ.สต.", "name": "รพ.สต.บ้านฉาง", "tambon": "บ้านฉาง", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/UpWggQvVq9c5gXQY6", "phone": "038601380"}, {"id": "workplace_25", "type": "รพ.สต.", "name": "รพ.สต.สำนักท้อน", "tambon": "สำนักท้อน", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/WsA6Uu1mWWXGcLyM9", "phone": "038601393"}, {"id": "workplace_26", "type": "รพ.สต.", "name": "รพ.สต.หนองบัว", "tambon": "หนองบัว", "district": "บ้านฉาง", "map_link": "https://maps.app.goo.gl/vxu51v3nB2x82oqe9", "phone": "038601327"}, {"id": "workplace_27", "type": "โรงพยาบาล", "name": "รพ.เขาชะเมาฯ", "tambon": "เขาชะเมา", "district": "เขาชะเมา", "map_link": "https://maps.app.goo.gl/R7FjDxFH6gNJoKu48", "phone": "038659100"}, {"id": "workplace_28", "type": "รพ.สต.", "name": "รพ.สต.บ้านชำฆ้อ", "tambon": "ชำฆ้อ", "district": "เขาชะเมา", "map_link": "https://maps.app.goo.gl/xmVw6MFu3EFkjQyM9", "phone": "038659147"}, {"id": "workplace_29", "type": "รพ.สต.", "name": "รพ.สต.แสงส่องหล้า_2", "tambon": "ชำฆ้อ", "district": "เขาชะเมา", "map_link": "https://maps.app.goo.gl/vxPaNrqaEFp1U2AX9", "phone": "038659158"}, {"id": "workplace_30", "type": "รพ.สต.", "name": "รพ.สต.บ้านเขาน้อย", "tambon": "เขาน้อย", "district": "เขาชะเมา", "map_link": "https://maps.app.goo.gl/vMSdCWswCRrwVnAm8", "phone": "038659189"}, {"id": "workplace_31", "type": "รพ.สต.", "name": "รพ.สต.บ้านเขาชะเมา", "tambon": "เขาชะเมา", "district": "เขาชะเมา", "map_link": "https://maps.app.goo.gl/fvXg2Yvx8xkp17Mg9", "phone": "038659179"}, {"id": "workplace_32", "type": "รพ.สต.", "name": "รพ.สต.บ้านหนองทรายขาว", "tambon": "หนองทรายขาว", "district": "เขาชะเมา", "map_link": "https://maps.app.goo.gl/Z1iBgKdj1cGBvhQQ9", "phone": "038659169"}, {"id": "workplace_33", "type": "โรงพยาบาล", "name": "รพ.แกลง", "tambon": "ทางเกวียน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/LXcKmbBj8r5iUMvf6", "phone": "038665444"}, {"id": "workplace_34", "type": "รพ.สต.", "name": "รพ.สต.กองดิน", "tambon": "กองดิน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/Ly4RgUHv9dAkCEPw6", "phone": "038665419"}, {"id": "workplace_35", "type": "รพ.สต.", "name": "รพ.สต.คลองป่าไม้", "tambon": "คลองป่าไม้", "district": "แกลง", "map_link": "https://maps.app.goo.gl/W6NnL5bWbZkj2e9s9", "phone": "038665465"}, {"id": "workplace_36", "type": "รพ.สต.", "name": "รพ.สต.ชากพง", "tambon": "ชากพง", "district": "แกลง", "map_link": "https://maps.app.goo.gl/Wn2ZzStNSXHxcpCy6", "phone": "038665439"}, {"id": "workplace_37", "type": "รพ.สต.", "name": "รพ.สต.ทางเกวียน", "tambon": "ทางเกวียน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/5Wx4f2Gz7L9P3t2Z9", "phone": "038665477"}, {"id": "workplace_38", "type": "รพ.สต.", "name": "รพ.สต.ทุ่งควายกิน", "tambon": "ทุ่งควายกิน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/8a1cSwD5PaKjt9TY7", "phone": "038665385"}, {"id": "workplace_39", "type": "รพ.สต.", "name": "รพ.สต.บ้านนา", "tambon": "บ้านนา", "district": "แกลง", "map_link": "https://maps.app.goo.gl/rxLnPVLB5aZpShS68", "phone": "038665307"}, {"id": "workplace_40", "type": "รพ.สต.", "name": "รพ.สต.ป่ายุบใน", "tambon": "ป่ายุบใน", "district": "แกลง", "map_link": "https://maps.app.goo.gl/5CiB8PFXN7RqyZmx9", "phone": "038665396"}, {"id": "workplace_41", "type": "รพ.สต.", "name": "รพ.สต.พังราด", "tambon": "พังราด", "district": "แกลง", "map_link": "https://maps.app.goo.gl/x3k9Vb9UwEcPjxj97", "phone": "038665407"}, {"id": "workplace_42", "type": "รพ.สต.", "name": "รพ.สต.วังหว้า", "tambon": "วังหว้า", "district": "แกลง", "map_link": "https://maps.app.goo.gl/Z1Y4Cy2eeB5vVEV78", "phone": "038665486"}, {"id": "workplace_43", "type": "รพ.สต.", "name": "รพ.สต.สองสลึง", "tambon": "สองสลึง", "district": "แกลง", "map_link": "https://maps.app.goo.gl/PUkr2ZXJA4THCuAd8", "phone": "038665329"}, {"id": "workplace_44", "type": "รพ.สต.", "name": "รพ.สต.เนินกว้าว", "tambon": "เนินกว้าว", "district": "แกลง", "map_link": "https://maps.app.goo.gl/oo3WTKy2F5NkNs6r8", "phone": "038665374"}, {"id": "workplace_45", "type": "รพ.สต.", "name": "รพ.สต.แกลง", "tambon": "แกลง", "district": "แกลง", "map_link": "https://maps.app.goo.gl/iHNUu9zXPhJcEfVE9", "phone": "038665363"}, {"id": "workplace_46", "type": "โรงพยาบาล", "name": "รพ.วังจันทร์", "tambon": "วังจันทร์", "district": "วังจันทร์", "map_link": "https://maps.app.goo.gl/qb9jaBqvKVJk2Yt38", "phone": "038652044"}, {"id": "workplace_47", "type": "สสอ.", "name": "สสอ.บ้านวังจันทร์", "tambon": "วังจันทร์", "district": "วังจันทร์", "map_link": "https://maps.app.goo.gl/eXfEFuadoHF1qjYZ7", "phone": "038652061"}, {"id": "workplace_48", "type": "รพ.สต.", "name": "รพ.สต.บ้านคลองเขต", "tambon": "ชุมแสง", "district": "วังจันทร์", "map_link": "https://maps.app.goo.gl/Eo17LdF3aBsLu1sw6", "phone": "038652094"}, {"id": "workplace_49", "type": "รพ.สต.", "name": "รพ.สต.บ้านวังจันทร์", "tambon": "วังจันทร์", "district": "วังจันทร์", "map_link": "https://maps.app.goo.gl/7Y2mMqHx3BzQAJkm8", "phone": "038652129"}, {"id": "workplace_50", "type": "รพ.สต.", "name": "รพ.สต.บ้านวังหว้า", "tambon": "วังหว้า", "district": "วังจันทร์", "map_link": "https://maps.app.goo.gl/XXbP7gHW9QxQmAcc7", "phone": "038652072"}, {"id": "workplace_51", "type": "รพ.สต.", "name": "รพ.สต.บ้านห้วยทับมอญ", "tambon": "ห้วยทับมอญ", "district": "วังจันทร์", "map_link": "https://maps.app.goo.gl/cG8h8yyS41UjDrPP8", "phone": "038652107"}, {"id": "workplace_52", "type": "รพ.สต.", "name": "รพ.สต.บ้านเขาตาอิ่น", "tambon": "เขาบายศรี", "district": "วังจันทร์", "map_link": "https://maps.app.goo.gl/Rp4cJBP41A7Bk5rDA", "phone": "038652084"}, {"id": "workplace_53", "type": "โรงพยาบาล", "name": "รพ.บ้านค่าย", "tambon": "บ้านค่าย", "district": "บ้านค่าย", "map_link": "https://maps.app.goo.gl/U5oDTMdY1jPcEhfZ6", "phone": "038655444"}, {"id": "workplace_54", "type": "สสอ.", "name": "สสอ.บ้านค่าย", "tambon": "บ้านค่าย", "district": "บ้านค่าย", "map_link": "https://maps.app.goo.gl/nfF59rBDfpjQM5Gz8", "phone": "038655405"}, {"id": "workplace_55", "type": "รพ.สต.", "name": "รพ.สต.หนองสะพาน", "tambon": "หนองตะพาน", "district": "บ้านค่าย", "map_link": "https://maps.app.goo.gl/J6nGzMUtD6qjHvjF9", "phone": "038655427"}, {"id": "workplace_56", "type": "รพ.สต.", "name": "รพ.สต.เนินสว่าง", "tambon": "บ้านค่าย", "district": "บ้านค่าย", "map_link": "https://maps.app.goo.gl/7TCCzqacRCcSjQ3p9", "phone": "038655393"}, {"id": "workplace_57", "type": "รพ.สต.", "name": "รพ.สต.บ้านฉาง", "tambon": "บ้านฉาง", "district": "บ้านค่าย", "map_link": "https://maps.app.goo.gl/Fv8q1y8sP7kBiRdv9", "phone": "038655416"}, {"id": "workplace_58", "type": "รพ.สต.", "name": "รพ.สต.คลองเดือน", "tambon": "ชากบก", "district": "บ้านค่าย", "map_link": "https://maps.app.goo.gl/D4GcYNWUb8BqdHnu8", "phone": "038655439"}, {"id": "workplace_59", "type": "โรงพยาบาล", "name": "รพ.ปลวกแดง", "tambon": "ปลวกแดง", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/uD6XTbFkr5VCdBTQ7", "phone": "038957500"}, {"id": "workplace_60", "type": "สสอ.", "name": "สสอ.ปลวกแดง", "tambon": "ปลวกแดง", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/FFVSLnpT87Rb3JYs8", "phone": "038957582"}, {"id": "workplace_61", "type": "รพ.สต.", "name": "รพ.สต.บ้านหนองค้างคาว", "tambon": "หนองไร่", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/DfqeWsLABJARXaim9", "phone": "038957560"}, {"id": "workplace_62", "type": "รพ.สต.", "name": "รพ.สต.บ้านมาบยางพร", "tambon": "มาบยางพร", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/k3R8N1qvqZ8J5GAo9", "phone": "038957545"}, {"id": "workplace_63", "type": "รพ.สต.", "name": "รพ.สต.บ้านตาสิทธิ์", "tambon": "ตาสิทธิ์", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/c1YrZPtHaBEPX6kv7", "phone": "038957571"}, {"id": "workplace_64", "type": "รพ.สต.", "name": "รพ.สต.ละหานปลาค้าว", "tambon": "ละหานปลาค้าว", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/CqSq4b2iVFzQgCN18", "phone": "038957594"}, {"id": "workplace_65", "type": "รพ.สต.", "name": "รพ.สต.ปลวกแดง", "tambon": "ปลวกแดง", "district": "ปลวกแดง", "map_link": "https://maps.app.goo.gl/wPUwuANvkY4h7cDB9", "phone": "038957534"}, {"id": "workplace_66", "type": "รพ.สต.", "name": "รพ.สต.บ้านพลงตาเอี่ยม", "tambon": "ห้วยโป่ง", "district": "เมืองระยอง", "map_link": "", "phone": ""}, {"id": "workplace_67", "type": "รพ.สต.", "name": "รพ.สต.บ้านเนินศาลา", "tambon": "เนินพระ", "district": "เมืองระยอง", "map_link": "", "phone": ""}, {"id": "workplace_68", "type": "รพ.สต.", "name": "รพ.สต.บ้านเนาขุนไทย", "tambon": "เนินพระ", "district": "เมืองระยอง", "map_link": "", "phone": ""}, {"id": "workplace_69", "type": "รพ.สต.", "name": "รพ.สต.ชุมแสง", "tambon": "ชุมแสง", "district": "วังจันทร์", "map_link": "", "phone": ""}, {"id": "workplace_70", "type": "รพ.สต.", "name": "รพ.สต.ตากวน", "tambon": "ตาขัน", "district": "บ้านค่าย", "map_link": "", "phone": ""}, {"id": "workplace_71", "type": "รพ.สต.", "name": "รพ.สต.บ้านแม่น้ำคู้", "tambon": "แม่น้ำคู้", "district": "ปลวกแดง", "map_link": "", "phone": ""}, {"id": "workplace_72", "type": "รพ.สต.", "name": "รพ.สต.นาเริง", "tambon": "นาเริง", "district": "บ้านฉาง", "map_link": "", "phone": ""}, {"id": "workplace_73", "type": "รพ.สต.", "name": "รพ.สต.เชิงเนิน", "tambon": "เชิงเนิน", "district": "เมืองระยอง", "map_link": "", "phone": ""}],
+    districtBudgets: [{"district": "นิคม", "budget": 2802850}, {"district": "บ้านค่าย", "budget": 1573620}, {"district": "บ้านฉาง", "budget": 6589290}, {"district": "ปลวกแดง", "budget": 1986940}, {"district": "วังจันทร์", "budget": 2500510}, {"district": "เขาชะเมา", "budget": 1419050}, {"district": "เมืองระยอง", "budget": 4625950}, {"district": "แกลง", "budget": 6721600}],
+    unitBudgets: [{"unit": "รพ.ระยอง", "district": "เมืองระยอง", "y2564": 1263800, "y2565": 0, "y2566": 398600, "y2567": 500000, "y2568": 0}, {"unit": "รพ.เฉลิมพระเกียรติฯ", "district": "เมืองระยอง", "y2564": 73500, "y2565": 0, "y2566": 499680, "y2567": 0, "y2568": 0}, {"unit": "สสอ.เมืองระยอง", "district": "เมืองระยอง", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 482400, "y2568": 0}, {"unit": "รพ.สต.กะเฉด_(ครั้งที่_1)", "district": "เมืองระยอง", "y2564": 0, "y2565": 0, "y2566": 50000, "y2567": 99500, "y2568": 91600}, {"unit": "รพ.สต.กะเฉด_(ครั้งที่_2)", "district": "เมืองระยอง", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 95800, "y2568": 93900}, {"unit": "รพ.นิคมพัฒนา", "district": "นิคม", "y2564": 165750, "y2565": 498500, "y2566": 0, "y2567": 499100, "y2568": 498600}, {"unit": "สสอ.นิคมพัฒนา_(ครั้งที่_1)", "district": "นิคม", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 494900, "y2568": 0}, {"unit": "สสอ.นิคมพัฒนา_(ครั้ั้งที่_2)", "district": "นิคม", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 450700, "y2568": 0}, {"unit": "รพ.สต.บ้านกระเฉท", "district": "นิคม", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 96000, "y2568": 99300}, {"unit": "รพ.บ้านฉาง_(ครั้งที่_1)", "district": "บ้านฉาง", "y2564": 1453000, "y2565": 348850, "y2566": 499700, "y2567": 499600, "y2568": 500000}, {"unit": "รพ.บ้านฉาง_(ครั้ั้งที่_2)", "district": "บ้านฉาง", "y2564": 0, "y2565": 0, "y2566": 499600, "y2567": 0, "y2568": 0}, {"unit": "สสอ.บ้านฉาง_(ครั้งที่_1)", "district": "บ้านฉาง", "y2564": 0, "y2565": 0, "y2566": 499400, "y2567": 491400, "y2568": 490500}, {"unit": "สสอ.บ้านฉาง_(ครั้ั้งที่_2)", "district": "บ้านฉาง", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 479400, "y2568": 0}, {"unit": "รพ.แกลง", "district": "แกลง", "y2564": 1168900, "y2565": 0, "y2566": 499600, "y2567": 500000, "y2568": 499800}, {"unit": "รพ.สต.กองดิน_(ครั้งที่_1)", "district": "แกลง", "y2564": 0, "y2565": 0, "y2566": 50000, "y2567": 99200, "y2568": 97000}, {"unit": "รพ.สต.กองดิน_(ครั้งที่_2)", "district": "แกลง", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 95600, "y2568": 96000}, {"unit": "รพ.วังจันทร์", "district": "วังจันทร์", "y2564": 321100, "y2565": 385100, "y2566": 0, "y2567": 434600, "y2568": 300000}, {"unit": "สสอ.บ้านวังจันทร์", "district": "วังจันทร์", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 96400, "y2568": 0}, {"unit": "รพ.สต.บ้านคลองเขต", "district": "วังจันทร์", "y2564": 0, "y2565": 0, "y2566": 98550, "y2567": 83300, "y2568": 0}, {"unit": "รพ.สต.บ้านวังจันทร์", "district": "วังจันทร์", "y2564": 0, "y2565": 0, "y2566": 98000, "y2567": 99400, "y2568": 98000}, {"unit": "รพ.สต.บ้านวังหว้า", "district": "วังจันทร์", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 0, "y2568": 95000}, {"unit": "รพ.บ้านค่าย", "district": "บ้านค่าย", "y2564": 0, "y2565": 208280, "y2566": 500000, "y2567": 0, "y2568": 0}, {"unit": "สสอ.บ้านค่าย", "district": "บ้านค่าย", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 487700, "y2568": 0}, {"unit": "รพ.ปลวกแดง", "district": "ปลวกแดง", "y2564": 0, "y2565": 0, "y2566": 279600, "y2567": 253000, "y2568": 0}, {"unit": "สสอ.ปลวกแดง", "district": "ปลวกแดง", "y2564": 0, "y2565": 0, "y2566": 0, "y2567": 494900, "y2568": 0}],
+    inventory: [{"unit": "รพ.ระยอง", "equipment": "ไม้เท้าอลูมิเนียมแบบสามขา", "total": 16, "damaged": 0, "available": 0, "borrowed": 16}, {"unit": "รพ.ระยอง", "equipment": "ไม้เท้าสำหรับคนตาบอดพับได้", "total": 10, "damaged": 0, "available": 0, "borrowed": 10}, {"unit": "รพ.ระยอง", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับให้เหมาะสมกับความพิการได้", "total": 47, "damaged": 0, "available": 0, "borrowed": 47}, {"unit": "รพ.ระยอง", "equipment": "เบาะรองนั่งสำหรับคนพิการ", "total": 3, "damaged": 0, "available": 0, "borrowed": 3}, {"unit": "รพ.ระยอง", "equipment": "เตียงผู้ป่วยแบบมือหมุน_2_ไก", "total": 10, "damaged": 0, "available": 0, "borrowed": 10}, {"unit": "รพ.นิคมพัฒนา", "equipment": "ไม้ค้ำยันรักแร้แบบอลูมิเนียม", "total": 25, "damaged": 0, "available": 17, "borrowed": 8}, {"unit": "รพ.นิคมพัฒนา", "equipment": "ไม้เท้าอลูมิเนียมแบบสามขา", "total": 75, "damaged": 0, "available": 13, "borrowed": 62}, {"unit": "รพ.นิคมพัฒนา", "equipment": "ไม้ค้ำยันรักแร้แบบไม้", "total": 30, "damaged": 0, "available": 12, "borrowed": 18}, {"unit": "รพ.นิคมพัฒนา", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับให้เหมาะสมกับความพิการได้", "total": 25, "damaged": 5, "available": 20, "borrowed": 0}, {"unit": "รพ.บ้านฉาง", "equipment": "ไม้ค้ำยันรักแร้แบบอลูมิเนียม", "total": 84, "damaged": 0, "available": 40, "borrowed": 44}, {"unit": "รพ.บ้านฉาง", "equipment": "ไม้เท้าอลูมิเนียมแบบสามขา", "total": 101, "damaged": 0, "available": 40, "borrowed": 61}, {"unit": "รพ.บ้านฉาง", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับให้เหมาะสมกับความพิการได้", "total": 60, "damaged": 2, "available": 0, "borrowed": 58}, {"unit": "รพ.บ้านฉาง", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับไม่ได้", "total": 21, "damaged": 0, "available": 21, "borrowed": 0}, {"unit": "รพ.เขาชะเมาฯ", "equipment": "ไม้ค้ำยันรักแร้แบบอลูมิเนียม", "total": 26, "damaged": 0, "available": 0, "borrowed": 26}, {"unit": "รพ.เขาชะเมาฯ", "equipment": "ไม้เท้าสำหรับคนตาบอดพับได้", "total": 6, "damaged": 0, "available": 0, "borrowed": 6}, {"unit": "รพ.เขาชะเมาฯ", "equipment": "ไม้ค้ำยันรักแร้แบบไม้", "total": 16, "damaged": 0, "available": 0, "borrowed": 16}, {"unit": "รพ.เขาชะเมาฯ", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับให้เหมาะสมกับความพิการได้", "total": 18, "damaged": 0, "available": 8, "borrowed": 10}, {"unit": "รพ.แกลง", "equipment": "ไม้เท้าสำหรับคนตาบอดพับได้", "total": 4, "damaged": 0, "available": 0, "borrowed": 4}, {"unit": "รพ.แกลง", "equipment": "ไม้ค้ำยันรักแร้แบบไม้", "total": 13, "damaged": 0, "available": 0, "borrowed": 13}, {"unit": "รพ.แกลง", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับให้เหมาะสมกับความพิการได้", "total": 8, "damaged": 0, "available": 0, "borrowed": 8}, {"unit": "รพ.แกลง", "equipment": "เบาะรองนั่งสำหรับคนพิการ", "total": 13, "damaged": 0, "available": 1, "borrowed": 12}, {"unit": "รพ.วังจันทร์", "equipment": "ไม้ค้ำยันรักแร้แบบอลูมิเนียม", "total": 30, "damaged": 0, "available": 26, "borrowed": 4}, {"unit": "รพ.วังจันทร์", "equipment": "ไม้เท้าอลูมิเนียมแบบสามขา", "total": 50, "damaged": 0, "available": 43, "borrowed": 7}, {"unit": "รพ.วังจันทร์", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับให้เหมาะสมกับความพิการได้", "total": 8, "damaged": 0, "available": 7, "borrowed": 1}, {"unit": "รพ.วังจันทร์", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับไม่ได้", "total": 2, "damaged": 0, "available": 1, "borrowed": 1}, {"unit": "รพ.บ้านค่าย", "equipment": "ไม้เท้าอลูมิเนียมแบบสามขา", "total": 60, "damaged": 0, "available": 0, "borrowed": 60}, {"unit": "รพ.บ้านค่าย", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับให้เหมาะสมกับความพิการได้", "total": 45, "damaged": 0, "available": 0, "borrowed": 45}, {"unit": "รพ.บ้านค่าย", "equipment": "เบาะรองนั่งสำหรับคนพิการ", "total": 4, "damaged": 0, "available": 0, "borrowed": 4}, {"unit": "รพ.บ้านค่าย", "equipment": "แผ่นรองตัวสำหรับผู้ป่วยอัมพาตหรือที่นอนลม", "total": 42, "damaged": 0, "available": 0, "borrowed": 42}, {"unit": "รพ.ปลวกแดง", "equipment": "ไม้ค้ำยันรักแร้แบบอลูมิเนียม", "total": 2, "damaged": 0, "available": 0, "borrowed": 2}, {"unit": "รพ.ปลวกแดง", "equipment": "ไม้เท้าอลูมิเนียมแบบสามขา", "total": 7, "damaged": 0, "available": 0, "borrowed": 7}, {"unit": "รพ.ปลวกแดง", "equipment": "ไม้เท้าสำหรับคนตาบอดพับได้", "total": 4, "damaged": 0, "available": 0, "borrowed": 4}, {"unit": "รพ.ปลวกแดง", "equipment": "รถนั่งคนพิการชนิดพับได้ทำด้วยโลหะแบบปรับให้เหมาะสมกับความพิการได้", "total": 14, "damaged": 0, "available": 2, "borrowed": 12}, {"unit": "รพ.ปลวกแดง", "equipment": "เตียงผู้ป่วยแบบมือหมุน_2_ไก", "total": 3, "damaged": 0, "available": 3, "borrowed": 0}, {"unit": "รพ.ปลวกแดง", "equipment": "เตียงผู้ป่วยแบบมือหมุน_3_ไก", "total": 1, "damaged": 0, "available": 1, "borrowed": 0}, {"unit": "รพ.ปลวกแดง", "equipment": "ที่นอนลมกันแผงกดทับ", "total": 1, "damaged": 0, "available": 1, "borrowed": 0}, {"unit": "รพ.ปลวกแดง", "equipment": "แผ่นรองตัวสำหรับผู้ป่วยอัมพาตหรือที่นอนลม", "total": 1, "damaged": 0, "available": 1, "borrowed": 0}, {"unit": "รพ.ปลวกแดง", "equipment": "เก้าอี้นั่งถ่ายสำหรับคนพิการ", "total": 1, "damaged": 0, "available": 1, "borrowed": 0}, {"unit": "รพ.ปลวกแดง", "equipment": "ชุดสายให้อาหารสำหรับผู้ป่วย", "total": 1, "damaged": 0, "available": 1, "borrowed": 0}, {"unit": "รพ.ปลวกแดง", "equipment": "เตียงผู้ป่วยไฟฟ้า", "total": 1, "damaged": 0, "available": 1, "borrowed": 0}],
     summary: {"total_units": 73, "total_equipment_types": 29, "total_districts": 8, "total_budget": 28219810}
   }
 };
@@ -1445,22 +1604,29 @@ function searchTable(searchId, tableId) {
       }
     }
     
-    // Search and highlight
-    if (filter !== '') {
+    // Search in visible cells AND hidden data
+    const hiddenData = row.getAttribute('data-searchable') || '';
+    let cellText = hiddenData;
+    
+    for (let j = 0; j < cells.length; j++) {
+      cellText += ' ' + (cells[j].textContent || cells[j].innerText);
+    }
+    
+    if (filter !== '' && cellText.toUpperCase().indexOf(filter) > -1) {
+      found = true;
+      // Highlight matched text in visible cells only
       for (let j = 0; j < cells.length; j++) {
         const cell = cells[j];
         const textValue = cell.textContent || cell.innerText;
         const upperText = textValue.toUpperCase();
         
         if (upperText.indexOf(filter) > -1) {
-          found = true;
-          // Highlight matched text
           const regex = new RegExp('(' + filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
           const highlighted = textValue.replace(regex, '<span class="highlight">$1</span>');
           cell.innerHTML = highlighted;
         }
       }
-    } else {
+    } else if (filter === '') {
       found = true;
     }
     
@@ -1540,14 +1706,15 @@ function initProject2() {
   
   const data = projectData.project2;
   
-  // 1. EQUIPMENT INVENTORY TAB
+  // 1. EQUIPMENT INVENTORY TAB (FIXED - REMOVED รหัส_อุปกรณ์ COLUMN)
   const inventoryBody = document.getElementById('p2InventoryBody');
   if (inventoryBody && inventoryBody.children.length === 0) {
     data.equipment.forEach((item, index) => {
       const tr = document.createElement('tr');
+      // Store equipment ID in data attribute for search but don't display it
+      tr.setAttribute('data-searchable', item.id + ' ' + item.name);
       tr.innerHTML = `
         <td><strong>${index + 1}</strong></td>
-        <td>${item.id || '-'}</td>
         <td>${item.name}</td>
       `;
       inventoryBody.appendChild(tr);
