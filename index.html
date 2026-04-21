@@ -838,8 +838,8 @@ body {
         <span class="stat-item-label">ปีงบประมาณ</span>
       </div>
       <div class="stat-item">
-        <span class="stat-item-value">~80K</span>
-        <span class="stat-item-label">งบเฉลี่ย</span>
+        <span class="stat-item-value">1.92M</span>
+        <span class="stat-item-label">งบรวม (บาท)</span>
       </div>
     </div>
   </div>
@@ -1203,82 +1203,154 @@ body {
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><span style="font-size:1.5rem;">📚</span> พัฒนาศักยภาพเครือข่าย</h5>
+        <h5 class="modal-title"><span style="font-size:1.5rem;">📚</span> พัฒนาศักยภาพเครือข่ายฯ</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
         <div class="alert-info">
           <span style="font-size:1.4rem;">📊</span>
-          <div><strong>สรุปข้อมูล:</strong> 30 โครงการ, 5 ปีงบประมาณ, 7 อำเภอ</div>
+          <div><strong>สรุปข้อมูล:</strong> 30 โครงการ, 5 ปีงบประมาณ, 7 อำเภอ, 21 หน่วยบริการ</div>
         </div>
-        <div style="margin-bottom:1.75rem;">
-          <h6 class="section-header">📈 สถิติภาพรวม</h6>
+
+        <!-- KPI CARDS -->
+        <div style="margin-bottom:1.25rem;">
+          <h6 class="section-header">📈 ตัวชี้วัดสำคัญ</h6>
           <div class="summary-cards">
-            <div class="summary-card"><span class="summary-card-value">30</span><span class="summary-card-label">โครงการ</span></div>
-            <div class="summary-card"><span class="summary-card-value">5</span><span class="summary-card-label">ปีงบประมาณ</span></div>
-            <div class="summary-card"><span class="summary-card-value">7</span><span class="summary-card-label">อำเภอ</span></div>
-            <div class="summary-card"><span class="summary-card-value">1.92M</span><span class="summary-card-label">งบประมาณรวม (บาท)</span></div>
+            <div class="summary-card" style="border-top:3px solid #3b82f6;">
+              <span class="summary-card-value" style="color:#3b82f6;">30</span>
+              <span class="summary-card-label">โครงการ</span>
+            </div>
+            <div class="summary-card" style="border-top:3px solid #10b981;">
+              <span class="summary-card-value" style="color:#10b981;">1.92M</span>
+              <span class="summary-card-label">งบประมาณรวม (บาท)</span>
+            </div>
+            <div class="summary-card" style="border-top:3px solid #f59e0b;">
+              <span class="summary-card-value" style="color:#f59e0b;">5</span>
+              <span class="summary-card-label">ปีงบประมาณ</span>
+            </div>
+            <div class="summary-card" style="border-top:3px solid #8b5cf6;">
+              <span class="summary-card-value" style="color:#8b5cf6;">7</span>
+              <span class="summary-card-label">อำเภอ</span>
+            </div>
+            <div class="summary-card" style="border-top:3px solid #06b6d4;">
+              <span class="summary-card-value" style="color:#06b6d4;">21</span>
+              <span class="summary-card-label">หน่วยบริการ</span>
+            </div>
+            <div class="summary-card" style="border-top:3px solid #ef4444;">
+              <span class="summary-card-value" style="color:#ef4444;">20</span>
+              <span class="summary-card-label">เสร็จสิ้น</span>
+            </div>
           </div>
         </div>
+
+        <!-- TABS -->
         <div class="tabs-container">
-          <button class="tab-btn active" onclick="switchTab3('projects', this)">📋 รายการโครงการ</button>
-          <button class="tab-btn" onclick="switchTab3('budget', this)">💰 งบประมาณ</button>
+          <button class="tab-btn active" onclick="switchTab3('dashboard',this)" style="touch-action:manipulation;">📊 แดชบอร์ด</button>
+          <button class="tab-btn" onclick="switchTab3('list',this)" style="touch-action:manipulation;">📋 รายการโครงการ</button>
+          <button class="tab-btn" onclick="switchTab3('district',this)" style="touch-action:manipulation;">🗺️ รายอำเภอ</button>
         </div>
-        <div id="tab3-projects" class="tab-content active">
+
+        <!-- TAB: DASHBOARD -->
+        <div id="tab3-dashboard" class="tab-content active">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+            <div>
+              <h6 class="section-header" style="font-size:0.78rem;">📅 งบประมาณตามปีงบประมาณ</h6>
+              <div class="chart-container" style="height:220px;padding:0.75rem;">
+                <canvas id="p3ChartYear"></canvas>
+              </div>
+            </div>
+            <div>
+              <h6 class="section-header" style="font-size:0.78rem;">📍 สัดส่วนตามอำเภอ (โครงการ)</h6>
+              <div class="chart-container" style="height:220px;padding:0.75rem;">
+                <canvas id="p3ChartDistrict"></canvas>
+              </div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+            <div>
+              <h6 class="section-header" style="font-size:0.78rem;">✅ สถานะการดำเนินโครงการ</h6>
+              <div class="chart-container" style="height:200px;padding:0.75rem;">
+                <canvas id="p3ChartStatus"></canvas>
+              </div>
+            </div>
+            <div>
+              <h6 class="section-header" style="font-size:0.78rem;">🏥 Top 6 หน่วยบริการ (งบสะสม)</h6>
+              <div class="chart-container" style="height:200px;padding:0.75rem;">
+                <canvas id="p3ChartUnits"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: PROJECT LIST -->
+        <div id="tab3-list" class="tab-content">
           <h6 class="section-header">📋 รายการโครงการทั้งหมด</h6>
           <div class="filter-row">
             <div class="filter-group">
               <label class="filter-label">ปีงบประมาณ</label>
-              <select class="year-select" id="p3YearSelect" onchange="loadP3Data()">
+              <select class="year-select" id="p3YearFilter" onchange="loadP3List()">
                 <option value="all">ทั้งหมด</option>
               </select>
             </div>
             <div class="filter-group">
               <label class="filter-label">อำเภอ</label>
-              <select class="year-select" id="p3DistrictSelect" onchange="loadP3Data()">
+              <select class="year-select" id="p3DistrictFilter" onchange="loadP3List()">
                 <option value="all">ทั้งหมด</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label class="filter-label">สถานะ</label>
+              <select class="year-select" id="p3StatusFilter" onchange="loadP3List()">
+                <option value="all">ทั้งหมด</option>
+                <option value="เสร็จเรียบร้อย">เสร็จเรียบร้อย</option>
+                <option value="อยู่ระหว่างดำเนินการ">อยู่ระหว่างดำเนินการ</option>
               </select>
             </div>
           </div>
           <div class="modal-search-sticky">
-            <input type="text" class="modal-search-input" id="p3ProjectSearch" placeholder="🔍 ค้นหาโครงการ..." onkeyup="searchTable('p3ProjectSearch','p3ProjectTable')">
+            <input type="text" class="modal-search-input" id="p3Search"
+              placeholder="🔍 ค้นหาโครงการ, หน่วยบริการ, อำเภอ..." onkeyup="loadP3List()">
           </div>
+          <div id="p3ListCount" style="font-size:0.78rem;color:var(--text-gray);margin-bottom:0.5rem;"></div>
           <div class="table-responsive">
-            <table class="table-custom" id="p3ProjectTable">
+            <table class="table-custom" id="p3ListTable">
               <thead><tr>
-                <th style="width:7%;">ปี</th>
-                <th style="width:11%;">อำเภอ</th>
-                <th style="width:15%;">หน่วยบริการ</th>
+                <th style="width:5%;">#</th>
+                <th style="width:6%;">ปี</th>
+                <th style="width:10%;">อำเภอ</th>
+                <th style="width:14%;">หน่วยบริการ</th>
                 <th style="width:43%;">ชื่อโครงการ</th>
-                <th style="width:12%;">งบประมาณ</th>
+                <th style="width:10%;">งบประมาณ</th>
                 <th style="width:12%;">สถานะ</th>
               </tr></thead>
-              <tbody id="p3ProjectBody"></tbody>
+              <tbody id="p3ListBody"></tbody>
             </table>
           </div>
-          <div id="p3ProjectNoResults" class="no-results"><div class="no-results-icon">🔍</div><p class="no-results-text">ไม่พบข้อมูล</p></div>
-        </div>
-        <div id="tab3-budget" class="tab-content">
-          <h6 class="section-header">💰 งบประมาณตามปีงบประมาณ</h6>
-          <div class="chart-container"><canvas id="project3Chart"></canvas></div>
-          <h6 class="section-header" style="margin-top:1.5rem;">📊 รายละเอียดงบประมาณทั้งหมด</h6>
-          <div class="modal-search-sticky">
-            <input type="text" class="modal-search-input" id="p3BudgetSearch" placeholder="🔍 ค้นหา..." onkeyup="searchTable('p3BudgetSearch','p3BudgetTable')">
+          <div id="p3ListNoResults" class="no-results" style="display:none;">
+            <div class="no-results-icon">🔍</div><p class="no-results-text">ไม่พบข้อมูล</p>
           </div>
+          <div id="p3Pagination" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px;padding:1rem 0 0.5rem;"></div>
+        </div>
+
+        <!-- TAB: DISTRICT -->
+        <div id="tab3-district" class="tab-content">
+          <h6 class="section-header">🗺️ สรุปข้อมูลรายอำเภอ</h6>
           <div class="table-responsive">
-            <table class="table-custom" id="p3BudgetTable">
+            <table class="table-custom" id="p3DistrictTable">
               <thead><tr>
-                <th style="width:7%;">ปี</th>
-                <th style="width:12%;">อำเภอ</th>
-                <th style="width:15%;">หน่วยบริการ</th>
-                <th style="width:48%;">ชื่อโครงการ</th>
-                <th style="width:18%;">งบประมาณ (บาท)</th>
+                <th style="width:14%;">อำเภอ</th>
+                <th style="width:9%;">โครงการ</th>
+                <th style="width:14%;">งบรวม (บาท)</th>
+                <th style="width:12%;">งบเฉลี่ย</th>
+                <th style="width:12%;">หน่วยบริการ</th>
+                <th style="width:12%;">เสร็จสิ้น</th>
+                <th style="width:14%;">กำลังดำเนินการ</th>
               </tr></thead>
-              <tbody id="p3BudgetBody"></tbody>
+              <tbody id="p3DistrictBody"></tbody>
             </table>
           </div>
-          <div id="p3BudgetNoResults" class="no-results"><div class="no-results-icon">🔍</div><p class="no-results-text">ไม่พบข้อมูล</p></div>
         </div>
+
       </div>
     </div>
   </div>
@@ -3145,178 +3217,299 @@ function loadP4Data() {
 }
 
 
-var project3Data = {
-  projects: [
-    {year:2565,district:"เขาชะเมา",unit:"รพ.เขาชะเมาฯ",name:"โครงการพัฒนาเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ และผู้สูงอายุที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพอำเภอเขาชะเมา ประจำปีงบประมาณ 2565",budget:91040,status:""},
-    {year:2566,district:"เขาชะเมา",unit:"รพ.เขาชะเมาฯ",name:"โครงการพัฒนาเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพอำเภอเขาชะเมา ประจำปีงบประมาณ 2566",budget:99080,status:""},
-    {year:2566,district:"ปลวกแดง",unit:"รพ.ปลวกแดง",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลปลวกแดง อำเภอปลวกแดง ประจำปีงบประมาณ 2566",budget:99900,status:""},
-    {year:2566,district:"แกลง",unit:"รพ.แกลง",name:"โครงการพัฒนาเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพอำเภอแกลงประจำปีงบประมาณ 2566",budget:79870,status:""},
-    {year:2566,district:"แกลง",unit:"รพ.สต.กองดิน",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ ผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลกองดิน อำเภอแกลง จังหวัดระยอง ประจำปีงบประมาณ 2566",budget:69090,status:""},
-    {year:2566,district:"บ้านฉาง",unit:"รพ.บ้านฉาง",name:"โครงการพัฒนาเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพอำเภอบ้านฉางประจำปีงบประมาณ 2566",budget:99800,status:""},
-    {year:2566,district:"เมืองระยอง",unit:"รพ.สต.กะเฉด",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลกะเฉด อำเภอเมือง จังหวัดระยอง ประจำปีงบประมาณ 2566",budget:49870,status:""},
-    {year:2566,district:"แกลง",unit:"รพ.สต.บ้านนา",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านนา อำเภอแกลง จังหวัดระยอง ประจำปีงบประมาณ 2566",budget:67460,status:""},
-    {year:2566,district:"เมืองระยอง",unit:"รพ.ระยอง",name:"โครงการอบรมเชิงปฏิบัติการ เรื่อง Physical Therapy In Management BPPV in elderly (การจัดการตะกอนหินปูนในผู้สูงอายุ) ประจำปีงบประมาณ 2566",budget:74832,status:""},
-    {year:2566,district:"วังจันทร์",unit:"รพ.สต.บ้านวังจันทร์",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านวังจันทร์ อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2566",budget:57400,status:""},
-    {year:2567,district:"วังจันทร์",unit:"รพ.สต.บ้านวังจันทร์",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านวังจันทร์ อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2567",budget:47650,status:"เสร็จเรียบร้อย"},
-    {year:2567,district:"เมืองระยอง",unit:"ทบ.นครระยอง",name:"โครงการพัฒนาศักยภาพเพื่อฟื้นฟูสมรรถภาพผู้พิการ และผู้ที่อยู่เครือข่ายบริการในระยะจำเป็นต้องได้รับการฟื้นฟู ประจำปีงบประมาณ 2567",budget:70350,status:"เสร็จเรียบร้อย"},
-    {year:2567,district:"แกลง",unit:"รพ.สต.กร่ำ",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลกร่ำ อำเภอแกลง จังหวัดระยอง ประจำปีงบประมาณ 2567",budget:66400,status:"เสร็จเรียบร้อย"},
-    {year:2567,district:"วังจันทร์",unit:"รพ.สต.บ้านคลองเขต",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านคลองเขต อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2567",budget:25200,status:"เสร็จเรียบร้อย"},
-    {year:2567,district:"บ้านค่าย",unit:"รพ.สต.หนองสะพาน",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลหนองสะพาน อำเภอบ้านค่าย จังหวัดระยอง ประจำปีงบประมาณ 2567",budget:33640,status:"เสร็จเรียบร้อย"},
-    {year:2567,district:"วังจันทร์",unit:"รพ.สต.บ้านเขาสิงห์โต",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพที่จำเป็นต่อสุขภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านเขาสิงห์โต อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2567",budget:19875,status:"เสร็จเรียบร้อย"},
-    {year:2567,district:"วังจันทร์",unit:"รพ.สต.บ้านเขาตาอิ๋น",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านเขาตาอิ๋น อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2567",budget:47575,status:"เสร็จเรียบร้อย"},
-    {year:2567,district:"เมืองระยอง",unit:"รพ.สต.บ้านแลง",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านแลง อำเภอเมืองระยอง จังหวัดระยอง ประจำปีงบประมาณ 2567",budget:38850,status:"เสร็จเรียบร้อย"},
-    {year:2567,district:"เมืองระยอง",unit:"สสจ.ระยอง",name:"โครงการ \"อบรมฟื้นฟูศักยภาพ นักฟื้นฟูสุขภาพชุมชนจังหวัดระยอง ปีงบประมาณ 2567\"",budget:363000,status:"เสร็จเรียบร้อย"},
-    {year:2567,district:"เมืองระยอง",unit:"รพ.สต.กะเฉด",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลกะเฉด อำเภอเมืองระยอง จังหวัดระยอง ประจำปีงบประมาณ 2567",budget:64210,status:"เสร็จเรียบร้อย"},
-    {year:2568,district:"วังจันทร์",unit:"รพ.สต.บ้านคลองเขต",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านคลองเขต อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2568",budget:20150,status:""},
-    {year:2568,district:"วังจันทร์",unit:"รพ.สต.บ้านเขาตาอิ๋น",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านเขาตาอิ๋น อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2568",budget:42575,status:""},
-    {year:2568,district:"วังจันทร์",unit:"รพ.สต.บ้านเขาสิงห์โต",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านเขาสิงห์โต อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2568",budget:18725,status:""},
-    {year:2568,district:"เมืองระยอง",unit:"รพ.สต.แกลง",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลแกลง อำเภอเมืองระยอง จังหวัดระยอง ประจำปีงบประมาณ 2568",budget:38025,status:""},
-    {year:2568,district:"แกลง",unit:"รพ.สต.ชากพง",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลชากพง อำเภอแกลง จังหวัดระยอง ประจำปีงบประมาณ 2568",budget:32010,status:""},
-    {year:2568,district:"เมืองระยอง",unit:"รพ.สต.บ้านเกาะเสม็ด",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านเกาะเสม็ด อำเภอเมืองระยอง จังหวัดระยอง ประจำปีงบประมาณ 2568",budget:23535,status:""},
-    {year:2568,district:"เมืองระยอง",unit:"รพ.สต.บ้านยายจั่น",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านยายจั่น อำเภอเมืองระยอง จังหวัดระยอง ประจำปีงบประมาณ 2568",budget:33625,status:""},
-    {year:2568,district:"บ้านค่าย",unit:"รพ.สต.หนองสะพาน",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลส่งเสริมสุขภาพตำบลหนองสะพาน อำเภอบ้านค่าย จังหวัดระยอง ประจำปีงบประมาณ 2568",budget:50120,status:""},
-    {year:2569,district:"วังจันทร์",unit:"รพ.สต.บ้านเขาตาอิ๋น",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการผู้สูงอายุ ผู้ที่มีภาวะพึ่งพิง และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพโรงพยาบาลส่งเสริมสุขภาพตำบลบ้านเขาตาอิ๋น อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2569",budget:50700,status:""},
-    {year:2569,district:"วังจันทร์",unit:"รพ.สต.บ้านวังจันทร์",name:"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการผู้สูงอายุ ผู้ที่มีภาวะพึ่งพิง และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพโรงพยาบาลส่งเสริมสุขภาพตำบลบ้านวังจันทร์ อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2569",budget:44850,status:""}
-  ],
-  years: [2565, 2566, 2567, 2568, 2569],
-  districts: ["เขาชะเมา", "ปลวกแดง", "แกลง", "บ้านฉาง", "เมืองระยอง", "วังจันทร์", "บ้านค่าย"],
-  budget_by_year: {"2565":91040,"2566":697302,"2567":776750,"2568":258765,"2569":95550},
-  total_budget: 1919407
-};
+var p3Records=[{"y":2565,"d":"เขาชะเมา","u":"รพ.เขาชะเมาฯ","b":91040,"n":"โครงการพัฒนาเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ และผู้สูงอายุที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพอำเภอเขาชะเมา ประจำปีงบประมาณ 2565","s":"เสร็จเรียบร้อย"},{"y":2566,"d":"เขาชะเมา","u":"รพ.เขาชะเมาฯ","b":99080,"n":"โครงการพัฒนาเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพอำเภอเขาชะเมา ประจำปีงบประมาณ 2566","s":"เสร็จเรียบร้อย"},{"y":2566,"d":"ปลวกแดง","u":"รพ.ปลวกแดง","b":99900,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ โรงพยาบาลปลวกแดง อำเภอปลวกแดง ประจำปีงบประมาณ 2566","s":"เสร็จเรียบร้อย"},{"y":2566,"d":"แกลง","u":"รพ.แกลง","b":79870,"n":"โครงการพัฒนาเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพอำเภอแกลง ประจำปีงบประมาณ 2566","s":"เสร็จเรียบร้อย"},{"y":2566,"d":"แกลง","u":"รพ.สต.กองดิน","b":69090,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ ผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพ รพ.สต.กองดิน อำเภอแกลง ประจำปีงบประมาณ 2566","s":"เสร็จเรียบร้อย"},{"y":2566,"d":"บ้านฉาง","u":"รพ.บ้านฉาง","b":99800,"n":"โครงการพัฒนาเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ และผู้ที่อยู่ในระยะที่จำเป็นต้องได้รับการฟื้นฟูสมรรถภาพอำเภอบ้านฉาง ประจำปีงบประมาณ 2566","s":"เสร็จเรียบร้อย"},{"y":2566,"d":"เมือง","u":"รพ.สต.กะเฉด","b":49870,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.กะเฉด อำเภอเมือง จังหวัดระยอง ประจำปีงบประมาณ 2566","s":"เสร็จเรียบร้อย"},{"y":2566,"d":"แกลง","u":"รพ.สต.บ้านนา","b":67460,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.บ้านนา อำเภอแกลง จังหวัดระยอง ประจำปีงบประมาณ 2566","s":"เสร็จเรียบร้อย"},{"y":2566,"d":"เมือง","u":"รพ.ระยอง","b":74832,"n":"โครงการอบรมเชิงปฏิบัติการ Physical Therapy In Management BPPV in elderly (การจัดการตะกอนหินปูนในผู้สูงอายุ) ประจำปีงบประมาณ 2566","s":"เสร็จเรียบร้อย"},{"y":2566,"d":"วังจันทร์","u":"รพ.สต.บ้านวังจันทร์","b":57400,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.บ้านวังจันทร์ อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2566","s":"เสร็จเรียบร้อย"},{"y":2567,"d":"วังจันทร์","u":"รพ.สต.บ้านวังจันทร์","b":47650,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.บ้านวังจันทร์ อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2567","s":"เสร็จเรียบร้อย"},{"y":2567,"d":"เมือง","u":"ทบ.นครระยอง","b":70350,"n":"โครงการพัฒนาศักยภาพเพื่อฟื้นฟูสมรรถภาพผู้พิการ และผู้ที่อยู่เครือข่ายบริการในระยะจำเป็นต้องได้รับการฟื้นฟู ประจำปีงบประมาณ 2567","s":"เสร็จเรียบร้อย"},{"y":2567,"d":"แกลง","u":"รพ.สต.กร่ำ","b":66400,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.กร่ำ อำเภอแกลง จังหวัดระยอง ประจำปีงบประมาณ 2567","s":"เสร็จเรียบร้อย"},{"y":2567,"d":"วังจันทร์","u":"รพ.สต.บ้านคลองเขต","b":25200,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.บ้านคลองเขต อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2567","s":"เสร็จเรียบร้อย"},{"y":2567,"d":"บ้านค่าย","u":"รพ.สต.หนองสะพาน","b":33640,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.หนองสะพาน อำเภอบ้านค่าย จังหวัดระยอง ประจำปีงบประมาณ 2567","s":"เสร็จเรียบร้อย"},{"y":2567,"d":"วังจันทร์","u":"รพ.สต.บ้านเขาสิงห์โต","b":19875,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพที่จำเป็นต่อสุขภาพ รพ.สต.บ้านเขาสิงห์โต อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2567","s":"เสร็จเรียบร้อย"},{"y":2567,"d":"วังจันทร์","u":"รพ.สต.บ้านเขาตาอิ๋น","b":47575,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.บ้านเขาตาอิ๋น อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2567","s":"เสร็จเรียบร้อย"},{"y":2567,"d":"เมือง","u":"รพ.สต.บ้านแลง","b":38850,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.บ้านแลง อำเภอเมือง จังหวัดระยอง ประจำปีงบประมาณ 2567","s":"เสร็จเรียบร้อย"},{"y":2567,"d":"เมือง","u":"สสจ.ระยอง","b":363000,"n":"โครงการอบรมฟื้นฟูศักยภาพ นักฟื้นฟูสุขภาพชุมชนจังหวัดระยอง ปีงบประมาณ 2567","s":"เสร็จเรียบร้อย"},{"y":2567,"d":"เมือง","u":"รพ.สต.กะเฉด","b":64210,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.กะเฉด อำเภอเมือง จังหวัดระยอง ประจำปีงบประมาณ 2567","s":"เสร็จเรียบร้อย"},{"y":2568,"d":"วังจันทร์","u":"รพ.สต.บ้านคลองเขต","b":20150,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.บ้านคลองเขต อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2568","s":"อยู่ระหว่างดำเนินการ"},{"y":2568,"d":"วังจันทร์","u":"รพ.สต.บ้านเขาตาอิ๋น","b":42575,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.บ้านเขาตาอิ๋น อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2568","s":"อยู่ระหว่างดำเนินการ"},{"y":2568,"d":"วังจันทร์","u":"รพ.สต.บ้านเขาสิงห์โต","b":18725,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.บ้านเขาสิงห์โต อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2568","s":"อยู่ระหว่างดำเนินการ"},{"y":2568,"d":"เมือง","u":"รพ.สต.แกลง","b":38025,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.แกลง อำเภอเมือง จังหวัดระยอง ประจำปีงบประมาณ 2568","s":"อยู่ระหว่างดำเนินการ"},{"y":2568,"d":"แกลง","u":"รพ.สต.ชากพง","b":32010,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.ชากพง อำเภอแกลง จังหวัดระยอง ประจำปีงบประมาณ 2568","s":"อยู่ระหว่างดำเนินการ"},{"y":2568,"d":"เมือง","u":"รพ.สต.บ้านเกาะเสม็ด","b":23535,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.บ้านเกาะเสม็ด อำเภอเมือง จังหวัดระยอง ประจำปีงบประมาณ 2568","s":"อยู่ระหว่างดำเนินการ"},{"y":2568,"d":"เมือง","u":"รพ.สต.บ้านยายจั่น","b":33625,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.บ้านยายจั่น อำเภอเมือง จังหวัดระยอง ประจำปีงบประมาณ 2568","s":"อยู่ระหว่างดำเนินการ"},{"y":2568,"d":"บ้านค่าย","u":"รพ.สต.หนองสะพาน","b":50120,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการ ผู้สูงอายุ รพ.สต.หนองสะพาน อำเภอบ้านค่าย จังหวัดระยอง ประจำปีงบประมาณ 2568","s":"อยู่ระหว่างดำเนินการ"},{"y":2569,"d":"วังจันทร์","u":"รพ.สต.บ้านเขาตาอิ๋น","b":50700,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการผู้สูงอายุ ผู้ที่มีภาวะพึ่งพิง รพ.สต.บ้านเขาตาอิ๋น อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2569","s":"อยู่ระหว่างดำเนินการ"},{"y":2569,"d":"วังจันทร์","u":"รพ.สต.บ้านวังจันทร์","b":44850,"n":"โครงการพัฒนาศักยภาพเครือข่ายบริการเพื่อฟื้นฟูสมรรถภาพผู้พิการผู้สูงอายุ ผู้ที่มีภาวะพึ่งพิง รพ.สต.บ้านวังจันทร์ อำเภอวังจันทร์ จังหวัดระยอง ประจำปีงบประมาณ 2569","s":"อยู่ระหว่างดำเนินการ"}];
 
-function switchTab3(tab, btnEl) {
-  var btns = document.querySelectorAll("#project3Modal .tab-btn");
-  btns.forEach(function(b) { b.classList.remove("active"); });
-  if (btnEl) btnEl.classList.add("active");
-  var contents = document.querySelectorAll("#project3Modal .tab-content");
-  contents.forEach(function(c) { c.classList.remove("active"); });
-  document.getElementById("tab3-" + tab).classList.add("active");
-  if (tab === "budget") renderP3Chart();
+var p3Charts={};
+var p3CurrentPage=1;
+var p3PageSize=50;
+var p3FilteredRecords=[];
+
+function switchTab3(tab,btnEl){
+  document.querySelectorAll("#project3Modal .tab-btn").forEach(function(b){b.classList.remove("active");});
+  if(btnEl)btnEl.classList.add("active");
+  document.querySelectorAll("#project3Modal .tab-content").forEach(function(c){c.classList.remove("active");});
+  document.getElementById("tab3-"+tab).classList.add("active");
+  if(tab==="dashboard")renderP3Charts();
 }
 
-var p3ChartInstance = null;
-function renderP3Chart() {
-  var ctx = document.getElementById("project3Chart");
-  if (!ctx) return;
-  if (p3ChartInstance) { p3ChartInstance.destroy(); p3ChartInstance = null; }
-  var byYear = project3Data.budget_by_year;
-  var labels = Object.keys(byYear).map(function(y) { return "ปี " + y; });
-  var values = Object.keys(byYear).map(function(y) { return byYear[y]; });
-  var colors = ["rgba(59,130,246,0.75)","rgba(16,185,129,0.75)","rgba(245,158,11,0.75)","rgba(139,92,246,0.75)","rgba(239,68,68,0.75)"];
-  p3ChartInstance = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: labels,
-      datasets: [{
-        label: "งบประมาณ (บาท)",
-        data: values,
-        backgroundColor: colors,
-        borderRadius: 6,
-        borderSkipped: false
-      }]
+function initP3(){
+  if(window.p3Initialized)return;
+  window.p3Initialized=true;
+
+  var years=[2565,2566,2567,2568,2569];
+  var ysel=document.getElementById("p3YearFilter");
+  if(ysel)years.forEach(function(y){
+    var o=document.createElement("option");o.value=y;o.textContent="ปีงบ "+y;ysel.appendChild(o);
+  });
+
+  var districts=["วังจันทร์","เมือง","แกลง","เขาชะเมา","บ้านค่าย","บ้านฉาง","ปลวกแดง"];
+  var dsel=document.getElementById("p3DistrictFilter");
+  if(dsel)districts.forEach(function(d){
+    var o=document.createElement("option");o.value=d;o.textContent=d;dsel.appendChild(o);
+  });
+
+  buildP3DistrictTable();
+  loadP3List();
+  renderP3Charts();
+}
+
+function renderP3Charts(){
+  renderP3YearChart();
+  renderP3DistrictChart();
+  renderP3StatusChart();
+  renderP3UnitsChart();
+}
+
+function destroyP3Chart(id){
+  if(p3Charts[id]){try{p3Charts[id].destroy();}catch(e){}p3Charts[id]=null;}
+}
+
+function renderP3YearChart(){
+  destroyP3Chart("year");
+  var ctx=document.getElementById("p3ChartYear");
+  if(!ctx)return;
+  var years=["2565","2566","2567","2568","2569"];
+  var budgets=[0.091,0.697,0.777,0.259,0.096];
+  var counts=[1,9,10,8,2];
+  p3Charts["year"]=new Chart(ctx,{
+    type:"bar",
+    data:{
+      labels:years,
+      datasets:[
+        {label:"งบประมาณ (ล้านบาท)",data:budgets,backgroundColor:"rgba(59,130,246,0.75)",borderRadius:5,yAxisID:"y"},
+        {label:"จำนวนโครงการ",data:counts,type:"line",borderColor:"#f59e0b",backgroundColor:"rgba(245,158,11,0.15)",tension:0.4,pointRadius:5,yAxisID:"y2"}
+      ]
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: function(ctx) { return "฿" + ctx.parsed.y.toLocaleString(); }
-          }
-        }
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{labels:{font:{size:10},boxWidth:12}},
+        tooltip:{callbacks:{label:function(c){
+          if(c.datasetIndex===0)return" ฿"+c.parsed.y.toFixed(2)+"M";
+          return" "+c.parsed.y+" โครงการ";
+        }}}
       },
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: {
-            callback: function(v) {
-              if (v >= 1000000) return (v/1000000).toFixed(1) + "M";
-              return (v/1000).toFixed(0) + "K";
-            }
-          }
-        }
+      scales:{
+        y:{beginAtZero:true,ticks:{font:{size:9},callback:function(v){return v+"M";}},grid:{color:"rgba(0,0,0,0.05)"}},
+        y2:{position:"right",beginAtZero:true,ticks:{font:{size:9}},grid:{display:false}},
+        x:{ticks:{font:{size:9}}}
       }
     }
   });
 }
 
-function initP3() {
-  if (window.p3Initialized) return;
-  window.p3Initialized = true;
-  var data = project3Data;
-
-  var yearSel = document.getElementById("p3YearSelect");
-  if (yearSel) {
-    data.years.forEach(function(year) {
-      var opt = document.createElement("option");
-      opt.value = year;
-      opt.textContent = "ปีงบประมาณ " + year;
-      yearSel.appendChild(opt);
-    });
-  }
-
-  var distSel = document.getElementById("p3DistrictSelect");
-  if (distSel) {
-    data.districts.forEach(function(dist) {
-      var opt = document.createElement("option");
-      opt.value = dist;
-      opt.textContent = dist;
-      distSel.appendChild(opt);
-    });
-  }
-
-  loadP3Data();
-
-  var budgetBody = document.getElementById("p3BudgetBody");
-  if (budgetBody && budgetBody.children.length === 0) {
-    data.projects.forEach(function(p) {
-      if (p.budget <= 0) return;
-      var tr = document.createElement("tr");
-      tr.innerHTML =
-        "<td><strong>" + p.year + "</strong></td>" +
-        "<td>" + p.district + "</td>" +
-        "<td>" + p.unit + "</td>" +
-        "<td>" + p.name + "</td>" +
-        "<td><strong>฿" + Number(p.budget).toLocaleString() + "</strong></td>";
-      budgetBody.appendChild(tr);
-    });
-  }
+function renderP3DistrictChart(){
+  destroyP3Chart("district");
+  var ctx=document.getElementById("p3ChartDistrict");
+  if(!ctx)return;
+  var labels=["วังจันทร์","เมือง","แกลง","เขาชะเมา","บ้านค่าย","บ้านฉาง","ปลวกแดง"];
+  var data=[10,9,5,2,2,1,1];
+  var colors=["#3b82f6","#10b981","#f59e0b","#8b5cf6","#ef4444","#06b6d4","#ec4899"];
+  p3Charts["district"]=new Chart(ctx,{
+    type:"doughnut",
+    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,hoverOffset:4}]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:"right",labels:{font:{size:9},boxWidth:10,padding:6}},
+        tooltip:{callbacks:{label:function(c){return c.label+": "+c.parsed+" โครงการ ("+((c.parsed/30)*100).toFixed(0)+"%)";}}}
+      }
+    }
+  });
 }
 
-function loadP3Data() {
-  var data = project3Data;
-  var yearVal = document.getElementById("p3YearSelect") ? document.getElementById("p3YearSelect").value : "all";
-  var distVal = document.getElementById("p3DistrictSelect") ? document.getElementById("p3DistrictSelect").value : "all";
-  var tbody = document.getElementById("p3ProjectBody");
-  if (!tbody) return;
-  tbody.innerHTML = "";
+function renderP3StatusChart(){
+  destroyP3Chart("status");
+  var ctx=document.getElementById("p3ChartStatus");
+  if(!ctx)return;
+  p3Charts["status"]=new Chart(ctx,{
+    type:"pie",
+    data:{
+      labels:["เสร็จเรียบร้อย","อยู่ระหว่างดำเนินการ"],
+      datasets:[{data:[20,10],backgroundColor:["#10b981","#f59e0b"],hoverOffset:4}]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{position:"bottom",labels:{font:{size:9},boxWidth:10,padding:6}},
+        tooltip:{callbacks:{label:function(c){return c.label+": "+c.parsed+" โครงการ ("+((c.parsed/30)*100).toFixed(0)+"%)";}}}
+      }
+    }
+  });
+}
 
-  var filtered = data.projects.filter(function(p) {
-    if (yearVal !== "all" && String(p.year) !== String(yearVal)) return false;
-    if (distVal !== "all" && p.district !== distVal) return false;
+function renderP3UnitsChart(){
+  destroyP3Chart("units");
+  var ctx=document.getElementById("p3ChartUnits");
+  if(!ctx)return;
+  var labels=["สสจ.ระยอง","รพ.เขาชะเมาฯ","รพ.สต.บ้านวังจันทร์","รพ.สต.บ้านเขาตาอิ๋น","รพ.สต.กะเฉด","รพ.ปลวกแดง"];
+  var data=[363000,190120,149900,140850,114080,99900];
+  p3Charts["units"]=new Chart(ctx,{
+    type:"bar",
+    data:{
+      labels:labels,
+      datasets:[{
+        label:"งบสะสม (บาท)",data:data,
+        backgroundColor:["#3b82f6","#8b5cf6","#10b981","#f59e0b","#06b6d4","#ef4444"],
+        borderRadius:4
+      }]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,indexAxis:"y",
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:function(c){return" ฿"+c.parsed.x.toLocaleString();}}}
+      },
+      scales:{
+        x:{beginAtZero:true,ticks:{font:{size:9},callback:function(v){return v>=1000000?(v/1000000).toFixed(1)+"M":(v/1000).toFixed(0)+"K";}},grid:{color:"rgba(0,0,0,0.05)"}},
+        y:{ticks:{font:{size:8}}}
+      }
+    }
+  });
+}
+
+function loadP3List(){
+  var yearVal=(document.getElementById("p3YearFilter")||{}).value||"all";
+  var distVal=(document.getElementById("p3DistrictFilter")||{}).value||"all";
+  var statVal=(document.getElementById("p3StatusFilter")||{}).value||"all";
+  var searchVal=((document.getElementById("p3Search")||{}).value||"").toLowerCase().trim();
+
+  p3FilteredRecords=p3Records.filter(function(r){
+    if(yearVal!=="all"&&String(r.y)!==String(yearVal))return false;
+    if(distVal!=="all"&&r.d!==distVal)return false;
+    if(statVal!=="all"&&r.s!==statVal)return false;
+    if(searchVal&&!(
+      r.n.toLowerCase().includes(searchVal)||
+      r.u.toLowerCase().includes(searchVal)||
+      r.d.toLowerCase().includes(searchVal)
+    ))return false;
     return true;
   });
 
-  filtered.forEach(function(p) {
-    var tr = document.createElement("tr");
-    var statusBadge = p.status === "เสร็จเรียบร้อย"
-      ? "<span class=\"badge-status badge-success\">✓ เสร็จ</span>"
-      : "<span class=\"badge-status badge-warning\">⏳ ดำเนินการ</span>";
-    var budgetText = p.budget > 0 ? "฿" + Number(p.budget).toLocaleString() : "-";
-    tr.innerHTML =
-      "<td><strong>" + p.year + "</strong></td>" +
-      "<td>" + p.district + "</td>" +
-      "<td>" + p.unit + "</td>" +
-      "<td style=\"font-size:0.82rem;\">" + p.name + "</td>" +
-      "<td>" + budgetText + "</td>" +
-      "<td>" + statusBadge + "</td>";
+  p3CurrentPage=1;
+  renderP3Page();
+}
+
+function renderP3Page(){
+  var filtered=p3FilteredRecords;
+  var totalPages=Math.max(1,Math.ceil(filtered.length/p3PageSize));
+  if(p3CurrentPage<1)p3CurrentPage=1;
+  if(p3CurrentPage>totalPages)p3CurrentPage=totalPages;
+
+  var start=(p3CurrentPage-1)*p3PageSize;
+  var pageRecs=filtered.slice(start,start+p3PageSize);
+
+  var tbody=document.getElementById("p3ListBody");
+  if(!tbody)return;
+  tbody.innerHTML="";
+
+  pageRecs.forEach(function(r,i){
+    var statusBadge=r.s==="เสร็จเรียบร้อย"
+      ?'<span class="badge-status badge-success" style="font-size:0.68rem;padding:2px 6px;">✓ เสร็จ</span>'
+      :'<span class="badge-status badge-warning" style="font-size:0.68rem;padding:2px 6px;">⏳ ดำเนิน</span>';
+    var tr=document.createElement("tr");
+    tr.innerHTML=
+      "<td style=\"color:var(--text-gray);font-size:0.72rem;\">"+(start+i+1)+"</td>"+
+      "<td style=\"font-size:0.75rem;font-weight:700;text-align:center;\">"+r.y+"</td>"+
+      "<td style=\"font-size:0.75rem;font-weight:600;\">"+r.d+"</td>"+
+      "<td style=\"font-size:0.75rem;\">"+r.u+"</td>"+
+      "<td style=\"font-size:0.78rem;\">"+r.n+"</td>"+
+      "<td style=\"text-align:right;font-size:0.75rem;color:#3b82f6;font-weight:600;\">฿"+r.b.toLocaleString()+"</td>"+
+      "<td>"+statusBadge+"</td>";
     tbody.appendChild(tr);
   });
 
-  var noResults = document.getElementById("p3ProjectNoResults");
-  if (noResults) noResults.style.display = filtered.length === 0 ? "block" : "none";
+  var countEl=document.getElementById("p3ListCount");
+  if(countEl){
+    var totalBudget=filtered.reduce(function(s,r){return s+r.b;},0);
+    countEl.innerHTML='<span style="color:var(--text-dark);font-weight:600;">'+filtered.length+' โครงการ</span>'+
+      ' | หน้า <strong>'+p3CurrentPage+'</strong>/<strong>'+totalPages+'</strong>'+
+      ' | งบรวม <strong style="color:#3b82f6;">฿'+totalBudget.toLocaleString(undefined,{maximumFractionDigits:0})+'</strong>';
+  }
+
+  var noRes=document.getElementById("p3ListNoResults");
+  if(noRes)noRes.style.display=filtered.length===0?"block":"none";
+
+  renderP3Pagination(totalPages);
 }
+
+function renderP3Pagination(totalPages){
+  var container=document.getElementById("p3Pagination");
+  if(!container)return;
+  container.innerHTML="";
+  if(totalPages<=1)return;
+
+  function mkBtn(label,page,disabled,active){
+    var btn=document.createElement("button");
+    btn.textContent=label;
+    btn.style.cssText="min-width:36px;height:36px;padding:0 10px;margin:0 2px;border-radius:8px;border:1.5px solid "+
+      (active?"#3b82f6":"#e2e8f0")+";background:"+
+      (active?"#3b82f6":"#fff")+";color:"+
+      (active?"#fff":disabled?"#94a3b8":"#1e293b")+
+      ";font-size:0.82rem;font-weight:600;cursor:"+(disabled?"default":"pointer")+
+      ";font-family:inherit;transition:all 0.2s;touch-action:manipulation;";
+    if(!disabled&&!active){
+      btn.onmouseenter=function(){this.style.background="#f1f5f9";};
+      btn.onmouseleave=function(){this.style.background="#fff";};
+    }
+    if(!disabled){
+      btn.onclick=function(){
+        p3CurrentPage=page;
+        renderP3Page();
+        var listEl=document.getElementById("tab3-list");
+        if(listEl)listEl.scrollTop=0;
+      };
+    }
+    return btn;
+  }
+
+  container.appendChild(mkBtn("‹ ก่อนหน้า",p3CurrentPage-1,p3CurrentPage===1,false));
+
+  var st=Math.max(1,p3CurrentPage-2);
+  var en=Math.min(totalPages,st+4);
+  st=Math.max(1,en-4);
+
+  if(st>1){
+    container.appendChild(mkBtn("1",1,false,false));
+    if(st>2){var sp=document.createElement("span");sp.textContent="…";sp.style="padding:0 4px;color:#94a3b8;line-height:36px;";container.appendChild(sp);}
+  }
+  for(var p=st;p<=en;p++)container.appendChild(mkBtn(String(p),p,false,p===p3CurrentPage));
+  if(en<totalPages){
+    if(en<totalPages-1){var sp2=document.createElement("span");sp2.textContent="…";sp2.style="padding:0 4px;color:#94a3b8;line-height:36px;";container.appendChild(sp2);}
+    container.appendChild(mkBtn(String(totalPages),totalPages,false,false));
+  }
+
+  container.appendChild(mkBtn("ถัดไป ›",p3CurrentPage+1,p3CurrentPage===totalPages,false));
+}
+
+function buildP3DistrictTable(){
+  var tbody=document.getElementById("p3DistrictBody");
+  if(!tbody)return;
+  tbody.innerHTML="";
+  var dd=[
+    {d:"เมือง",    c:9,  b:756297, units:8, done:6,  ong:3},
+    {d:"วังจันทร์",c:10, b:374700, units:4, done:5,  ong:5},
+    {d:"แกลง",     c:5,  b:314830, units:5, done:4,  ong:1},
+    {d:"เขาชะเมา", c:2,  b:190120, units:1, done:2,  ong:0},
+    {d:"บ้านฉาง",  c:1,  b:99800,  units:1, done:1,  ong:0},
+    {d:"ปลวกแดง",  c:1,  b:99900,  units:1, done:1,  ong:0},
+    {d:"บ้านค่าย", c:2,  b:83760,  units:1, done:1,  ong:1},
+  ];
+  dd.forEach(function(row){
+    var avg=row.c>0?Math.round(row.b/row.c):0;
+    var tr=document.createElement("tr");
+    tr.innerHTML=
+      "<td><strong>"+row.d+"</strong></td>"+
+      "<td style=\"text-align:center;font-weight:700;color:#3b82f6;\">"+row.c+"</td>"+
+      "<td style=\"text-align:right;\">฿"+Number(row.b).toLocaleString(undefined,{maximumFractionDigits:0})+"</td>"+
+      "<td style=\"text-align:right;\">฿"+Number(avg).toLocaleString()+"</td>"+
+      "<td style=\"text-align:center;\">"+row.units+"</td>"+
+      "<td style=\"text-align:center;\"><span class=\"badge-status badge-success\">"+row.done+"</span></td>"+
+      "<td style=\"text-align:center;\">"+(row.ong>0?'<span class="badge-status badge-warning">'+row.ong+'</span>':'<span style="color:var(--text-gray)">-</span>')+"</td>";
+    tbody.appendChild(tr);
+  });
+}
+
 
 
 function navigateTo(url) {
