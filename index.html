@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
@@ -1369,6 +1369,31 @@ body {
   .budget-sticky-total { font-size: 1.15rem; }
 }
 
+
+/* ── PROJECT 1 LIVE DATA ─────────────────────────── */
+@keyframes p1-spin  { to { transform: rotate(360deg); } }
+@keyframes p1-pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+.p1-loading-wrap { display:flex; align-items:center; justify-content:center; gap:0.65rem; padding:1.5rem 1rem; color:var(--text-gray); font-size:0.85rem; }
+.p1-spinner { width:18px; height:18px; border:2px solid var(--border-light); border-top-color:#3b82f6; border-radius:50%; animation:p1-spin 0.7s linear infinite; flex-shrink:0; }
+.p1-live-badge { display:inline-flex; align-items:center; gap:0.35rem; font-size:0.68rem; font-weight:600; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; border-radius:20px; padding:0.2rem 0.6rem; margin-bottom:0.875rem; }
+.p1-live-dot { width:6px; height:6px; border-radius:50%; background:#10b981; animation:p1-pulse 2s infinite; }
+.p1-section-label { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--text-gray); margin-bottom:0.6rem; margin-top:1rem; }
+.p1-table-wrap { overflow-x:auto; border-radius:8px; border:1px solid var(--border-light); margin-bottom:1rem; }
+.p1-mini-table { width:100%; border-collapse:collapse; font-size:0.78rem; background:var(--white); }
+.p1-mini-table thead th { background:var(--bg-gray); padding:0.45rem 0.65rem; font-weight:700; color:var(--text-gray); text-align:left; white-space:nowrap; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.04em; }
+.p1-mini-table tbody tr { border-top:1px solid var(--border-light); transition:background 0.15s; }
+.p1-mini-table tbody tr:hover { background:var(--bg-light); }
+.p1-mini-table tbody td { padding:0.45rem 0.65rem; color:var(--text-dark); vertical-align:middle; }
+.p1-num-cell { color:var(--text-gray); font-size:0.72rem; }
+.p1-badge { display:inline-block; font-size:0.65rem; font-weight:700; padding:0.18rem 0.5rem; border-radius:6px; white-space:nowrap; }
+.p1-badge-disabled { background:#dbeafe; color:#1e40af; }
+.p1-badge-elderly  { background:#d1fae5; color:#065f46; }
+.p1-badge-mixed    { background:#f3f4f6; color:#374151; }
+.p1-badge-done     { background:#d1fae5; color:#065f46; }
+.p1-badge-ongoing  { background:#fef3c7; color:#92400e; }
+.p1-badge-pending  { background:#f0f9ff; color:#0369a1; }
+.p1-badge-other    { background:#f3f4f6; color:#374151; }
+.p1-error-wrap { display:flex; align-items:center; gap:0.6rem; padding:0.875rem 1rem; background:#fff7ed; border:1px solid #fed7aa; border-radius:8px; color:#c2410c; font-size:0.8rem; margin-bottom:1rem; }
 </style>
 </head>
 <body>
@@ -1383,24 +1408,14 @@ body {
       <div class="navbar-logo">🏥</div>
       <span>กองทุนหลักประกันสุขภาพจังหวัดระยอง</span>
     </a>
-    <a href="login.html" style="
-      background: #1e40af;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 0.45rem 1.1rem;
-      font-family: 'Sarabun', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: background 0.2s;
-      white-space: nowrap;
-    " onmouseover="this.style.background='#1e3a8a'" onmouseout="this.style.background='#1e40af'">
-      🔐 Staff Portal
+    <a href="staff-portal.html" style="
+      display:inline-flex;align-items:center;gap:0.35rem;
+      color:#64748b;font-size:0.8rem;font-weight:500;
+      text-decoration:none;padding:0.3rem 0.65rem;
+      border:1px solid #e2e8f0;border-radius:6px;
+      transition:all 0.2s;font-family:Sarabun,sans-serif;
+    " onmouseover="this.style.borderColor='#94a3b8';this.style.color='#475569'" onmouseout="this.style.borderColor='#e2e8f0';this.style.color='#64748b'">
+      &#x1F464; สำหรับเจ้าหน้าที่
     </a>
   </div>
 </nav>
@@ -1458,11 +1473,11 @@ body {
       </div>
       <div class="acc-mini-stats">
         <div class="acc-mini-stat">
-          <span class="acc-mini-stat-val" style="color:#3b82f6;">351</span>
+          <span class="acc-mini-stat-val" id="p1HeaderHouses" style="color:#3b82f6;">351</span>
           <span class="acc-mini-stat-lbl">หลัง</span>
         </div>
         <div class="acc-mini-stat">
-          <span class="acc-mini-stat-val">15.89M</span>
+          <span class="acc-mini-stat-val" id="p1HeaderBudget">15.89M</span>
           <span class="acc-mini-stat-lbl">บาท</span>
         </div>
       </div>
@@ -1470,32 +1485,12 @@ body {
     </div>
     <div class="acc-body" id="accBody1">
       <div class="acc-body-inner">
-        <div class="acc-kpi-row">
-          <div class="acc-kpi-card">
-            <span class="acc-kpi-val" style="color:#3b82f6;">351</span>
-            <span class="acc-kpi-lbl">หลังที่ปรับแล้ว</span>
-          </div>
-          <div class="acc-kpi-card">
-            <span class="acc-kpi-val">10</span>
-            <span class="acc-kpi-lbl">ปีงบประมาณ</span>
-          </div>
-          <div class="acc-kpi-card">
-            <span class="acc-kpi-val">8</span>
-            <span class="acc-kpi-lbl">อำเภอ</span>
-          </div>
-          <div class="acc-kpi-card">
-            <span class="acc-kpi-val" style="color:#3b82f6;">15.89M</span>
-            <span class="acc-kpi-lbl">งบรวม (บาท)</span>
+        <div id="p1-content">
+          <div class="p1-loading-wrap">
+            <div class="p1-spinner"></div>
+            <span>กำลังโหลดข้อมูล...</span>
           </div>
         </div>
-        <div class="acc-progress-bar">
-          <div class="acc-progress-fill" style="width:90%;background:#3b82f6;"></div>
-        </div>
-        <p class="acc-summary-text">
-          ดำเนินการปรับสภาพบ้านให้กับผู้พิการและผู้สูงอายุ 351 หลัง ใน 8 อำเภอ ต่อเนื่องตั้งแต่ปีงบประมาณ 2558–2569
-          มีผู้รับประโยชน์ทั้งผู้พิการ ผู้สูงอายุ และกลุ่มรวม ครอบคลุมความพิการ 7 ประเภท
-          งบประมาณรวมทั้งสิ้น ~15.89 ล้านบาท อำเภอแกลงมีจำนวนผู้รับประโยชน์สูงที่สุด
-        </p>
         <button class="acc-open-btn" onclick="openModal('project1Modal')">
           📊 เปิดแดชบอร์ดเต็ม
         </button>
@@ -5074,5 +5069,8 @@ window.navigateTo = navigateTo;
   </div>
 </footer>
 
+
+<script src="assets/js/api.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
