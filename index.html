@@ -1378,10 +1378,29 @@ body {
 
 <!-- NAVBAR -->
 <nav class="navbar">
-  <div class="container-custom">
+  <div class="container-custom" style="display:flex;align-items:center;justify-content:space-between;">
     <a href="#" class="navbar-brand" onclick="return false;">
       <div class="navbar-logo">🏥</div>
       <span>กองทุนหลักประกันสุขภาพจังหวัดระยอง</span>
+    </a>
+    <a href="login.html" style="
+      background: #1e40af;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.45rem 1.1rem;
+      font-family: 'Sarabun', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background 0.2s;
+      white-space: nowrap;
+    " onmouseover="this.style.background='#1e3a8a'" onmouseout="this.style.background='#1e40af'">
+      🔐 Staff Portal
     </a>
   </div>
 </nav>
